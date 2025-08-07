@@ -3,26 +3,50 @@ import CourseCard from "../components/CourseCard";
 
 const courses = [
   {
-    title: "Introduction to AI",
-    description: "Learn the basics of Artificial Intelligence, including history, applications, and future trends.",
-    image: "https://source.unsplash.com/400x200/?ai,robot"
+    title: "Introduction to Artificial Intelligence",
+    description: "Master the fundamentals of AI, including machine learning basics, neural networks, and real-world applications.",
+    image: "https://source.unsplash.com/400x200/?artificial-intelligence"
   },
   {
     title: "Machine Learning Fundamentals",
-    description: "Dive into supervised and unsupervised learning, algorithms, and real-world projects.",
+    description: "Learn supervised and unsupervised learning algorithms, data preprocessing, and model evaluation techniques.",
     image: "https://source.unsplash.com/400x200/?machine-learning"
   },
   {
     title: "Deep Learning with Neural Networks",
-    description: "Explore deep learning, neural networks, and build your own models.",
-    image: "https://source.unsplash.com/400x200/?deep-learning"
+    description: "Explore convolutional neural networks, recurrent neural networks, and transformer architectures.",
+    image: "https://source.unsplash.com/400x200/?neural-network"
   },
-  // Add more courses as needed
+  {
+    title: "Natural Language Processing (NLP)",
+    description: "Build chatbots, sentiment analysis systems, and language models using modern NLP techniques.",
+    image: "https://source.unsplash.com/400x200/?text-analysis"
+  },
+  {
+    title: "Computer Vision & Image Recognition",
+    description: "Develop image classification, object detection, and facial recognition systems using AI.",
+    image: "https://source.unsplash.com/400x200/?computer-vision"
+  },
+  {
+    title: "AI for Business & Strategy",
+    description: "Learn how to implement AI solutions in business, from automation to predictive analytics.",
+    image: "https://source.unsplash.com/400x200/?business-ai"
+  },
+  {
+    title: "Reinforcement Learning",
+    description: "Master Q-learning, policy gradients, and deep reinforcement learning for game AI and robotics.",
+    image: "https://source.unsplash.com/400x200/?robot-learning"
+  },
+  {
+    title: "AI Ethics & Responsible AI",
+    description: "Understand bias, fairness, transparency, and ethical considerations in AI development.",
+    image: "https://source.unsplash.com/400x200/?ethics"
+  }
 ];
 
 function Home() {
   return (
-    <div>
+    <div style={{maxWidth: 1000, margin: "40px auto", padding: 24, background: "#f9f9fb", color: "#18181a", borderRadius: 12, boxShadow: "0 2px 12px rgba(0,0,0,0.07)"}}>
       <section style={{background: "linear-gradient(90deg, #007bff 0%, #00c6ff 100%)", color: "#fff", padding: "60px 0 40px 0", textAlign: "center"}}>
         <h1 style={{fontSize: "2.8rem", marginBottom: 16}}>Welcome to Workiy Academy</h1>
         <p style={{fontSize: "1.3rem", maxWidth: 600, margin: "0 auto 24px auto"}}>
