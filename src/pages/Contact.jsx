@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-function Contact() {
+
+const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "", courseInterest: "" });
   const [submitted, setSubmitted] = useState(false);
 
@@ -102,6 +103,6 @@ function Contact() {
       </div>
     </div>
   );
-}
+};
 
 export default Contact;

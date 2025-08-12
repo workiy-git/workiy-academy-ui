@@ -63,27 +63,26 @@ const courses = [
   }
 ];
 
-function Courses() {
-  return (
-    <div style={{maxWidth: 1000, margin: "40px auto", padding: 24, background: "#f9f9fb", color: "#18181a", borderRadius: 12, boxShadow: "0 2px 12px rgba(0,0,0,0.07)"}}>
-      <h1>All AI Courses</h1>
-      <p style={{textAlign: "center", marginBottom: "32px", color: "#666"}}>
-        Comprehensive AI education from fundamentals to advanced applications
-      </p>
-      <ul style={{listStyle: "none", padding: 0}}>
-        {courses.map((course, idx) => (
-          <li key={idx} style={{background: "#fff", borderRadius: 10, boxShadow: "0 2px 8px rgba(0,0,0,0.06)", margin: "18px 0", padding: 24}}>
-            <h2 style={{marginBottom: 8, color: "#007bff"}}>{course.title}</h2>
-            <p style={{marginBottom: "12px", lineHeight: "1.6"}}>{course.description}</p>
-            <div style={{display: "flex", gap: "16px", fontSize: "0.9rem", color: "#666"}}>
-              <span>⏱️ {course.duration}</span>
-              <span>📊 {course.level}</span>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+
+const Courses = () => (
+  <div style={{maxWidth: 1000, margin: "40px auto", padding: 24, background: "#f9f9fb", color: "#18181a", borderRadius: 12, boxShadow: "0 2px 12px rgba(0,0,0,0.07)"}}>
+    <h1>All AI Courses</h1>
+    <p style={{textAlign: "center", marginBottom: "32px", color: "#666"}}>
+      Comprehensive AI education from fundamentals to advanced applications
+    </p>
+    <ul style={{listStyle: "none", padding: 0}}>
+      {courses.map((course, idx) => (
+        <li key={idx} style={{background: "#fff", borderRadius: 10, boxShadow: "0 2px 8px rgba(0,0,0,0.06)", margin: "18px 0", padding: 24}}>
+          <h2 style={{marginBottom: 8, color: "#007bff"}}>{course.title}</h2>
+          <p style={{marginBottom: "12px", lineHeight: "1.6"}}>{course.description}</p>
+          <div style={{display: "flex", gap: "16px", fontSize: "0.9rem", color: "#666"}}>
+            <span>⏱️ {course.duration}</span>
+            <span>📊 {course.level}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 
 export default Courses;
