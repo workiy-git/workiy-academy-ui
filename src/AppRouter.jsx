@@ -7,6 +7,7 @@ import Courses from './pages/Courses';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Internship from './pages/Internship';
+import Course from './pages/Course';
 
 const AppRouter = () => (
   <Router>
@@ -18,6 +19,7 @@ const AppRouter = () => (
         <Route path="/about" element={<About />} />
   <Route path="/contact" element={<Contact />} />
   <Route path="/internship" element={<Internship />} />
+        <Route path="/course" element={<Course />} />
       </Routes>
     </div>
   </Router>
