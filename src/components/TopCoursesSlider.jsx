@@ -1,0 +1,124 @@
+import React from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Avatar from "@mui/material/Avatar";
+import StarIcon from "@mui/icons-material/Star";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import Carousel from "react-material-ui-carousel";
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import GroupIcon from '@mui/icons-material/Group';
+import BarChartIcon from '@mui/icons-material/BarChart';
+
+const topCourses = [
+  {
+    title: "Learn Figma - UI/UX Design Essential Training",
+    lessons: 8,
+    students: 198,
+    level: "Beginner",
+    rating: 4,
+    image: "https://i.ibb.co/hFBsFqGP/unsplash-7u-SKXpks-CKg.png",
+  },
+  {
+    title: "Python for Beginners - Learn Programming from scratch",
+    lessons: 21,
+    students: 99,
+    level: "Beginner",
+    rating: 3,
+    image: "https://i.ibb.co/1G268Rjx/learning-education-ideas-insight-intelligence-study-concept.png",
+  },
+  {
+    title: "Acoustic Guitar and Electric Guitar Started",
+    lessons: 8,
+    students: 301,
+    level: "Average",
+    rating: 5,
+    image: "https://i.ibb.co/chb5JWgL/unsplash-YQQMGo-Oix4c.png",
+  },
+  {
+    title: "Mobile App Development with Flutter & Dart",
+    lessons: 15,
+    students: 215,
+    level: "Advanced",
+    rating: 2,
+    image: "https://i.ibb.co/rKb60RNF/unsplash-b-OKIpt-Pzd-Pk.png",
+  }
+];
+
+const CourseCard = ({ title, lessons, students, level, rating, image }) => (
+  <Card sx={{ minWidth: 320, maxWidth: 340, mx: 2, borderRadius: 3, boxShadow: 3, position: "relative", transition: 'box-shadow 0.3s', '&:hover': { boxShadow: 8 } }}>
+    <Box sx={{ height: 140, background: `url(${image}) center/cover`, borderTopLeftRadius: 12, borderTopRightRadius: 12 }} />
+    <CardContent>
+      <Typography variant="h6" sx={{ fontWeight: 600, mb: 1, minHeight: 48, color: '#212529' }}>{title}</Typography>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 3, mb: 1, flexWrap: 'wrap' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, color: '#5A69F2' }}>
+          <MenuBookIcon sx={{ fontSize: '1rem' }} />
+          <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: 500, fontSize: '0.60rem' }}>
+            {lessons} <span style={{ fontSize: '0.60rem' }}>Lessons</span>
+          </Typography>
+        </Box>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, color: '#5A69F2' }}>
+          <GroupIcon sx={{ fontSize: '1rem' }} />
+          <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: 500, fontSize: '0.60rem' }}>
+            {students} <span style={{ fontSize: '0.60rem' }}>Students</span>
+          </Typography>
+        </Box>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, color: '#5A69F2' }}>
+          <BarChartIcon sx={{ fontSize: '1rem' }} />
+          <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: 500, fontSize: '0.60rem' }}>
+            <span style={{ fontSize: '0.60rem' }}>{level}</span>
+          </Typography>
+        </Box>
+      </Box>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
+        {[...Array(5)].map((_, i) => (
+          <StarIcon key={i} sx={{ color: i < rating ? "#FFD600" : "#e0e0e0", fontSize: 20 }} />
+        ))}
+      </Box>
+      <Button variant="contained" endIcon={<ChevronRightIcon />} sx={{ mt: 1, fontWeight: 600, borderRadius: 2, bgcolor: "#212529", color: "#fff", '&:hover': { bgcolor: "#000" }, width: '100%' }}>
+        Start course
+      </Button>
+    </CardContent>
+  </Card>
+);
+
+const TopCoursesSlider = () => (
+  <Box sx={{ py: 6, bgcolor: "#fff" }}>
+    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mb: 3, px: 2 }}>
+      <Typography variant="h4" sx={{ fontWeight: 700 }}>
+        Top Courses
+      </Typography>
+      <Box sx={{ display: "flex", gap: 1 }}>
+        <Avatar sx={{ bgcolor: "#e3e3e3", color: "#007bff", width: 36, height: 36 }}>
+          <ChevronLeftIcon />
+        </Avatar>
+        <Avatar sx={{ bgcolor: "#e3e3e3", color: "#007bff", width: 36, height: 36 }}>
+          <ChevronRightIcon />
+        </Avatar>
+      </Box>
+    </Box>
+    <Carousel
+      indicators={false}
+      navButtonsAlwaysVisible={false}
+      autoPlay={false}
+      animation="slide"
+      sx={{ width: "100%" }}
+      navButtonsWrapperProps={{ style: { display: "none" } }}
+      cycleNavigation={false}
+      swipe={true}
+      fullHeightHover={false}
+      height={400}
+    >
+      <Box sx={{ display: "flex", justifyContent: "center", gap: 3 }}>
+        {topCourses.map((course, idx) => (
+          <CourseCard key={idx} {...course} />
+        ))}
+      </Box>
+    </Carousel>
+  </Box>
+);
+
+export default TopCoursesSlider;

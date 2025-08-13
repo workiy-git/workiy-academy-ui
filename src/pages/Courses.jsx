@@ -1,88 +1,135 @@
-import React from "react";
+import React, { useState } from "react";
+import { Container, Grid, Typography, Button, Box, AppBar, Toolbar, Link, Stack } from "@mui/material";
+import CourseCard from "../components/CourseCard";
+import reactImg from "../assets/react.svg";
 
 const courses = [
   {
-    title: "Introduction to Artificial Intelligence",
-    description: "Master the fundamentals of AI, including machine learning basics, neural networks, and real-world applications.",
-    duration: "8 weeks",
-    level: "Beginner"
-  },
-  {
-    title: "Machine Learning Fundamentals",
-    description: "Learn supervised and unsupervised learning algorithms, data preprocessing, and model evaluation techniques.",
-    duration: "10 weeks",
-    level: "Intermediate"
-  },
-  {
-    title: "Deep Learning with Neural Networks",
-    description: "Explore convolutional neural networks, recurrent neural networks, and transformer architectures.",
+    title: "Full Stack Web Developer",
+    description: "Get the skills with real world experience Employers want with career Accelators.",
     duration: "12 weeks",
-    level: "Advanced"
+    level: "Beginner",
+    image: reactImg
   },
   {
-    title: "Natural Language Processing (NLP)",
-    description: "Build chatbots, sentiment analysis systems, and language models using modern NLP techniques.",
+    title: "Data Scientist",
+    description: "Master data analysis, machine learning, and AI for real-world business solutions.",
     duration: "10 weeks",
-    level: "Intermediate"
+    level: "Intermediate",
+    image: reactImg
   },
   {
-    title: "Computer Vision & Image Recognition",
-    description: "Develop image classification, object detection, and facial recognition systems using AI.",
-    duration: "10 weeks",
-    level: "Intermediate"
-  },
-  {
-    title: "AI for Business & Strategy",
-    description: "Learn how to implement AI solutions in business, from automation to predictive analytics.",
-    duration: "8 weeks",
-    level: "Beginner"
-  },
-  {
-    title: "Reinforcement Learning",
-    description: "Master Q-learning, policy gradients, and deep reinforcement learning for game AI and robotics.",
+    title: "MERN Stack with Gen AI",
+    description: "Build modern web apps using MongoDB, Express, React, Node, and Generative AI.",
     duration: "12 weeks",
-    level: "Advanced"
+    level: "Advanced",
+    image: reactImg
   },
   {
-    title: "AI Ethics & Responsible AI",
-    description: "Understand bias, fairness, transparency, and ethical considerations in AI development.",
-    duration: "6 weeks",
-    level: "All Levels"
-  },
-  {
-    title: "Generative AI & Large Language Models",
-    description: "Learn about GPT, BERT, and other transformer models for text generation and understanding.",
+    title: "AI and ML",
+    description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
     duration: "10 weeks",
-    level: "Advanced"
-  },
-  {
-    title: "AI in Healthcare",
-    description: "Explore medical image analysis, drug discovery, and patient care optimization using AI.",
-    duration: "8 weeks",
-    level: "Intermediate"
+    level: "Intermediate",
+    image: reactImg
   }
 ];
 
 
-const Courses = () => (
-  <div style={{maxWidth: 1000, margin: "40px auto", padding: 24, background: "#f9f9fb", color: "#18181a", borderRadius: 12, boxShadow: "0 2px 12px rgba(0,0,0,0.07)"}}>
-    <h1>All AI Courses</h1>
-    <p style={{textAlign: "center", marginBottom: "32px", color: "#666"}}>
-      Comprehensive AI education from fundamentals to advanced applications
-    </p>
-    <ul style={{listStyle: "none", padding: 0}}>
-      {courses.map((course, idx) => (
-        <li key={idx} style={{background: "#fff", borderRadius: 10, boxShadow: "0 2px 8px rgba(0,0,0,0.06)", margin: "18px 0", padding: 24}}>
-          <h2 style={{marginBottom: 8, color: "#007bff"}}>{course.title}</h2>
-          <p style={{marginBottom: "12px", lineHeight: "1.6"}}>{course.description}</p>
-          <div style={{display: "flex", gap: "16px", fontSize: "0.9rem", color: "#666"}}>
-            <span>⏱️ {course.duration}</span>
-            <span>📊 {course.level}</span>
-          </div>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
+const Courses = () => {
+  const [showAll, setShowAll] = useState(false);
+
+  return (
+    <Box sx={{ bgcolor: "#F6F8FB", minHeight: "100vh" }}>
+      {/* Header Navigation */}
+      <AppBar position="static" color="default" elevation={0} sx={{ bgcolor: "#fff", boxShadow: "none", borderBottom: "1px solid #E3EAF2" }}>
+        <Toolbar sx={{ justifyContent: "space-between", px: { xs: 2, md: 8 } }}>
+          <Stack direction="row" spacing={4} alignItems="center">
+            <Link href="#" underline="none" color="inherit" sx={{ fontWeight: 700, fontSize: 18 }}>HOME</Link>
+            <Link href="#" underline="none" color="primary" sx={{ fontWeight: 700, fontSize: 18 }}>Courses</Link>
+            <Link href="#" underline="none" color="inherit" sx={{ fontWeight: 700, fontSize: 18 }}>Blog</Link>
+            <Link href="#" underline="none" color="inherit" sx={{ fontWeight: 700, fontSize: 18 }}>Internship</Link>
+            <Link href="#" underline="none" color="inherit" sx={{ fontWeight: 700, fontSize: 18 }}>About us</Link>
+          </Stack>
+          <Button variant="contained" color="primary" sx={{ borderRadius: 3, fontWeight: 700, px: 4, py: 1, fontSize: 16, boxShadow: "none" }}>ENQUIRED</Button>
+        </Toolbar>
+      </AppBar>
+
+      {/* Hero Section */}
+      <Box sx={{ py: 7, bgcolor: "#FFFFFF" }}>
+        <Container maxWidth="md">
+          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mb: 3 }}>
+            <Typography variant="h3" align="center" sx={{ fontWeight: 800, mb: 2, color: "#1A237E", fontFamily: 'Inter, sans-serif' }}>
+              Ready to imagine your career?
+            </Typography>
+            <Typography variant="h6" align="center" color="text.secondary" sx={{ mb: 5, fontWeight: 500, fontFamily: 'Inter, sans-serif' }}>
+              Get the skills with real world experience Employers want with career Accelators
+            </Typography>
+          </Box>
+          <Grid container spacing={4} justifyContent="center">
+            {courses.slice(0, 4).map((course, idx) => (
+              <Grid item xs={12} sm={6} md={3} key={idx}>
+                <CourseCard course={course} />
+              </Grid>
+            ))}
+          </Grid>
+          <Box sx={{ textAlign: "center", mt: 5 }}>
+            <Button variant="contained" color="primary" sx={{ px: 6, py: 2, borderRadius: 3, fontWeight: 800, fontSize: 18, fontFamily: 'Inter, sans-serif', boxShadow: "none" }} onClick={() => setShowAll(true)}>
+              All Career Accelators
+            </Button>
+          </Box>
+          {/* Show all courses below when showAll is true */}
+          {showAll && (
+            <Box sx={{ py: 7, bgcolor: "#F6F8FB" }}>
+              <Container maxWidth="lg">
+                <Typography variant="h4" align="center" sx={{ fontWeight: 800, mb: 4, color: "#1A237E", fontFamily: 'Inter, sans-serif' }}>
+                  All Courses
+                </Typography>
+                <Grid container spacing={4} justifyContent="center">
+                  {courses.map((course, idx) => (
+                    <Grid item xs={12} sm={6} md={3} key={idx}>
+                      <CourseCard course={course} />
+                    </Grid>
+                  ))}
+                </Grid>
+              </Container>
+            </Box>
+          )}
+        </Container>
+      </Box>
+
+      {/* Academy Info Section */}
+      <Box sx={{ py: 7 }}>
+        <Container maxWidth="md">
+          <Typography variant="h4" align="center" sx={{ fontWeight: 800, mb: 2, color: "#1A237E", fontFamily: 'Inter, sans-serif' }}>
+            Workiy Academy is the leading Software Training Institute in Chennai
+          </Typography>
+          <Typography variant="body1" align="center" color="text.secondary" sx={{ mb: 2, fontSize: 17, fontFamily: 'Inter, sans-serif', fontWeight: 500 }}>
+            which offers the latest and trending courses with a practical learning experience. In addition to the core curriculum, Workiy often offers a range of support services to help students succeed. These may include mentorship programs, career services, and access to a network of alumni and industry professionals.
+          </Typography>
+        </Container>
+      </Box>
+
+      {/* Footer Section */}
+      <Box sx={{ bgcolor: "#1A237E", color: "#fff", py: 5 }}>
+        <Container maxWidth="md">
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <Typography variant="subtitle1" sx={{ fontWeight: 700, fontSize: 18, fontFamily: 'Inter, sans-serif', mb: 1 }}>HOME</Typography>
+              <Typography variant="subtitle1" sx={{ fontWeight: 700, fontSize: 18, fontFamily: 'Inter, sans-serif', mb: 1 }}>Courses</Typography>
+              <Typography variant="subtitle1" sx={{ fontWeight: 700, fontSize: 18, fontFamily: 'Inter, sans-serif', mb: 1 }}>Blog</Typography>
+              <Typography variant="subtitle1" sx={{ fontWeight: 700, fontSize: 18, fontFamily: 'Inter, sans-serif', mb: 1 }}>Internship</Typography>
+              <Typography variant="subtitle1" sx={{ fontWeight: 700, fontSize: 18, fontFamily: 'Inter, sans-serif', mb: 1 }}>About us</Typography>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Typography variant="body2" sx={{ fontSize: 16, fontFamily: 'Inter, sans-serif', mb: 1 }}>#6-183, Ottiyambakkam Road , Chennai - 126</Typography>
+              <Typography variant="body2" sx={{ fontSize: 16, fontFamily: 'Inter, sans-serif', mb: 1 }}>9342483624</Typography>
+              <Typography variant="body2" sx={{ fontSize: 16, fontFamily: 'Inter, sans-serif', mb: 1 }}>hr@Workiy.ca</Typography>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+    </Box>
+  );
+};
 
 export default Courses;
