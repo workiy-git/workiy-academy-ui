@@ -1,50 +1,157 @@
 import React from "react";
+import "./About.css";
 
-function About() {
+const About = () => {
   return (
-    <div style={{maxWidth: 800, margin: "40px auto", padding: 24, background: "#f9f9fb", color: "#18181a", borderRadius: 12, boxShadow: "0 2px 12px rgba(0,0,0,0.07)"}}>
-      <h1>About Workiy Academy</h1>
-      <p>
-        Workiy Academy is a premier institution dedicated to advancing education in Artificial Intelligence and Machine Learning. Founded with the vision of democratizing AI knowledge, we provide comprehensive, industry-aligned courses that bridge the gap between theoretical concepts and practical applications.
-      </p>
-      
-      <h2>Our Mission</h2>
-      <p>
-        To empower individuals and organizations with cutting-edge AI skills through expert-led instruction, hands-on projects, and real-world applications. We believe that AI literacy is essential for the future workforce and strive to make this knowledge accessible to everyone.
-      </p>
-
-      <h2>What We Offer</h2>
-      <ul>
-        <li><strong>Comprehensive AI Curriculum:</strong> From fundamentals to advanced topics like deep learning, NLP, and computer vision</li>
-        <li><strong>Expert Instructors:</strong> Industry professionals with years of experience in AI development and research</li>
-        <li><strong>Hands-on Projects:</strong> Real-world applications and case studies to reinforce learning</li>
-        <li><strong>Flexible Learning:</strong> Online courses designed to fit your schedule and learning pace</li>
-        <li><strong>Community Support:</strong> Access to forums, study groups, and networking opportunities</li>
-        <li><strong>Career Guidance:</strong> Industry insights and job placement assistance</li>
-      </ul>
-
-      <h2>Our Course Categories</h2>
-      <div style={{display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "16px", marginTop: "16px"}}>
-        <div style={{background: "#f8f9fa", padding: "16px", borderRadius: "8px"}}>
-          <h3 style={{color: "#007bff", marginBottom: "8px"}}>Foundation Courses</h3>
-          <p>Introduction to AI, Machine Learning Fundamentals</p>
+    <div className="about-container">
+      {/* Hero Section */}
+      <section className="hero-section">
+        <div className="hero-content">
+          <div className="hero-text">
+            <h1>Where Learning Meets Doing.</h1>
+            <p>
+              At Workiy Academy, we specialize in cutting-edge Generative AI training that goes beyond theory. 
+              We provide real-time project experience and industry-relevant courses designed to prepare you 
+              for the opportunities of tomorrow. Our programs bridge the gap between theoretical knowledge 
+              and practical application.
+            </p>
+            <p>
+              We believe in making learning practical, relevant, and engaging. Our approach is shaped by 
+              industry demands, ensuring you stay ahead of the curve while building a portfolio that 
+              showcases your skills to potential employers.
+            </p>
+          </div>
+          <div className="hero-image">
+            <div className="geometric-pattern">
+              <img 
+                src="https://i.ibb.co/67zHv4jL/images.jpg" 
+                alt="AI Brain Visual" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </div>
+          </div>
         </div>
-        <div style={{background: "#f8f9fa", padding: "16px", borderRadius: "8px"}}>
-          <h3 style={{color: "#007bff", marginBottom: "8px"}}>Specialized AI</h3>
-          <p>NLP, Computer Vision, Reinforcement Learning</p>
-        </div>
-        <div style={{background: "#f8f9fa", padding: "16px", borderRadius: "8px"}}>
-          <h3 style={{color: "#007bff", marginBottom: "8px"}}>Applied AI</h3>
-          <p>AI for Business, Healthcare AI, Ethics & Responsible AI</p>
-        </div>
-      </div>
+      </section>
 
-      <h2>Why Choose Workiy Academy?</h2>
-      <p>
-        With over 10,000+ successful graduates and partnerships with leading tech companies, we've established ourselves as a trusted name in AI education. Our courses are regularly updated to reflect the latest industry trends and technological advancements.
-      </p>
+      {/* Mission, Principles, and Values Section */}
+      <section className="values-section">
+        <div className="values-grid">
+          <div className="value-card">
+            <h2>Our Mission</h2>
+            <ul>
+              <li>Turning learners into tech leaders</li>
+              <li>Powering skills for today's demands</li>
+              <li>Building hands-on industry expertise</li>
+              <li>Guiding dreams into careers</li>
+              <li>Shaping futures that last</li>
+            </ul>
+          </div>
+          
+          <div className="value-card">
+            <h2>Our Principles</h2>
+            <ul>
+              <li>Learning by Doing</li>
+              <li>Industry Relevance</li>
+              <li>Innovation First</li>
+              <li>Personal Attention</li>
+              <li>Integrity Always</li>
+            </ul>
+          </div>
+          
+          <div className="value-card">
+            <h2>Our Values</h2>
+            <ul>
+              <li>Passion for learning</li>
+              <li>Commitment to quality</li>
+              <li>Innovation every day</li>
+              <li>Respect for every learner</li>
+              <li>Results that matter</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Approach Section */}
+      <section className="approach-section">
+        <h2>Our Approach</h2>
+        <div className="approach-content">
+          <ul>
+            <li>Learn by doing, not just listening</li>
+            <li>Blend theory with real-world projects</li>
+            <li>Stay aligned with industry demands</li>
+            <li>Gain guidance from expert mentors</li>
+            <li>Receive support from start to success</li>
+          </ul>
+        </div>
+      </section>
+
+      {/* What Makes Us Different Section */}
+      <section className="different-section">
+        <h2>
+          <span>What Makes</span> <span>Us Different</span>
+        </h2>
+        <div className="different-content">
+          <div className="different-item">
+            <h3>Learning by Building</h3>
+            <p>
+              We focus on hands-on, real-world projects from day one. You'll build actual applications 
+              and solutions that demonstrate your skills to potential employers, ensuring you're job-ready 
+              from the start.
+            </p>
+          </div>
+          
+          <div className="different-item">
+            <h3>Generative AI at the Core</h3>
+            <p>
+              While others talk about AI, we train you on practical Generative AI applications that are 
+              in high demand. Our curriculum is built around the latest AI technologies that are shaping 
+              the future of work.
+            </p>
+          </div>
+          
+          <div className="different-item">
+            <h3>Mentors Who've Been There</h3>
+            <p>
+              Our trainers are industry professionals who have built solutions for real clients. They bring 
+              battle-tested skills and insights that you won't find in traditional educational settings.
+            </p>
+          </div>
+          
+          <div className="different-item">
+            <h3>Startup Energy. Personal Attention</h3>
+            <p>
+              We're young, fast-growing, and constantly adapting. We innovate often, move quickly, and 
+              provide the one-on-one support you need to succeed in a rapidly changing tech landscape.
+            </p>
+          </div>
+          
+          <div className="different-item">
+            <h3>Career-Driven Approach</h3>
+            <p>
+              Everything we teach is designed with your future in mind. From your first project to building 
+              a portfolio that will impress interviewers, we're focused on your career success every step 
+              of the way.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Hiring Partners Section */}
+      <section className="partners-section">
+        <h2>
+          <span>Our Hiring</span> <span>Partners</span>
+        </h2>
+        <div className="partners-grid">
+          <div className="partner-logo">Freshworks</div>
+          <div className="partner-logo">Google</div>
+          <div className="partner-logo">Microsoft</div>
+          <div className="partner-logo">PhonePe</div>
+          <div className="partner-logo">PayPal</div>
+          <div className="partner-logo">TCS</div>
+        </div>
+      </section>
     </div>
   );
-}
+};
 
 export default About;
