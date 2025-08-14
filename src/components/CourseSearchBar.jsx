@@ -10,12 +10,17 @@ import Paper from "@mui/material/Paper";
 
 const categories = [
   "All",
-  "AI & Machine Learning",
+  "Artificial Intelligence",
+  "Machine Learning",
+  "Deep Learning",
+  "Natural Language Processing",
+  "Computer Vision",
+  "Business & Strategy",
+  "Ethics & Responsible AI",
   "Programming",
   "Design",
-  "Business",
-   "Mobile Development",
   "Data Science",
+  "Mobile Development",
   "Other"
 ];
 
@@ -49,7 +54,7 @@ const CourseSearchBar = () => {
           label="Search anything"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          sx={{ flex: 1, maxWidth: 900, bgcolor: "#f9f9fb" }}
+          sx={{ flex: 1, maxWidth: 900, bgcolor: "#FAFAFA", '& .MuiOutlinedInput-notchedOutline': { border: 'none' } }}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -61,10 +66,11 @@ const CourseSearchBar = () => {
         <Button type="submit" variant="contained" sx={{ fontWeight: 600, px: 4, height: 56, backgroundColor: "#262627" ,color:"#fff" }}>
           Search
         </Button>
-      </Box>
-      <Typography variant="body2" sx={{ mt: 3, color: "#888" }}>
+           <Typography variant="body2" sx={{ mt: 3, color: "#888" }}>
         Or view the following courses...
       </Typography>
+      </Box>
+   
     </Paper>
   );
 };

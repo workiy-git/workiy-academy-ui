@@ -22,7 +22,7 @@ const ContactUs = () => {
   };
 
   return (
-    <Paper elevation={3} sx={{ width: '100vw', maxWidth: '100vw', mx: 0, my: 6, p: 4, borderRadius: 0 }}>
+    <Paper elevation={3} sx={{ width: '95vw', maxWidth: '100vw', mx: 0, my: 6, p: 4, borderRadius: 0 }}>
       <Typography variant="h4" sx={{ mb: 2, fontWeight: 600, textAlign: 'center' }}>
         Contact us
       </Typography>

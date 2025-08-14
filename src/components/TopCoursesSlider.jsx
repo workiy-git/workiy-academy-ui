@@ -78,7 +78,7 @@ const CourseCard = ({ title, lessons, students, level, rating, image }) => (
           <StarIcon key={i} sx={{ color: i < rating ? "#FFD600" : "#e0e0e0", fontSize: 20 }} />
         ))}
       </Box>
-      <Button variant="contained" endIcon={<ChevronRightIcon />} sx={{ mt: 1, fontWeight: 600, borderRadius: 2, bgcolor: "#212529", color: "#fff", '&:hover': { bgcolor: "#000" }, width: '100%' }}>
+      <Button variant="contained" endIcon={<ChevronRightIcon />} sx={{ mt: 1, fontWeight: 600, borderRadius: 2,fontSize: 12, padding: 1.5, bgcolor: "#212529", color: "#fff", '&:hover': { bgcolor: "#000" }, width: '50%' }}>
         Start course
       </Button>
     </CardContent>
