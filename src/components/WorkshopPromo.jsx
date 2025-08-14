@@ -17,7 +17,7 @@ const WorkshopPromo = () => (
         </Box>
       </Grid>
       <Grid item xs={12} md={6} sx={{ display: 'flex',width: '50%', alignItems: 'center', justifyContent: { xs: 'center', md: 'flex-start' } }}>
-        <Box sx={{ textAlign: { xs: 'center', md: 'left' }, width: { xs: '100%', md: '80%' }, color: '#fff' }}>
+        <Box sx={{ textAlign: { xs: 'center', md: 'center' }, width: { xs: '100%', md: '80%' }, color: '#fff' }}>
           <Typography variant="h4" sx={{ fontWeight: 700, mb: 2, color: '#fff' }}>
             Build Your First AI Chatbot
           </Typography>

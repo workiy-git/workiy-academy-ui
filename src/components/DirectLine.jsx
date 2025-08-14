@@ -44,7 +44,7 @@ const DirectLine = () => {
         {/* Right Side: Location Map */}
         <Grid item xs={12} md={7}>
           <Paper elevation={2} sx={{ p: 0, borderRadius: 3, height: '100%', minHeight: 300, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Box sx={{ width: '100%', height: 300 }}>
+            <Box sx={{ width: { xs: '100%', md: '50vw' }, height: 300, mx: 'auto' }}>
               <iframe
                 title="Workiy Academy Location"
                 src="https://www.google.com/maps?q=Workiy+Academy&output=embed"
