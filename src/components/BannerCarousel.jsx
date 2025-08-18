@@ -16,9 +16,9 @@ const BannerCarousel = ({ slides }) => (
           key={idx}
           sx={{
             width: "100%",
+            height: "400px",
             position: "relative",
-            aspectRatio: '16/9', // Ensures HD ratio
-            overflow: 'hidden',
+            overflow: "hidden",
           }}
         >
           <img
@@ -28,7 +28,7 @@ const BannerCarousel = ({ slides }) => (
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              display: 'block',
+              display: "block",
             }}
           />
         </Box>

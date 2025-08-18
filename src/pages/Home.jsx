@@ -9,6 +9,7 @@ import CourseSearchBar from "../components/CourseSearchBar";
 import WorkshopPromo from "../components/WorkshopPromo";
 import BannerCarousel from "../components/BannerCarousel";
 import DirectLine from "../components/DirectLine";
+import OurPotentialPartners from "../components/OurPotentialPartners";
 
 const courses = [
   {
@@ -69,7 +70,7 @@ const bannerSlides = [
     button: "View Courses",
     buttonHref: "#courses",
     bg: "linear-gradient(90deg, #007bff 100%, #212529 100%)",
-    image: "https://i.ibb.co/fYF5kmVv/6017748.jp",
+    image: "https://i.ibb.co/MDCDzSXP/banner.jpg",
   },
   {
     title: "Master AI & Machine Learning",
@@ -78,7 +79,7 @@ const bannerSlides = [
     button: "Explore Programs",
     buttonHref: "#courses",
     bg: "linear-gradient(90deg, #00c6ff 0%, #007bff 100%)",
-    image: "https://i.ibb.co/XkzWtwSm/back-to-school-facebook-cover-14.jpg",
+    image: "https://i.ibb.co/MDCDzSXP/banner.jpg",
   },
   {
     title: "Future-Proof Your Career",
@@ -87,7 +88,7 @@ const bannerSlides = [
     button: "Start Learning",
     buttonHref: "#courses",
     bg: "linear-gradient(90deg, #007bff 0%, #00c6ff 100%)",
-    image: "https://i.ibb.co/GfkTzP03/50.jpg",
+    image: "https://i.ibb.co/MDCDzSXP/banner.jpg",
   },
 ];
 
@@ -98,7 +99,7 @@ const Home = () => (
       minHeight: "100vh",
       m: 0,
       p: 0,
-      bgcolor: "#f9f9fb",
+      bgcolor: "#fff",
       color: "#ffc03d",
       position: "relative",
       left: "50%",
@@ -109,6 +110,7 @@ const Home = () => (
     <Box sx={{ width: "100%", p: 0, m: 0 }}>
       <BannerCarousel slides={bannerSlides} />
     </Box>
+    <OurPotentialPartners />
     <CourseSearchBar />
     <TopCoursesSlider />
     <NewsletterSignup />
