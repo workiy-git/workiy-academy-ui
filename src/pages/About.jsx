@@ -1,22 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./About.css";
 import SchoolIcon from '@mui/icons-material/School';
 import PsychologyIcon from '@mui/icons-material/Psychology';
+import BuildIcon from '@mui/icons-material/Build';
+import GroupsIcon from '@mui/icons-material/Groups';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ConstructionIcon from '@mui/icons-material/Construction';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
 const About = () => {
+  // Animated stats logic
+  const [learners, setLearners] = useState(0);
+  const [projects, setProjects] = useState(0);
+  const [courses, setCourses] = useState(0);
+  
+  useEffect(() => {
+    let l = 0, p = 0, c = 0;
+    const lTarget = 10000, pTarget = 100, cTarget = 20;
+    const lStep = Math.ceil(lTarget / 60), pStep = 2, cStep = 1;
+    const interval = setInterval(() => {
+      if (l < lTarget) l = Math.min(l + lStep, lTarget);
+      if (p < pTarget) p = Math.min(p + pStep, pTarget);
+      if (c < cTarget) c = Math.min(c + cStep, cTarget);
+      setLearners(l);
+      setProjects(p);
+      setCourses(c);
+      if (l === lTarget && p === pTarget && c === cTarget) clearInterval(interval);
+    }, 20);
+    return () => clearInterval(interval);
+  }, []);
   return (
-    <div className="about-container">
-      {/* Hero Section */}
+
+
+  <div className="about-container">
+  {/* Stats Section (moved above partners) */}
+  {/* ...existing code... */}
+
       <section className="hero-section">
         <div className="hero-content">
           <div className="hero-text">
-                <h1>
-                  <span style={{ color: '#FFB703' }}>Where Learning</span>{' '}
-                  <span style={{ color: '#100E85' }}>Meets Doing.</span>
-                </h1>
+            <h1 className="hero-main-heading">
+              <span className="yellow-text">Where Learning</span> <span className="blue-text">Meets Doing.</span>
+            </h1>
             <p>
               At Workiy Academy, we specialize in cutting-edge Generative AI training that goes beyond theory. 
               We provide real-time project experience and industry-relevant courses designed to prepare you 
@@ -29,21 +56,22 @@ const About = () => {
               showcases your skills to potential employers.
             </p>
           </div>
-              <div className="hero-image">
-                <img
-                  src="https://i.ibb.co/67zHv4jL/images.jpg"
-                  alt="AI Brain Visual"
-                  className="simple-main-img"
-                />
-              </div>
+          <div className="hero-image">
+            <div className="geometric-pattern">
+              <img 
+                src="https://i.ibb.co/67zHv4jL/images.jpg" 
+                alt="AI Brain Visual" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Mission, Principles, and Values Section */}
       <section className="values-section">
-        
         <div className="values-grid">
-          <div className="value-card">
+          <div className="value-card mission">
             <h2>Our Mission</h2>
             <ul>
               <li>Turning learners into tech leaders</li>
@@ -53,7 +81,7 @@ const About = () => {
               <li>Shaping futures that last</li>
             </ul>
           </div>
-          <div className="value-card">
+          <div className="value-card principles">
             <h2>Our Principles</h2>
             <ul>
               <li>Learning by Doing</li>
@@ -63,7 +91,7 @@ const About = () => {
               <li>Integrity Always</li>
             </ul>
           </div>
-          <div className="value-card">
+          <div className="value-card values">
             <h2>Our Values</h2>
             <ul>
               <li>Passion for learning</li>
@@ -78,78 +106,82 @@ const About = () => {
 
       {/* Our Approach Section */}
       <section className="approach-section">
-        <h2>Our Approach</h2>
-        <div className="approach-grid">
-          <div className="approach-square">
-            <div className="approach-icon"><SchoolIcon style={{ fontSize: 40, color: '#100E85' }} /></div>
-            <div className="approach-title">Learn by doing, not just listening</div>
-            <div className="approach-desc">Hands-on projects from day one to build real-world skills that employers actually need.</div>
+  <h2 className="yellow-text">Our Approach</h2>
+        <div className="approach-boxes-grid">
+          <div className="approach-box">
+            <SchoolIcon className="approach-icon" />
+            <div className="approach-title">Learn by Doing</div>
+            <div className="approach-desc">Experience hands-on learning with real projects.</div>
           </div>
-          <div className="approach-square">
-            <div className="approach-icon"><PsychologyIcon style={{ fontSize: 40, color: '#FFB703' }} /></div>
-            <div className="approach-title">Blend theory with real-world projects</div>
-            <div className="approach-desc">Practical applications that demonstrate your capabilities and build a strong portfolio.</div>
+          <div className="approach-box">
+            <PsychologyIcon className="approach-icon" />
+            <div className="approach-title">Blend Theory & Practice</div>
+            <div className="approach-desc">Combine foundational knowledge with practical application.</div>
           </div>
-          <div className="approach-square">
-            <div className="approach-icon"><TrendingUpIcon style={{ fontSize: 40, color: '#100E85' }} /></div>
-            <div className="approach-title">Stay aligned with industry demands</div>
-            <div className="approach-desc">Curriculum updated with latest market requirements and emerging technologies.</div>
+          <div className="approach-box">
+            <BuildIcon className="approach-icon" />
+            <div className="approach-title">Industry Alignment</div>
+            <div className="approach-desc">Stay updated with skills that match industry needs.</div>
           </div>
-          <div className="approach-square">
-            <div className="approach-icon"><SupportAgentIcon style={{ fontSize: 40, color: '#FFB703' }} /></div>
-            <div className="approach-title">Gain guidance from expert mentors</div>
-            <div className="approach-desc">Learn from professionals who've built real solutions for Fortune 500 companies.</div>
+          <div className="approach-box">
+            <GroupsIcon className="approach-icon" />
+            <div className="approach-title">Expert Mentorship</div>
+            <div className="approach-desc">Get guidance from experienced professionals.</div>
           </div>
-          <div className="approach-square">
-            <div className="approach-icon"><CheckCircleIcon style={{ fontSize: 40, color: '#100E85' }} /></div>
-            <div className="approach-title">Receive support from start to success</div>
-            <div className="approach-desc">Continuous guidance throughout your learning journey and beyond graduation.</div>
+          <div className="approach-box">
+            <TrendingUpIcon className="approach-icon" />
+            <div className="approach-title">Continuous Growth</div>
+            <div className="approach-desc">Develop skills for long-term career success.</div>
+          </div>
+          <div className="approach-box">
+            <SupportAgentIcon className="approach-icon" />
+            <div className="approach-title">Personal Support</div>
+            <div className="approach-desc">Receive help and feedback at every step.</div>
           </div>
         </div>
       </section>
 
       {/* What Makes Us Different Section */}
       <section className="different-section">
-        <h2>
-          <span>What Makes</span> <span>Us Different</span>
-        </h2>
+  <h2 className="yellow-text">What Makes Us Different</h2>
         <div className="different-content">
           <div className="different-item">
-            <h3>Learning by Building</h3>
+            <AutoAwesomeIcon className="different-icon" />
+            <h3><span className="blue-text">Learning by Building</span></h3>
             <p>
               We focus on hands-on, real-world projects from day one. You'll build actual applications 
               and solutions that demonstrate your skills to potential employers, ensuring you're job-ready 
               from the start.
             </p>
           </div>
-          
           <div className="different-item">
-            <h3>Generative AI at the Core</h3>
+            <PsychologyIcon className="different-icon" />
+            <h3><span className="blue-text">Generative AI at the Core</span></h3>
             <p>
               While others talk about AI, we train you on practical Generative AI applications that are 
               in high demand. Our curriculum is built around the latest AI technologies that are shaping 
               the future of work.
             </p>
           </div>
-          
           <div className="different-item">
-            <h3>Mentors Who've Been There</h3>
+            <GroupsIcon className="different-icon" />
+            <h3><span className="blue-text">Mentors Who've Been There</span></h3>
             <p>
               Our trainers are industry professionals who have built solutions for real clients. They bring 
               battle-tested skills and insights that you won't find in traditional educational settings.
             </p>
           </div>
-          
           <div className="different-item">
-            <h3>Startup Energy. Personal Attention</h3>
+            <ConstructionIcon className="different-icon" />
+            <h3><span className="blue-text">Startup Energy. Personal Attention</span></h3>
             <p>
               We're young, fast-growing, and constantly adapting. We innovate often, move quickly, and 
               provide the one-on-one support you need to succeed in a rapidly changing tech landscape.
             </p>
           </div>
-          
           <div className="different-item">
-            <h3>Career-Driven Approach</h3>
+            <EmojiEventsIcon className="different-icon" />
+            <h3><span className="blue-text">Career-Driven Approach</span></h3>
             <p>
               Everything we teach is designed with your future in mind. From your first project to building 
               a portfolio that will impress interviewers, we're focused on your career success every step 
@@ -159,11 +191,27 @@ const About = () => {
         </div>
       </section>
 
+      {/* Stats Section (moved above partners) */}
+      <section className="stats-section">
+        <div className="stats-grid">
+          <div className="stat-box">
+            <div className="stat-number">{learners.toLocaleString()}<span className="stat-plus">+</span></div>
+            <div className="stat-label">Learners</div>
+          </div>
+          <div className="stat-box">
+            <div className="stat-number">{projects}+ </div>
+            <div className="stat-label">Real Time Projects</div>
+          </div>
+          <div className="stat-box">
+            <div className="stat-number">{courses}+ </div>
+            <div className="stat-label">GEN AI Courses</div>
+          </div>
+        </div>
+      </section>
+
       {/* Our Hiring Partners Section */}
       <section className="partners-section">
-        <h2>
-          <span>Our Hiring</span> <span>Partners</span>
-        </h2>
+        <h2 className="yellow-text">Our Hiring Partners</h2>
         <div className="partners-grid">
           <div className="partner-logo">Freshworks</div>
           <div className="partner-logo">Google</div>
@@ -174,7 +222,6 @@ const About = () => {
         </div>
       </section>
     </div>
-
   );
 };
 
