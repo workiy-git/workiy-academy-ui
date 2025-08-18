@@ -101,10 +101,7 @@ const Home = () => (
       p: 0,
       bgcolor: "#fff",
       color: "#ffc03d",
-      position: "relative",
-      left: "50%",
-      right: "50%",
-      transform: "translateX(-50%)",
+      overflowX: 'hidden',
     }}
   >
     <Box sx={{ width: "100%", p: 0, m: 0 }}>
