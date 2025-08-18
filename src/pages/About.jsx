@@ -1,5 +1,10 @@
 import React from "react";
 import "./About.css";
+import SchoolIcon from '@mui/icons-material/School';
+import PsychologyIcon from '@mui/icons-material/Psychology';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const About = () => {
   return (
@@ -8,7 +13,10 @@ const About = () => {
       <section className="hero-section">
         <div className="hero-content">
           <div className="hero-text">
-            <h1>Where Learning Meets Doing.</h1>
+                <h1>
+                  <span style={{ color: '#FFB703' }}>Where Learning</span>{' '}
+                  <span style={{ color: '#100E85' }}>Meets Doing.</span>
+                </h1>
             <p>
               At Workiy Academy, we specialize in cutting-edge Generative AI training that goes beyond theory. 
               We provide real-time project experience and industry-relevant courses designed to prepare you 
@@ -21,20 +29,19 @@ const About = () => {
               showcases your skills to potential employers.
             </p>
           </div>
-          <div className="hero-image">
-            <div className="geometric-pattern">
-              <img 
-                src="https://i.ibb.co/67zHv4jL/images.jpg" 
-                alt="AI Brain Visual" 
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-            </div>
-          </div>
+              <div className="hero-image">
+                <img
+                  src="https://i.ibb.co/67zHv4jL/images.jpg"
+                  alt="AI Brain Visual"
+                  className="simple-main-img"
+                />
+              </div>
         </div>
       </section>
 
       {/* Mission, Principles, and Values Section */}
       <section className="values-section">
+        
         <div className="values-grid">
           <div className="value-card">
             <h2>Our Mission</h2>
@@ -46,7 +53,6 @@ const About = () => {
               <li>Shaping futures that last</li>
             </ul>
           </div>
-          
           <div className="value-card">
             <h2>Our Principles</h2>
             <ul>
@@ -57,7 +63,6 @@ const About = () => {
               <li>Integrity Always</li>
             </ul>
           </div>
-          
           <div className="value-card">
             <h2>Our Values</h2>
             <ul>
@@ -74,14 +79,32 @@ const About = () => {
       {/* Our Approach Section */}
       <section className="approach-section">
         <h2>Our Approach</h2>
-        <div className="approach-content">
-          <ul>
-            <li>Learn by doing, not just listening</li>
-            <li>Blend theory with real-world projects</li>
-            <li>Stay aligned with industry demands</li>
-            <li>Gain guidance from expert mentors</li>
-            <li>Receive support from start to success</li>
-          </ul>
+        <div className="approach-grid">
+          <div className="approach-square">
+            <div className="approach-icon"><SchoolIcon style={{ fontSize: 40, color: '#100E85' }} /></div>
+            <div className="approach-title">Learn by doing, not just listening</div>
+            <div className="approach-desc">Hands-on projects from day one to build real-world skills that employers actually need.</div>
+          </div>
+          <div className="approach-square">
+            <div className="approach-icon"><PsychologyIcon style={{ fontSize: 40, color: '#FFB703' }} /></div>
+            <div className="approach-title">Blend theory with real-world projects</div>
+            <div className="approach-desc">Practical applications that demonstrate your capabilities and build a strong portfolio.</div>
+          </div>
+          <div className="approach-square">
+            <div className="approach-icon"><TrendingUpIcon style={{ fontSize: 40, color: '#100E85' }} /></div>
+            <div className="approach-title">Stay aligned with industry demands</div>
+            <div className="approach-desc">Curriculum updated with latest market requirements and emerging technologies.</div>
+          </div>
+          <div className="approach-square">
+            <div className="approach-icon"><SupportAgentIcon style={{ fontSize: 40, color: '#FFB703' }} /></div>
+            <div className="approach-title">Gain guidance from expert mentors</div>
+            <div className="approach-desc">Learn from professionals who've built real solutions for Fortune 500 companies.</div>
+          </div>
+          <div className="approach-square">
+            <div className="approach-icon"><CheckCircleIcon style={{ fontSize: 40, color: '#100E85' }} /></div>
+            <div className="approach-title">Receive support from start to success</div>
+            <div className="approach-desc">Continuous guidance throughout your learning journey and beyond graduation.</div>
+          </div>
         </div>
       </section>
 
@@ -151,6 +174,7 @@ const About = () => {
         </div>
       </section>
     </div>
+
   );
 };
 
