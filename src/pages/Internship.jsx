@@ -42,7 +42,11 @@ const Internship = () => (
         </label>
         <label style={labelStyle}>
           <span>Year of Graduation <span style={asteriskStyle}>*</span></span>
-          <input type="text" placeholder="e.g. 2025" style={inputStyle} required />
+          <select style={inputStyle} required>
+            {getYearOptions().map(year => (
+              <option key={year} value={year}>{year}</option>
+            ))}
+          </select>
         </label>
         <label style={labelStyle}>
           <span>Area of Interest in Internship <span style={asteriskStyle}>*</span></span>
@@ -64,8 +68,32 @@ const Internship = () => (
           </div>
         </label>
         <label style={labelStyle}>
-          <span>Attach your Resume (.pdf,.doc,.docx required )<span style={asteriskStyle}>*</span></span>
-          <input type="file" style={inputStyle} accept=".pdf,.doc,.docx" required />
+          <span>Attach your Resume <span style={asteriskStyle}>*</span></span>
+          <div style={{ position: "relative", width: "100%" }}>
+            <input
+              type="file"
+              style={{
+                ...inputStyle,
+                paddingRight: 36 // space for the pin icon
+              }}
+              accept=".pdf,.doc,.docx"
+              required
+            />
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/60/60995.png"
+              alt="attachment"
+              style={{
+                position: "absolute",
+                right: 10,
+                top: "50%",
+                transform: "translateY(-50%)",
+                width: 20,
+                height: 20,
+                pointerEvents: "none",
+                opacity: 0.7
+              }}
+            />
+          </div>
         </label>
         <label style={labelStyle}>
           <span>Description</span>
@@ -92,6 +120,15 @@ const Internship = () => (
     </form>
   </div>
 );
+
+function getYearOptions() {
+  const currentYear = new Date().getFullYear();
+  const years = [];
+  for (let i = currentYear - 3; i <= currentYear + 3; i++) {
+    years.push(i);
+  }
+  return years;
+}
 
 const inputStyle = {
   width: "100%",
