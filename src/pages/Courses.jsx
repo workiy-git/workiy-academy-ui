@@ -31,6 +31,26 @@ const courses = [
     duration: "10 weeks",
     level: "Intermediate",
     image: reactImg
+  }, {
+    title: "figma",
+    description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
+    duration: "10 weeks",
+    level: "Intermediate",
+    image: reactImg
+  },
+  {
+    title: "photoshop",
+    description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
+    duration: "10 weeks",
+    level: "Intermediate",
+    image: reactImg
+  },
+  {
+    title: "danvis",
+    description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
+    duration: "10 weeks",
+    level: "Intermediate",
+    image: reactImg
   }
 ];
 
@@ -38,98 +58,56 @@ const courses = [
 const Courses = () => {
   const [showAll, setShowAll] = useState(false);
 
+  // Determine which courses to show
+  const displayedCourses = showAll ? courses : courses.slice(0, 4);
+
   return (
     <Box sx={{ bgcolor: "#F6F8FB", minHeight: "100vh" }}>
-      {/* Header Navigation */}
-      <AppBar position="static" color="default" elevation={0} sx={{ bgcolor: "#fff", boxShadow: "none", borderBottom: "1px solid #E3EAF2" }}>
-        <Toolbar sx={{ justifyContent: "space-between", px: { xs: 2, md: 8 } }}>
-          <Stack direction="row" spacing={4} alignItems="center">
-            <Link href="#" underline="none" color="inherit" sx={{ fontWeight: 700, fontSize: 18 }}>HOME</Link>
-            <Link href="#" underline="none" color="primary" sx={{ fontWeight: 700, fontSize: 18 }}>Courses</Link>
-            <Link href="#" underline="none" color="inherit" sx={{ fontWeight: 700, fontSize: 18 }}>Blog</Link>
-            <Link href="#" underline="none" color="inherit" sx={{ fontWeight: 700, fontSize: 18 }}>Internship</Link>
-            <Link href="#" underline="none" color="inherit" sx={{ fontWeight: 700, fontSize: 18 }}>About us</Link>
-          </Stack>
-          <Button variant="contained" color="primary" sx={{ borderRadius: 3, fontWeight: 700, px: 4, py: 1, fontSize: 16, boxShadow: "none" }}>ENQUIRED</Button>
-        </Toolbar>
-      </AppBar>
-
       {/* Hero Section */}
-      <Box sx={{ py: 7, bgcolor: "#FFFFFF" }}>
-        <Container maxWidth="md">
-          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mb: 3 }}>
-            <Typography variant="h3" align="center" sx={{ fontWeight: 800, mb: 2, color: "#1A237E", fontFamily: 'Inter, sans-serif' }}>
+      <Box sx={{ py: 1, bgcolor: "#FFFFFF" }}>
+        <Container maxWidth="lg" sx={{ ml: { xs: 0, sm: 2, md: 4, lg: 8 } }}>
+          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", mb: 3, mt: { xs: 4, sm: 8, md: 10 }, ml: { xs: 0, sm: 1, md: 2 } }}>
+            <Typography variant="h3" align="left" sx={{ fontWeight: 800, mb: 2, color: "#22223b", fontFamily: 'Inter, sans-serif' }}>
               Ready to imagine your career?
             </Typography>
-            <Typography variant="h6" align="center" color="text.secondary" sx={{ mb: 5, fontWeight: 500, fontFamily: 'Inter, sans-serif' }}>
+            <Typography variant="h6" align="left" color="text.secondary" sx={{ mb: 5, fontWeight: 500, fontFamily: 'Inter, sans-serif' }}>
               Get the skills with real world experience Employers want with career Accelators
             </Typography>
           </Box>
-          <Grid container spacing={4} justifyContent="center">
-            {courses.slice(0, 4).map((course, idx) => (
-              <Grid item xs={12} sm={6} md={3} key={idx}>
+          <Grid container spacing={4} justifyContent="flex-start">
+            {displayedCourses.map((course, idx) => (
+              <Grid item xs={12} sm={6} md={3} lg={3} key={idx} sx={{ mb: 3 }}>
                 <CourseCard course={course} />
               </Grid>
             ))}
           </Grid>
-          <Box sx={{ textAlign: "center", mt: 5 }}>
-            <Button variant="contained" color="primary" sx={{ px: 6, py: 2, borderRadius: 3, fontWeight: 800, fontSize: 18, fontFamily: 'Inter, sans-serif', boxShadow: "none" }} onClick={() => setShowAll(true)}>
-              All Career Accelators
-            </Button>
-          </Box>
-          {/* Show all courses below when showAll is true */}
-          {showAll && (
-            <Box sx={{ py: 7, bgcolor: "#F6F8FB" }}>
-              <Container maxWidth="lg">
-                <Typography variant="h4" align="center" sx={{ fontWeight: 800, mb: 4, color: "#1A237E", fontFamily: 'Inter, sans-serif' }}>
-                  All Courses
-                </Typography>
-                <Grid container spacing={4} justifyContent="center">
-                  {courses.map((course, idx) => (
-                    <Grid item xs={12} sm={6} md={3} key={idx}>
-                      <CourseCard course={course} />
-                    </Grid>
-                  ))}
-                </Grid>
-              </Container>
+          {!showAll && (
+            <Box sx={{ textAlign: "left", mt: 5 }}>
+              <Button
+                variant="contained"
+                sx={{
+                  px: 6,
+                  py: 2,
+                  borderRadius: 3,
+                  fontWeight: 500,
+                  fontSize: 15,
+                  fontFamily: 'Inter, sans-serif',
+                  // boxShadow: "none",
+                  backgroundColor: "#fff",
+                  border: '3px solid #22223b', // <-- This sets the border color
+                  color: "#22223b",
+
+                }}
+                onClick={() => setShowAll(true)}
+              >
+                All Career Accelators
+              </Button>
             </Box>
           )}
         </Container>
       </Box>
-
-      {/* Academy Info Section */}
-      <Box sx={{ py: 7 }}>
-        <Container maxWidth="md">
-          <Typography variant="h4" align="center" sx={{ fontWeight: 800, mb: 2, color: "#1A237E", fontFamily: 'Inter, sans-serif' }}>
-            Workiy Academy is the leading Software Training Institute in Chennai
-          </Typography>
-          <Typography variant="body1" align="center" color="text.secondary" sx={{ mb: 2, fontSize: 17, fontFamily: 'Inter, sans-serif', fontWeight: 500 }}>
-            which offers the latest and trending courses with a practical learning experience. In addition to the core curriculum, Workiy often offers a range of support services to help students succeed. These may include mentorship programs, career services, and access to a network of alumni and industry professionals.
-          </Typography>
-        </Container>
-      </Box>
-
-      {/* Footer Section */}
-      <Box sx={{ bgcolor: "#1A237E", color: "#fff", py: 5 }}>
-        <Container maxWidth="md">
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <Typography variant="subtitle1" sx={{ fontWeight: 700, fontSize: 18, fontFamily: 'Inter, sans-serif', mb: 1 }}>HOME</Typography>
-              <Typography variant="subtitle1" sx={{ fontWeight: 700, fontSize: 18, fontFamily: 'Inter, sans-serif', mb: 1 }}>Courses</Typography>
-              <Typography variant="subtitle1" sx={{ fontWeight: 700, fontSize: 18, fontFamily: 'Inter, sans-serif', mb: 1 }}>Blog</Typography>
-              <Typography variant="subtitle1" sx={{ fontWeight: 700, fontSize: 18, fontFamily: 'Inter, sans-serif', mb: 1 }}>Internship</Typography>
-              <Typography variant="subtitle1" sx={{ fontWeight: 700, fontSize: 18, fontFamily: 'Inter, sans-serif', mb: 1 }}>About us</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography variant="body2" sx={{ fontSize: 16, fontFamily: 'Inter, sans-serif', mb: 1 }}>#6-183, Ottiyambakkam Road , Chennai - 126</Typography>
-              <Typography variant="body2" sx={{ fontSize: 16, fontFamily: 'Inter, sans-serif', mb: 1 }}>9342483624</Typography>
-              <Typography variant="body2" sx={{ fontSize: 16, fontFamily: 'Inter, sans-serif', mb: 1 }}>hr@Workiy.ca</Typography>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
     </Box>
   );
-};
+}
 
 export default Courses;
