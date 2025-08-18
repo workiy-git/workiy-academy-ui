@@ -51,7 +51,35 @@ const courses = [
     duration: "10 weeks",
     level: "Intermediate",
     image: reactImg
-  }
+  },
+   {
+    title: "AI for QA Testing & Automation",
+    description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
+    duration: "10 weeks",
+    level: "Intermediate",
+    image: reactImg
+  },
+   {
+    title: "AI-Enhanced Business Analysis",
+    description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
+    duration: "10 weeks",
+    level: "Intermediate",
+    image: reactImg
+  },
+   {
+    title: "AI Automation Specialist Program",
+    description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
+    duration: "10 weeks",
+    level: "Intermediate",
+    image: reactImg
+  },
+  {
+    title: "AI Agents Developer with Python",
+    description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
+    duration: "10 weeks",
+    level: "Intermediate",
+    image: reactImg
+  },
 ];
 
 
@@ -59,7 +87,7 @@ const Courses = () => {
   const [showAll, setShowAll] = useState(false);
 
   // Determine which courses to show
-  const displayedCourses = showAll ? courses : courses.slice(0, 4);
+  const displayedCourses = showAll ? courses : courses.slice(0, 6);
 
   return (
     <Box sx={{ bgcolor: "#F6F8FB", minHeight: "100vh" }}>
