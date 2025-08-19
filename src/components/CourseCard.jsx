@@ -6,13 +6,15 @@ const CourseCard = ({ course }) => (
     elevation={0}
     sx={{
       borderRadius: 4,
-      width: { xs: 200, sm: 220, md: 240 },
-      aspectRatio: '1 / 1',
-      bgcolor: '#fff',
+  width: { xs: '100%', sm: 220, md: 240, lg: 260 },
+  maxWidth: { xs: '100%', sm: 260, md: 300, lg: 340 },
+  minHeight: 180,
+  height: 'auto',
+  bgcolor: '#fff',
       boxShadow: '0px 4px 24px rgba(26, 35, 126, 0.08)',
       transition: 'transform 0.2s, box-shadow 0.2s',
       mx: 'auto',
-      p: { xs: 1, sm: 1.5, md: 2 },
+      p: { xs: 1, sm: 2, md: 2.5, lg: 3 },
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
@@ -24,11 +26,11 @@ const CourseCard = ({ course }) => (
     }}
   >
     <CardContent sx={{ p: 0 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 1 }}>
+      <Box sx={{ width: '100%', height: 80, display: 'flex', justifyContent: 'center', alignItems: 'center', mb: 3 }}>
         <img
           src={course.image}
           alt={course.title}
-          style={{ width: '48px', height: '48px', objectFit: 'contain' }}
+          style={{ width: '120%', height: '130%', objectFit: 'cover', borderRadius: 5 }}
         />
       </Box>
       <Typography

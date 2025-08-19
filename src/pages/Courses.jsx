@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Grid, Typography, Button, Box, AppBar, Toolbar, Link, Stack } from "@mui/material";
 import CourseCard from "../components/CourseCard";
-import reactImg from "../assets/react.svg";
+import reactImg from "../assets/course1.png";
 
 const courses = [
   {
@@ -51,6 +51,13 @@ const courses = [
     duration: "10 weeks",
     level: "Intermediate",
     image: reactImg
+  },
+    {
+    title: "Certified AI Automation Specialist Program",
+    description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
+    duration: "10 weeks",
+    level: "Intermediate",
+    image: reactImg
   }
 ];
 
@@ -59,7 +66,7 @@ const Courses = () => {
   const [showAll, setShowAll] = useState(false);
 
   // Determine which courses to show
-  const displayedCourses = showAll ? courses : courses.slice(0, 4);
+  const displayedCourses = showAll ? courses : courses.slice(0, 6);
 
   return (
     <Box sx={{ bgcolor: "#F6F8FB", minHeight: "100vh" }}>
@@ -89,14 +96,17 @@ const Courses = () => {
                   px: 6,
                   py: 2,
                   borderRadius: 3,
-                  fontWeight: 500,
+                  fontWeight: 700,
                   fontSize: 15,
                   fontFamily: 'Inter, sans-serif',
-                  // boxShadow: "none",
                   backgroundColor: "#fff",
-                  border: '3px solid #22223b', // <-- This sets the border color
+                  border: '3px solid #22223b',
                   color: "#22223b",
-
+                  transition: 'background 0.2s, color 0.2s',
+                  '&:hover': {
+                    backgroundColor: '#22223b',
+                    color: '#fff',
+                  },
                 }}
                 onClick={() => setShowAll(true)}
               >
