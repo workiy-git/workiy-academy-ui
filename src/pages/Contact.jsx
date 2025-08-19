@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
+import './Contact.css';
 
 
 
@@ -115,7 +116,7 @@ const Contact = () => (
 					<Grid item xs={12} md={6}>
 						<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: { xs: 'stretch', md: 'flex-end' } }}>
 							<Box sx={{ display: 'flex', width: '100%' }}>
-								<input type="email" placeholder="Enter your email" style={{ flex: 1, padding: '12px', borderRadius: '6px 0 0 6px', border: '1px solid #E4E7EC', fontSize: '1rem', background: '#F9FAFB', borderRight: 'none' }} />
+								<input className='email-input' type="email" placeholder="Enter your email" style={{ flex: 1, padding: '12px', borderRadius: '6px 0 0 6px', border: '1px solid #E4E7EC', fontSize: '1rem', background: '#F9FAFB', borderRight: 'none' }} />
 								<button type="button" style={{ padding: '12px 24px', background: '#7F56D9', color: '#fff', border: 'none', borderRadius: '0 6px 6px 0', fontSize: '1rem', fontWeight: 600, cursor: 'pointer' }}>Subscribe</button>
 							</Box>
 							<Typography variant="body2" sx={{ color: '#666', mt: 1, textAlign: 'left' }}>

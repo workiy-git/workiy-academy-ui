@@ -8,10 +8,12 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Internship from './pages/Internship';
 import Course from './pages/Course';
+import NavbarMobile from './components/NavbarMobile';
 
 const AppRouter = () => (
   <Router>
     <Navbar />
+    <NavbarMobile />
     <div className="container">
       <Routes>
         <Route path="/" element={<Home />} />
