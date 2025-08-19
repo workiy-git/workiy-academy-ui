@@ -9,14 +9,14 @@ const BannerCarousel = ({ slides }) => (
       navButtonsAlwaysVisible={true}
       interval={5000}
       animation="slide"
-      sx={{ width: "100%", height: "400px" }}
+      sx={{ width: "100%", height: { xs: '180px', sm: '260px', md: '400px' } }}
     >
       {slides.map((slide, idx) => (
         <Box
           key={idx}
           sx={{
             width: "100%",
-            height: "400px",
+            height: { xs: '180px', sm: '260px', md: '400px' },
             position: "relative",
             overflow: "hidden",
           }}
