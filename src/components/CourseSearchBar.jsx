@@ -34,7 +34,7 @@ const CourseSearchBar = () => {
   };
 
   return (
-    <Paper elevation={0} sx={{ width: '100vw', maxWidth: '100vw', mx: 0, my: 6, p: { xs: 2, md: 4 }, borderRadius: 0, textAlign: "center", bgcolor: "#fff", boxShadow: 'none' }}>
+    <Paper elevation={0} sx={{ mx: 0, my: 6, p: { xs: 2, md: 4 }, borderRadius: 0, textAlign: "center", bgcolor: "#fff", boxShadow: 'none' }}>
       <Typography variant="h5" sx={{ fontWeight: 700, mb: 1, color: "#262627" }}>
         Search among <span style={{ color: '#5A69F2' }}>307</span> courses and find your favorite course
       </Typography>

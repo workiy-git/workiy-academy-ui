@@ -17,7 +17,7 @@ const NewsletterSignup = () => {
   };
 
   return (
-    <Paper elevation={0} sx={{ width: '95vw', maxWidth: '9 0vw', mx: 0, my: 6, p: 4, borderRadius: 0, textAlign: 'center', backgroundColor: '#F6F7FE' }}>
+    <Paper elevation={0} sx={{ mx: 0, my: 6, p: 4, borderRadius: 0, textAlign: 'center', backgroundColor: '#F6F7FE' }}>
       <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center', justifyContent: 'center', gap: 1 }}>
         <Box sx={{ flex: 7, textAlign: { xs: 'center', md: 'left' },right: { md: '-50px' } }}>
           <Typography variant="h3" sx={{ fontWeight: 700, mb: { xs: 2, md: 0 }, color: '#000' }}>

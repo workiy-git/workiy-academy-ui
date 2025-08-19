@@ -8,7 +8,7 @@ import EmailIcon from '@mui/icons-material/Email';
 
 const DirectLine = () => {
   return (
-    <Box sx={{ width: '100vw', bgcolor: '#fff', py: { xs: 4, md: 8 }, px: { xs: 2, md: 0 } }}>
+    <Box sx={{ bgcolor: '#fff', py: { xs: 4, md: 8 }, px: { xs: 2, md: 0 } }}>
       <Grid container spacing={4} justifyContent="center" alignItems="stretch">
         {/* Left Side: Contact Info */}
         <Grid item xs={12} md={5}>
