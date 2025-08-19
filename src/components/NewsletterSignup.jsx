@@ -17,11 +17,10 @@ const NewsletterSignup = () => {
   };
 
   return (
+
     <Paper
       elevation={0}
       sx={{
-        width: '95vw',
-        maxWidth: '100vw',
         mx: 0,
         my: { xs: 2, md: 6 },
         p: { xs: 2, sm: 3, md: 4 },

@@ -25,8 +25,6 @@ const ContactUs = () => {
     <Paper
       elevation={3}
       sx={{
-        width: '95vw',
-        maxWidth: '95vw',
         mx: 0,
         my: { xs: 2, md: 6 },
         p: { xs: 2, sm: 3, md: 4 },
@@ -42,6 +40,7 @@ const ContactUs = () => {
           fontSize: { xs: 18, sm: 22, md: 28 },
         }}
       >
+
         Contact us
       </Typography>
       <Typography

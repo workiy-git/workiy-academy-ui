@@ -34,11 +34,10 @@ const CourseSearchBar = () => {
   };
 
   return (
+
     <Paper
       elevation={0}
       sx={{
-        width: '90vw',
-        maxWidth: '90vw',
         mx: 0,
         my: { xs: 2, md: 6 },
         p: { xs: 1.5, sm: 2, md: 4 },
