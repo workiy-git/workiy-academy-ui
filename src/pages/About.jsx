@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./About.css";
+import "../assets/About.css"
 import SchoolIcon from '@mui/icons-material/School';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import BuildIcon from '@mui/icons-material/Build';
@@ -57,13 +57,11 @@ const About = () => {
             </p>
           </div>
           <div className="hero-image">
-            <div className="geometric-pattern">
-              <img 
-                src="https://i.ibb.co/67zHv4jL/images.jpg" 
-                alt="AI Brain Visual" 
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-            </div>
+            <img 
+              src="https://i.ibb.co/67zHv4jL/images.jpg" 
+              alt="AI Brain Visual" 
+              className="hero-img-responsive"
+            />
           </div>
         </div>
       </section>
@@ -204,7 +202,7 @@ const About = () => {
           </div>
           <div className="stat-box">
             <div className="stat-number">{courses}+ </div>
-            <div className="stat-label">GEN AI Courses</div>
+            <div className="stat-label"> GEN AI Courses</div>
           </div>
         </div>
       </section>
@@ -213,12 +211,12 @@ const About = () => {
       <section className="partners-section">
         <h2 className="yellow-text">Our Hiring Partners</h2>
         <div className="partners-grid">
-          <div className="partner-logo">Freshworks</div>
-          <div className="partner-logo">Google</div>
-          <div className="partner-logo">Microsoft</div>
-          <div className="partner-logo">PhonePe</div>
-          <div className="partner-logo">PayPal</div>
-          <div className="partner-logo">TCS</div>
+          <div className="partner-logo"><img src="" alt="Freshworks" /></div>
+          <div className="partner-logo"><img src="" alt="Google" /></div>
+          <div className="partner-logo"><img src="" alt="Microsoft" /></div>
+          <div className="partner-logo"><img src="" alt="PhonePe" /></div>
+          <div className="partner-logo"><img src="" alt="PayPal" /></div>
+          <div className="partner-logo"><img src="" alt="TCS" /></div>
         </div>
       </section>
     </div>
