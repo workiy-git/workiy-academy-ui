@@ -8,34 +8,57 @@ import EmailIcon from '@mui/icons-material/Email';
 
 const DirectLine = () => {
   return (
-    <Box sx={{ bgcolor: '#fff', py: { xs: 4, md: 8 }, px: { xs: 2, md: 0 } }}>
-      <Grid container spacing={4} justifyContent="center" alignItems="stretch">
+
+    <Box sx={{ bgcolor: '#fff', py: { xs: 3, md: 8 }, px: { xs: 1, sm: 2, md: 0 } }}>
+      <Grid
+        container
+        spacing={{ xs: 2, md: 4 }}
+        justifyContent="center"
+        alignItems="stretch"
+      >
         {/* Left Side: Contact Info */}
         <Grid item xs={12} md={5}>
           <Paper elevation={0} sx={{ bgcolor: 'transparent', p: 0 }}>
-            <Box sx={{ textAlign: 'left' }}>
-              <Typography variant="h4" sx={{ fontWeight: 700, mb: 2, color: '#212529', textAlign: 'left' }}>
+            <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
+              <Typography
+                variant="h5"
+                sx={{
+                  fontWeight: 700,
+                  mb: 2,
+                  color: '#212529',
+                  textAlign: { xs: 'center', md: 'left' },
+                  fontSize: { xs: 18, sm: 22, md: 28 },
+                }}
+              >
                 Need a direct line?
               </Typography>
-              <Typography variant="body1" sx={{ mb: 2, color: '#555', textAlign: 'left' }}>
+              <Typography
+                variant="body1"
+                sx={{
+                  mb: 2,
+                  color: '#555',
+                  textAlign: { xs: 'center', md: 'left' },
+                  fontSize: { xs: 14, sm: 15, md: 16 },
+                }}
+              >
                 We’re here to help you with any questions, feedback, or support you need.
               </Typography>
-              <Box sx={{ display: 'flex', alignItems: 'center', mt: 3, mb: 0.5 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', mt: 3, mb: 0.5, justifyContent: { xs: 'center', md: 'flex-start' } }}>
                 <PhoneIcon sx={{ color: '#5A69F2', mr: 1 }} />
                 <Typography variant="subtitle1" sx={{ fontWeight: 600, color: '#5A69F2', textAlign: 'left' }}>
                   Phone
                 </Typography>
               </Box>
-              <Typography variant="body2" sx={{ mb: 2, color: '#212529', textAlign: 'left', ml: 4 }}>
+              <Typography variant="body2" sx={{ mb: 2, color: '#212529', textAlign: { xs: 'center', md: 'left' }, ml: { xs: 0, md: 4 }, fontSize: { xs: 13, sm: 14 } }}>
                 +91 9342483624
               </Typography>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.5 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.5, justifyContent: { xs: 'center', md: 'flex-start' } }}>
                 <EmailIcon sx={{ color: '#5A69F2', mr: 1 }} />
                 <Typography variant="subtitle1" sx={{ fontWeight: 600, color: '#5A69F2', textAlign: 'left' }}>
                   Email
                 </Typography>
               </Box>
-              <Typography variant="body2" sx={{ mb: 2, color: '#212529', textAlign: 'left', ml: 4 }}>
+              <Typography variant="body2" sx={{ mb: 2, color: '#212529', textAlign: { xs: 'center', md: 'left' }, ml: { xs: 0, md: 4 }, fontSize: { xs: 13, sm: 14 } }}>
                 hr@workiy.ca
               </Typography>
             </Box>
@@ -43,8 +66,19 @@ const DirectLine = () => {
         </Grid>
         {/* Right Side: Location Map */}
         <Grid item xs={12} md={7}>
-          <Paper elevation={2} sx={{ p: 0, borderRadius: 3, height: '100%', minHeight: 300, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Box sx={{ width: { xs: '100%', md: '50vw' }, height: 300, mx: 'auto' }}>
+          <Paper
+            elevation={2}
+            sx={{
+              p: 0,
+              borderRadius: 3,
+              height: '100%',
+              minHeight: { xs: 200, md: 300 },
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Box sx={{ width: '100%', height: { xs: 200, sm: 250, md: 300 }, mx: 'auto' }}>
               <iframe
                 title="Workiy Academy Location"
                 src="https://www.google.com/maps?q=Workiy+Academy&output=embed"

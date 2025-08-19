@@ -5,10 +5,46 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 
 const WorkshopPromo = () => (
-  <Box sx={{ mx: 0, my: 6, p: { xs: 2, md: 6 }, borderRadius: 0, bgcolor: '#FF6363' }}>
-    <Grid sx={{ display: 'flex',width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-      <Grid item xs={12} md={6} sx={{ display: 'flex',width: '50%', justifyContent: 'center', alignItems: 'center' }}>
-        <Box sx={{ width: { xs: '100%', md: '100%' }, maxWidth: 400, borderRadius: 3, overflow: 'hidden', boxShadow: 2 }}>
+  <Box
+    sx={{
+      mx: 0,
+      my: { xs: 2, md: 6 },
+      p: { xs: 2, sm: 3, md: 6 },
+      borderRadius: 0,
+      bgcolor: '#FF6363',
+    }}
+  >
+    <Grid
+      container
+      spacing={0}
+      sx={{
+        flexDirection: { xs: 'column', md: 'row' },
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+      }}
+    >
+      <Grid
+        item
+        xs={12}
+        md={6}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: { xs: '100%', md: '50%' },
+          mb: { xs: 2, md: 0 },
+        }}
+      >
+        <Box
+          sx={{
+            width: { xs: '90%', sm: '80%', md: '100%' },
+            maxWidth: 400,
+            borderRadius: 3,
+            overflow: 'hidden',
+            boxShadow: 2,
+          }}
+        >
           <img
             src="https://i.ibb.co/9HyTYn2Q/Group-3625.png"
             alt="Build Your First AI Chatbot"
@@ -16,21 +52,68 @@ const WorkshopPromo = () => (
           />
         </Box>
       </Grid>
-      <Grid item xs={12} md={6} sx={{ display: 'flex',width: '50%', alignItems: 'center', justifyContent: { xs: 'center', md: 'flex-start' } }}>
-        <Box sx={{ textAlign: { xs: 'center', md: 'center' }, width: { xs: '100%', md: '80%' }, color: '#fff' }}>
-          <Typography variant="h4" sx={{ fontWeight: 700, mb: 2, color: '#fff' }}>
+      <Grid
+        item
+        xs={12}
+        md={6}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: { xs: 'center', md: 'flex-start' },
+          width: { xs: '100%', md: '50%' },
+        }}
+      >
+        <Box
+          sx={{
+            textAlign: { xs: 'center', md: 'left' },
+            width: { xs: '100%', md: '80%' },
+            color: '#fff',
+          }}
+        >
+          <Typography
+            variant="h5"
+            sx={{
+              fontWeight: 700,
+              mb: 2,
+              color: '#fff',
+              fontSize: { xs: 20, sm: 24, md: 32 },
+            }}
+          >
             Build Your First AI Chatbot
           </Typography>
-          <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
+          <Typography
+            variant="h6"
+            sx={{ fontWeight: 600, mb: 2, fontSize: { xs: 16, sm: 18, md: 22 } }}
+          >
             Join Our ₹9 Workshop!
           </Typography>
-          <Typography variant="body1" sx={{ mb: 3 }}>
+          <Typography
+            variant="body1"
+            sx={{ mb: 3, fontSize: { xs: 14, sm: 15, md: 16 } }}
+          >
             We believe learning should be accessible to everyone! That’s why we’re offering our exclusive introductory workshop for only ₹9. Whether you’re a beginner or looking to enhance your skills, this is your golden chance.
           </Typography>
-          <Button variant="contained" sx={{ bgcolor: '#000', color: '#fff', fontWeight: 700, px: 4, py: 1.5, borderRadius: 2, mr: 2, '&:hover': { bgcolor: '#4051b5' } }}>
+          <Button
+            variant="contained"
+            sx={{
+              bgcolor: '#000',
+              color: '#fff',
+              fontWeight: 700,
+              px: { xs: 2, sm: 4 },
+              py: 1.5,
+              borderRadius: 2,
+              width: { xs: '100%', sm: 'auto' },
+              fontSize: { xs: 14, sm: 16 },
+              mr: { xs: 0, sm: 2 },
+              '&:hover': { bgcolor: '#4051b5' },
+            }}
+          >
             Buy ₹9
           </Button>
-          <Typography variant="body2" sx={{ mt: 3, color: '#fff' }}>
+          <Typography
+            variant="body2"
+            sx={{ mt: 3, color: '#fff', fontSize: { xs: 13, sm: 14 } }}
+          >
             Unlock your learning journey for less than the price of a cup of tea!
           </Typography>
         </Box>

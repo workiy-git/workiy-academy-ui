@@ -22,11 +22,35 @@ const ContactUs = () => {
   };
 
   return (
-    <Paper elevation={3} sx={{  mx: 0, my: 6, p: 4, borderRadius: 0 }}>
-      <Typography variant="h4" sx={{ mb: 2, fontWeight: 600, textAlign: 'center' }}>
+    <Paper
+      elevation={3}
+      sx={{
+        mx: 0,
+        my: { xs: 2, md: 6 },
+        p: { xs: 2, sm: 3, md: 4 },
+        borderRadius: 0,
+      }}
+    >
+      <Typography
+        variant="h5"
+        sx={{
+          mb: 2,
+          fontWeight: 600,
+          textAlign: 'center',
+          fontSize: { xs: 18, sm: 22, md: 28 },
+        }}
+      >
+
         Contact us
       </Typography>
-      <Typography variant="body2" sx={{ mb: 2, textAlign: 'center' }}>
+      <Typography
+        variant="body2"
+        sx={{
+          mb: 2,
+          textAlign: 'center',
+          fontSize: { xs: 13, sm: 14 },
+        }}
+      >
         Your email address will not be published. Required fields are marked *
       </Typography>
       <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
@@ -38,6 +62,7 @@ const ContactUs = () => {
             onChange={handleChange}
             fullWidth
             required
+            sx={{ fontSize: { xs: 14, sm: 16 } }}
           />
           <TextField
             label="Email*"
@@ -47,6 +72,7 @@ const ContactUs = () => {
             onChange={handleChange}
             fullWidth
             required
+            sx={{ fontSize: { xs: 14, sm: 16 } }}
           />
         </Box>
         <Box sx={{ mb: 2 }}>
@@ -58,6 +84,7 @@ const ContactUs = () => {
             fullWidth
             multiline
             minRows={3}
+            sx={{ fontSize: { xs: 14, sm: 16 } }}
           />
         </Box>
         <Box sx={{ mb: 2, display: 'flex', justifyContent: { xs: 'flex-start', md: 'flex-start' } }}>
@@ -70,12 +97,23 @@ const ContactUs = () => {
                 color="primary"
               />
             }
-            label="Save my name, email in this browser for the next time I comment"
+            label={<span style={{ fontSize: '0.95em' }}>Save my name, email in this browser for the next time I comment</span>}
             sx={{ flex: 1, ml: 0 }}
           />
         </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
-          <Button type="submit" variant="contained" sx={{ width: 120, fontWeight: 600, bgcolor: '#5A69F2', '&:hover': { bgcolor: '#4051b5' } }}>
+        <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'flex-start' } }}>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{
+              width: { xs: '100%', sm: 140 },
+              fontWeight: 600,
+              bgcolor: '#5A69F2',
+              fontSize: { xs: 15, sm: 16 },
+              py: { xs: 1.2, sm: 1.5 },
+              '&:hover': { bgcolor: '#4051b5' },
+            }}
+          >
             SEND
           </Button>
         </Box>
