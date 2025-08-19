@@ -95,7 +95,6 @@ const bannerSlides = [
 const Home = () => (
   <Box
     sx={{
-      width: "100vw",
       minHeight: "100vh",
       m: 0,
       p: 0,
