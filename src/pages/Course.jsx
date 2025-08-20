@@ -279,38 +279,22 @@ const Course = () => {
                 </div>
 
                 <div style={styles.heroBadges}>
-                    <div
-                        style={hoveredBadge === 0 ? {...styles.badge, ...styles.badgeHover} : styles.badge}
-                        onMouseEnter={() => setHoveredBadge(0)}
-                        onMouseLeave={() => setHoveredBadge(null)}
-                    >
-                        <ClockIcon color="#ffffff" />
-                        <div>20 hours / 2 weeks</div>
-                    </div>
-                    <div
-                        style={hoveredBadge === 1 ? {...styles.badge, ...styles.badgeHover} : styles.badge}
-                        onMouseEnter={() => setHoveredBadge(1)}
-                        onMouseLeave={() => setHoveredBadge(null)}
-                    >
-                        <BarChartIcon color="#ffffff" />
-                        <div>Beginner to Intermediate</div>
-                    </div>
-                    <div
-                        style={hoveredBadge === 2 ? {...styles.badge, ...styles.badgeHover} : styles.badge}
-                        onMouseEnter={() => setHoveredBadge(2)}
-                        onMouseLeave={() => setHoveredBadge(null)}
-                    >
-                        <LaptopIcon color="#ffffff" />
-                        <div>Basic Computer Literacy + English</div>
-                    </div>
-                    <div
-                        style={hoveredBadge === 3 ? {...styles.badge, ...styles.badgeHover} : styles.badge}
-                        onMouseEnter={() => setHoveredBadge(3)}
-                        onMouseLeave={() => setHoveredBadge(null)}
-                    >
-                        <BadgeAwardIcon color="#ffffff" />
-                        <div>Certified Prompt Engineer (CPE)</div>
-                    </div>
+                    { [
+                        { label: "20 hours / 2 weeks", color: "#f3e8ff" },
+                        { label: "Beginner to Intermediate", color: "#f3e8ff" },
+                        { label: "Basic Computer Literacy + English", color: "#f3e8ff" },
+                        { label: "Certified Prompt Engineer (CPE)", color: "#f3e8ff" }
+                    ].map((badge, index) => (
+                        <div
+                            key={index}
+                            style={hoveredBadge === index ? {...styles.badge, ...styles.badgeHover} : styles.badge}
+                            onMouseEnter={() => setHoveredBadge(index)}
+                            onMouseLeave={() => setHoveredBadge(null)}
+                        >
+                            <ClockIcon color="#ffffff" />
+                            <div style={{ color: badge.color }}>{badge.label}</div>
+                        </div>
+                    )) }
                 </div>
 
                 <section style={styles.section}>
