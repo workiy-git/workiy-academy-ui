@@ -13,11 +13,11 @@ const DirectLine = () => {
       <Grid
         container
         spacing={{ xs: 2, md: 4 }}
-        justifyContent="center"
+        justifyContent="space-around"
         alignItems="stretch"
       >
         {/* Left Side: Contact Info */}
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} md={5} sx={{ maxWidth: { xs: '100%', md: '40%' } }}>
           <Paper elevation={0} sx={{ bgcolor: 'transparent', p: 0 }}>
             <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
               <Typography
@@ -65,7 +65,7 @@ const DirectLine = () => {
           </Paper>
         </Grid>
         {/* Right Side: Location Map */}
-        <Grid item xs={12} md={7}>
+        <Grid item xs={12} md={7} sx={{ maxWidth: { xs: '100%', md: '70%' } }}>
           <Paper
             elevation={2}
             sx={{
@@ -73,6 +73,8 @@ const DirectLine = () => {
               borderRadius: 3,
               height: '100%',
               minHeight: { xs: 200, md: 300 },
+              
+              width: '600px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',

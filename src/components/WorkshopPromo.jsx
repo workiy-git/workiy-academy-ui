@@ -105,7 +105,7 @@ const WorkshopPromo = () => (
               width: { xs: '100%', sm: 'auto' },
               fontSize: { xs: 14, sm: 16 },
               mr: { xs: 0, sm: 2 },
-              '&:hover': { bgcolor: '#4051b5' },
+              '&:hover': { bgcolor: '#808080' },
             }}
           >
             Buy ₹9
