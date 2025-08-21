@@ -14,47 +14,55 @@ import GroupIcon from '@mui/icons-material/Group';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import { GlobalStyles } from '@mui/material';
 
-const topCourses = [
-  {
-    title: "Learn Figma - UI/UX Design Essential Training",
-    lessons: 8,
-    students: 198,
-    level: "Beginner",
-    rating: 4,
-    image: "https://i.ibb.co/hFBsFqGP/unsplash-7u-SKXpks-CKg.png",
-    path: "https://production.d2ggwqvu23n3mj.amplifyapp.com/courses"
-  },
-  {
-    title: "Python for Beginners - Learn Programming from scratch",
-    lessons: 21,
-    students: 99,
-    level: "Beginner",
-    rating: 3,
-    image: "https://i.ibb.co/1G268Rjx/learning-education-ideas-insight-intelligence-study-concept.png",
-    path: "https://production.d2ggwqvu23n3mj.amplifyapp.com/courses"
-  },
-  {
-    title: "Mobile App Development with Flutter & Dart",
-    lessons: 15,
-    students: 215,
-    level: "Advanced",
-    rating: 2,
-    image: "https://i.ibb.co/rKb60RNF/unsplash-b-OKIpt-Pzd-Pk.png",
-    path: "https://production.d2ggwqvu23n3mj.amplifyapp.com/courses"
-  },
-  {
-    title: "Mobile App Development with Flutter & Dart",
-    lessons: 15,
-    students: 215,
-    level: "Advanced",
-    rating: 2,
-    image: "https://i.ibb.co/rKb60RNF/unsplash-b-OKIpt-Pzd-Pk.png",
-    path: "https://production.d2ggwqvu23n3mj.amplifyapp.com/courses"
-  }
 
-];
+// All UI text, button labels, and course data in a single JSON object
+const topCoursesSliderData = {
+  sectionTitle: "Top Courses",
+  startCourse: "Start course",
+  lessonsLabel: "Lessons",
+  studentsLabel: "Students",
+  topCourses: [
+    {
+      title: "Learn Figma - UI/UX Design Essential Training",
+      lessons: 8,
+      students: 198,
+      level: "Beginner",
+      rating: 4,
+      image: "https://i.ibb.co/hFBsFqGP/unsplash-7u-SKXpks-CKg.png",
+      path: "https://production.d2ggwqvu23n3mj.amplifyapp.com/courses"
+    },
+    {
+      title: "Python for Beginners - Learn Programming from scratch",
+      lessons: 21,
+      students: 99,
+      level: "Beginner",
+      rating: 3,
+      image: "https://i.ibb.co/1G268Rjx/learning-education-ideas-insight-intelligence-study-concept.png",
+      path: "https://production.d2ggwqvu23n3mj.amplifyapp.com/courses"
+    },
+    {
+      title: "Mobile App Development with Flutter & Dart",
+      lessons: 15,
+      students: 215,
+      level: "Advanced",
+      rating: 2,
+      image: "https://i.ibb.co/rKb60RNF/unsplash-b-OKIpt-Pzd-Pk.png",
+      path: "https://production.d2ggwqvu23n3mj.amplifyapp.com/courses"
+    },
+    {
+      title: "Mobile App Development with Flutter & Dart",
+      lessons: 15,
+      students: 215,
+      level: "Advanced",
+      rating: 2,
+      image: "https://i.ibb.co/rKb60RNF/unsplash-b-OKIpt-Pzd-Pk.png",
+      path: "https://production.d2ggwqvu23n3mj.amplifyapp.com/courses"
+    }
+  ]
+};
 
-const CourseCard = ({ title, lessons, students, level, rating, image, path }) => {
+
+const CourseCard = ({ title, lessons, students, level, rating, image, path, lessonsLabel, studentsLabel, startCourseLabel }) => {
   const handleStartCourse = () => {
     window.location.href = path;
   };
@@ -81,13 +89,13 @@ const CourseCard = ({ title, lessons, students, level, rating, image, path }) =>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, color: '#5A69F2' }}>
             <MenuBookIcon sx={{ fontSize: { xs: '0.9rem', sm: '1rem' } }} />
             <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: 500, fontSize: { xs: '0.65rem', sm: '0.75rem' } }}>
-              {lessons} <span style={{ fontSize: '0.65rem' }}>Lessons</span>
+              {lessons} <span style={{ fontSize: '0.65rem' }}>{lessonsLabel}</span>
             </Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, color: '#5A69F2' }}>
             <GroupIcon sx={{ fontSize: { xs: '0.9rem', sm: '1rem' } }} />
             <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: 500, fontSize: { xs: '0.65rem', sm: '0.75rem' } }}>
-              {students} <span style={{ fontSize: '0.65rem' }}>Students</span>
+              {students} <span style={{ fontSize: '0.65rem' }}>{studentsLabel}</span>
             </Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, color: '#5A69F2' }}>
@@ -108,7 +116,7 @@ const CourseCard = ({ title, lessons, students, level, rating, image, path }) =>
           sx={{ mt: 1, fontWeight: 600, borderRadius: 2, fontSize: { xs: 9, sm: 10 }, py: 1, px: 2, bgcolor: "#212529", color: "#fff", '&:hover': { bgcolor: "#000" }, width: { xs: '100%', sm: '60%', md: '50%' }, alignSelf: { xs: 'center', sm: 'flex-start' } }}
           onClick={handleStartCourse}
         >
-          Start course
+          {startCourseLabel}
         </Button>
       </CardContent>
     </Card>
@@ -153,7 +161,7 @@ const TopCoursesSlider = () => {
       <Box sx={{ py: { xs: 3, sm: 4, md: 6 }, bgcolor: "none", height: '200' }}>
         <Box sx={{ display: "flex", flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'flex-start', sm: 'center' }, justifyContent: "space-between", mb: 3, px: { xs: 1, sm: 2 } }}>
           <Typography variant="h5" sx={{ fontWeight: 700, fontSize: { xs: 18, sm: 22, md: 28 }, mb: { xs: 1, sm: 0 } }}>
-            Top Courses
+            {topCoursesSliderData.sectionTitle}
           </Typography>
           <Box sx={{ display: 'flex', gap: 1, mt: { xs: 2, sm: 0 } }}>
             <Avatar sx={{ bgcolor: '#e3e3e3', color: '#007bff', width: 32, height: 32, cursor: 'pointer' }} onClick={() => scroll('left')}>
@@ -197,7 +205,7 @@ const TopCoursesSlider = () => {
               },
             }}
           >
-            {topCourses.map((course, idx) => (
+            {topCoursesSliderData.topCourses.map((course, idx) => (
               <Box
                 key={idx}
                 sx={{
@@ -208,7 +216,12 @@ const TopCoursesSlider = () => {
                   display: 'flex',
                 }}
               >
-                <CourseCard {...course} />
+                <CourseCard
+                  {...course}
+                  lessonsLabel={topCoursesSliderData.lessonsLabel}
+                  studentsLabel={topCoursesSliderData.studentsLabel}
+                  startCourseLabel={topCoursesSliderData.startCourse}
+                />
               </Box>
             ))}
           </Box>
