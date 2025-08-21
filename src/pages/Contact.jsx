@@ -34,9 +34,9 @@ const contactInfo = [
 const Contact = () => (
 	<Box sx={{  p: { xs: 2, sm: 4 }, bgcolor: '#f9f9fb', color: '#18181a' }}>
 		<Box textAlign="center" mb={5} >
-			<Typography variant="h6" sx={{ color: '#7c3aed', fontSize: 24, mb: 1 }}>Contact US</Typography>
-			<Typography variant="h2" sx={{ fontWeight: 700, fontSize: 55, mb: 1 }}>We’d love to hear from you</Typography>
-			<Typography variant="h6" sx={{ color: '#666', fontSize: 24 }}>Our friendly team is always here to chat.</Typography>
+			<Typography variant="h6" >Contact US</Typography>
+			<Typography variant="h2" >We’d love to hear from you</Typography>
+			<Typography variant="h6" >Our friendly team is always here to chat.</Typography>
 		</Box>
 		<Grid container spacing={4} justifyContent="center" mb={5}>
 			{contactInfo.map((info, idx) => (
