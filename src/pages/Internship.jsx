@@ -1,10 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import "react-phone-input-2/lib/style.css";
+import PhoneInput from "react-phone-input-2";
+import flatpickr from "flatpickr";
+import "flatpickr/dist/flatpickr.min.css";
 
-const fieldWidth = "100%"; // Make fields take full width of the inner container
-const innerContainerWidth = 700; // Set your desired field/question width
+const fieldWidth = "100%";
+const innerContainerWidth = 700;
 
 const Internship = () => {
   const [selectedSkill, setSelectedSkill] = useState(null);
+  const [phone, setPhone] = useState("");
+  const [dob, setDob] = useState("");
+  const dobInputRef = useRef(null);
+
+  useEffect(() => {
+    if (dobInputRef.current) {
+      flatpickr(dobInputRef.current, {
+        dateFormat: "d/m/Y",
+        maxDate: "today",
+        allowInput: true,
+        onChange: (selectedDates, dateStr) => setDob(dateStr),
+      });
+    }
+  }, []);
 
   return (
     <div style={{ maxWidth: 900, margin: "40px auto", background: "#fff", borderRadius: 12, boxShadow: "0 2px 12px rgba(0,0,0,0.07)", overflow: "hidden" }}>
@@ -29,11 +47,80 @@ const Internship = () => {
             </label>
             <label style={labelStyle}>
               <span>Date Of Birth <span style={asteriskStyle}>*</span></span>
-              <input type="date" style={inputStyle} required />
+              <div
+                style={{
+                  position: "relative",
+                  width: fieldWidth,
+                  cursor: "pointer",
+                  marginTop: 4,
+                }}
+                onClick={() => dobInputRef.current && dobInputRef.current._flatpickr.open()}
+              >
+                <input
+                  ref={dobInputRef}
+                  type="text"
+                  value={dob}
+                  placeholder="DD/MM/YYYY"
+                  style={{
+                    ...inputStyle,
+                    cursor: "pointer",
+                    marginTop: 0,
+                    background: "#f9f9fb",
+                  }}
+                  readOnly
+                  required
+                  onFocus={e => e.target.blur()}
+                />
+                <span
+                  style={{
+                    position: "absolute",
+                    right: 12,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    pointerEvents: "none",
+                    opacity: 0.7,
+                    display: "flex",
+                    alignItems: "center"
+                  }}
+                >
+                  <svg width="20" height="20" fill="none" stroke="#888" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <path d="M16 2v4M8 2v4M3 10h18" />
+                  </svg>
+                </span>
+              </div>
             </label>
             <label style={labelStyle}>
               <span>Phone No. <span style={asteriskStyle}>*</span></span>
-              <input type="tel" placeholder="Enter phone number" style={inputStyle} required />
+              <PhoneInput
+                country={'in'}
+                value={phone}
+                onChange={setPhone}
+                inputStyle={{
+                  ...inputStyle,
+                  paddingLeft: 48,
+                  width: "100%",
+                  marginTop: 0
+                }}
+                buttonStyle={{
+                  border: "none",
+                  background: "transparent"
+                }}
+                inputProps={{
+                  name: 'phone',
+                  required: true,
+                  autoFocus: false
+                }}
+                containerStyle={{
+                  width: "100%",
+                  marginTop: 4
+                }}
+                onlyCountries={['in', 'us', 'gb', 'ae', 'au', 'ca', 'sg']}
+                enableSearch
+                disableCountryCode={false}
+                disableDropdown={false}
+                countryCodeEditable={false}
+              />
             </label>
             <label style={labelStyle}>
               <span>Email <span style={asteriskStyle}>*</span></span>
@@ -56,19 +143,22 @@ const Internship = () => {
                     appearance: "none",
                     WebkitAppearance: "none",
                     MozAppearance: "none",
-                    paddingRight: 36 // space for the custom arrow
+                    paddingRight: 36
                   }}
                   required
+                  defaultValue=""
                 >
+                  <option value="" disabled>
+                    Select
+                  </option>
                   {getYearOptions().map(year => (
                     <option key={year} value={year}>{year}</option>
                   ))}
                 </select>
-                {/* Custom dropdown arrow, moved slightly to the left */}
                 <span
                   style={{
                     position: "absolute",
-                    right: 18, // move arrow slightly to the left
+                    right: 18,
                     top: "50%",
                     transform: "translateY(-50%)",
                     pointerEvents: "none",
@@ -139,16 +229,15 @@ const Internship = () => {
                   style={{
                     ...inputStyle,
                     paddingRight: 36,
-                    background: "#f9f9fb", // match other fields
-                    border: "1px solid #e0e0e0", // match other fields
-                    borderRadius: 6, // match other fields
+                    background: "#f9f9fb",
+                    border: "1px solid #e0e0e0",
+                    borderRadius: 6,
                     cursor: "pointer",
                     color: "#333"
                   }}
                   accept=".pdf,.doc,.docx"
                   required
                 />
-                {/* Attachment SVG icon */}
                 <span
                   style={{
                     position: "absolute",
@@ -247,7 +336,7 @@ const labelStyle = {
   flexDirection: "column",
   alignItems: "flex-start",
   fontWeight: 500,
-  width: fieldWidth
+  width: "100%"
 };
 
 const asteriskStyle = {
