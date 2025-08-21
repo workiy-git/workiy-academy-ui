@@ -9,55 +9,63 @@ const courses = [
     description: "Get the skills with real world experience Employers want with career Accelators.",
     duration: "12 weeks",
     level: "Beginner",
-    image: reactImg
+    image: reactImg,
+    path: "/courses/full-stack-web-developer"
   },
   {
     title: "Data Scientist",
     description: "Master data analysis, machine learning, and AI for real-world business solutions.",
     duration: "10 weeks",
     level: "Intermediate",
-    image: reactImg
+    image: reactImg,
+    path: "/courses/data-scientist"
   },
   {
     title: "MERN Stack with Gen AI",
     description: "Build modern web apps using MongoDB, Express, React, Node, and Generative AI.",
     duration: "12 weeks",
     level: "Advanced",
-    image: reactImg
+    image: reactImg,
+    path: "/courses/mern-stack-gen-ai"
   },
   {
     title: "AI and ML",
     description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
     duration: "10 weeks",
     level: "Intermediate",
-    image: reactImg
+    image: reactImg,
+    path: "/courses/ai-ml"
   }, {
     title: "figma",
     description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
     duration: "10 weeks",
     level: "Intermediate",
-    image: reactImg
+    image: reactImg,
+    path: "/courses/figma"
   },
   {
     title: "photoshop",
     description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
     duration: "10 weeks",
     level: "Intermediate",
-    image: reactImg
+    image: reactImg,
+    path: "/courses/photoshop"
   },
   {
     title: "danvis",
     description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
     duration: "10 weeks",
     level: "Intermediate",
-    image: reactImg
+    image: reactImg,
+    path: "/courses/danvis"
   },
     {
     title: "Certified AI Automation Specialist Program",
     description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
     duration: "10 weeks",
     level: "Intermediate",
-    image: reactImg
+    image: reactImg,
+    path: "/courses/certified-ai-automation-specialist"
   }
 ];
 
