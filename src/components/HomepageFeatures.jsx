@@ -58,19 +58,7 @@ const HomepageFeatures = () => (
     >
       {features.map((f, i) => (
         <Grid item xs={4} sm={4} md={4} key={i} display="flex">
-          <Card
-            elevation={2}
-            sx={{
-              borderRadius: 3,
-              minHeight: 50,
-              width: 300,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              p: 3,
-              flex: 1,
-            }}
-          >
+          <div></div>
             <Box sx={{ mb: 2 }}>{f.icon}</Box>
             <CardContent sx={{ textAlign: "center", flexGrow: 1 }}>
               <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
