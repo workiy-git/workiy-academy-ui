@@ -24,21 +24,23 @@ const OurPotentialPartners = () => (
       flexDirection: { xs: 'column', md: 'row' },
       alignItems: { xs: 'flex-start', md: 'center' },
       gap: { xs: 2, md: 0 },
+      height  : { xs: 'auto', md: 50 },
+      padding: { xs: 1, md: 2 },
     }}
   >
     <Typography
       variant="h6"
       sx={{
-        fontWeight: 700,
-        color: '#808080',
+        fontWeight: 500,
+        color: '#212529',
         letterSpacing: 1,
-        fontSize: { xs: 16, sm: 18, md: 20 },
+        fontSize: { xs: 0, sm: 14, md: 14 },
         textAlign: { xs: 'center', md: 'left' },
-        width: { xs: '100%', md: '18%' },
+        width: { xs: '100%', md: '15%' },
         minWidth: 120,
-        pl: { xs: 0, md: 6 },
+        pl: { xs: 0, md: 2 },
         pr: { xs: 0, md: 0 },
-        mb: { xs: 1.5, md: 0 },
+        mb: { xs: 0.5, md: 0 },
       }}
     >
       OUR POTENTIAL PARTNERS
@@ -52,15 +54,22 @@ const OurPotentialPartners = () => (
         flexWrap: 'nowrap',
         overflowX: 'auto',
         width: { xs: '100%', md: '82%' },
-        pl: { xs: 1, md: 2 },
+        pl: 0,
         pb: { xs: 1, md: 0 },
+        scrollbarWidth: 'none', // Firefox
+        msOverflowStyle: 'none', // IE/Edge
+        '&::-webkit-scrollbar': {
+          height: 0,
+          display: 'none',
+          background: 'transparent',
+        },
       }}
     >
       {partnerImages.map((img, idx) => (
         <Box
           key={idx}
           sx={{
-            height: { xs: 44, sm: 54, md: 60 },
+            height: { xs: 34, sm: 44, md: 40 },
             width: { xs: 80, sm: 100, md: 120 },
             display: 'flex',
             alignItems: 'center',
@@ -76,8 +85,8 @@ const OurPotentialPartners = () => (
             src={img}
             alt={`Partner ${idx + 1}`}
             style={{
-              maxHeight: 32,
-              maxWidth: 80,
+              maxHeight: 24,
+              maxWidth: 60,
               objectFit: 'contain',
               width: '100%',
             }}

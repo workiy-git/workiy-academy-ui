@@ -252,6 +252,7 @@ const Course = () => {
           <section key={sIndex} style={styles.section}>
             <div style={styles.sectionTitle}>{section.title}</div>
 
+
             {section.type === "bullets" && (
               <ul style={styles.bulletList}>
                 {section.items.map((point, i) => (
