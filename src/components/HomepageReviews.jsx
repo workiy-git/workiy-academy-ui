@@ -13,7 +13,19 @@ const reviews = [
     rating: 5,
     avatar: "https://randomuser.me/api/portraits/men/32.jpg"
   },
-  {
+  {  {features.map((f, i) => (
+        <Grid item xs={4} sm={4} md={4} key={i} display="flex">
+          <div></div>
+            <Box sx={{ mb: 2 }}>{f.icon}</Box>
+            <CardContent sx={{ textAlign: "center", flexGrow: 1 }}>
+              <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                {f.title}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {f.desc}
+              </Typography>
+            </CardContent>
+          </Card>
     name: "Priya Patel",
     course: "Deep Learning with Neural Networks",
     review: "Amazing instructors and real-world examples. I feel confident building deep learning models now.",

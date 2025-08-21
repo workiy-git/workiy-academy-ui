@@ -1,19 +1,19 @@
 import React from "react";
 
 const Internship = () => (
-  <div style={{ maxWidth: 900, margin: "40px auto", background: "#fff", borderRadius: 12, boxShadow: "0 2px 12px rgba(0,0,0,0.07)", overflow: "hidden" }}>
-    {/* Header Image */}
-    <div style={{ width: "100%", height: 220, background: "#e6e6ef", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <img
-        src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=900&q=80"
-        alt="Internship"
-        style={{ width: "100%", height: "100%", objectFit: "cover" }}
-      />
-    </div>
-    {/* Title */}
-    <h2 style={{ textAlign: "center", margin: "24px 0 8px", fontWeight: 700 }}>INTERNSHIP FORM</h2>
-    {/* Form */}
-    <form style={{ padding: 32 }}>
+  <div sty  {features.map((f, i) => (
+          <Grid item xs={4} sm={4} md={4} key={i} display="flex">
+            <div></div>
+              <Box sx={{ mb: 2 }}>{f.icon}</Box>
+              <CardContent sx={{ textAlign: "center", flexGrow: 1 }}>
+                <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                  {f.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {f.desc}
+                </Typography>
+              </CardContent>
+            </Card>
       <h3 style={{ textAlign: "center", marginBottom: 24, fontWeight: 600 }}>Please fill the below Details</h3>
       <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
         <label style={labelStyle}>
