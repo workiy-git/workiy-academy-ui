@@ -7,16 +7,7 @@ import "flatpickr/dist/flatpickr.min.css";
 const fontFamily = "'Poppins', 'Inter', sans-serif";
 
 const emojiList = [
-  "😞", // 1
-  "😕", // 2
-  "😐", // 3
-  "🙂", // 4
-  "😊", // 5
-  "😃", // 6
-  "😁", // 7
-  "😎", // 8
-  "🤩", // 9
-  "🥇", // 10
+  "😞", "😕", "😐", "🙂", "😊", "😃", "😁", "😎", "🤩", "🥇"
 ];
 
 const Internship = () => {
@@ -28,10 +19,12 @@ const Internship = () => {
   const [institute, setInstitute] = useState("");
   const [graduationYear, setGraduationYear] = useState("");
   const [areaOfInterest, setAreaOfInterest] = useState("");
-  const [skills, setSkills] = useState("");
+  const [skills, setSkills] = useState([]);
+  const [skillInput, setSkillInput] = useState("");
   const [skillRating, setSkillRating] = useState(null);
   const [resume, setResume] = useState(null);
   const [description, setDescription] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const dobInputRef = useRef(null);
 
@@ -46,8 +39,58 @@ const Internship = () => {
     }
   }, []);
 
+  // Email validation on blur or change
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+    if (
+      value &&
+      !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(value)
+    ) {
+      setEmailError("Please enter a valid email address.");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  // Handle skill input and add on comma or enter
+  const handleSkillInput = (e) => {
+    const value = e.target.value;
+    // If comma or enter is pressed, add skill
+    if (
+      (e.key === "," || e.key === "Enter") &&
+      value.trim().replace(",", "") !== ""
+    ) {
+      e.preventDefault();
+      addSkill(value);
+    }
+  };
+
+  const addSkill = (value) => {
+    const skill = value.trim().replace(/,$/, "");
+    if (skill && !skills.includes(skill)) {
+      setSkills([...skills, skill]);
+    }
+    setSkillInput("");
+  };
+
+  const handleSkillChange = (e) => {
+    setSkillInput(e.target.value);
+  };
+
+  const removeSkill = (removeIdx) => {
+    setSkills(skills.filter((_, idx) => idx !== removeIdx));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (
+      email &&
+      !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)
+    ) {
+      setEmailError("Please enter a valid email address.");
+      return;
+    }
     console.log({
       fullName,
       dob,
@@ -82,7 +125,7 @@ const Internship = () => {
       {/* Header Image */}
       <div
         style={{
-          width: "100vw", // Make image container full viewport width
+          width: "100vw",
           height: "22vw",
           minHeight: 120,
           maxHeight: 220,
@@ -90,19 +133,19 @@ const Internship = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          margin: 0, // Remove auto margin
+          margin: 0,
           padding: 0,
           position: "relative",
           left: "50%",
           right: "50%",
-          transform: "translate(-50%, 0)", // Ensure it stretches edge-to-edge
+          transform: "translate(-50%, 0)",
         }}
       >
         <img
           src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=900&q=80"
           alt="Internship"
           style={{
-            width: "100vw", // Full viewport width
+            width: "100vw",
             height: "100%",
             objectFit: "cover",
             borderRadius: 0,
@@ -129,13 +172,13 @@ const Internship = () => {
       <form
         style={{
           width: "100%",
-          maxWidth: 600, // Increased maxWidth for wider fields
+          maxWidth: 600,
           minWidth: 0,
           margin: "0 auto",
           background: "transparent",
           borderRadius: 0,
           boxShadow: "none",
-          padding: "0 4vw 32px 4vw", // Slightly less padding for more width
+          padding: "0 4vw 32px 4vw",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -263,8 +306,12 @@ const Internship = () => {
               style={inputStyle}
               required
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={handleEmailChange}
+              onBlur={handleEmailChange}
             />
+            {emailError && (
+              <span style={{ color: "red", fontSize: 13, marginTop: 2 }}>{emailError}</span>
+            )}
           </label>
           <label style={labelStyle}>
             <span style={spanStyle}>
@@ -351,14 +398,59 @@ const Internship = () => {
             <span style={spanStyle}>
               Skills <span style={asteriskStyle}>*</span>
             </span>
-            <input
-              type="text"
-              placeholder="List your skills"
-              style={inputStyle}
-              required
-              value={skills}
-              onChange={e => setSkills(e.target.value)}
-            />
+            <div style={{ width: "100%", minHeight: 44, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 6, border: "1px solid #e0e0e0", borderRadius: 8, padding: "4px 8px", background: "#fff" }}>
+              {skills.map((skill, idx) => (
+                <span
+                  key={idx}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    background: "#f5f5f5",
+                    color: "#181b22",
+                    borderRadius: 16,
+                    padding: "2px 10px 2px 8px",
+                    fontSize: 14,
+                    marginRight: 4,
+                    marginBottom: 2,
+                  }}
+                >
+                  {skill}
+                  <span
+                    onClick={() => removeSkill(idx)}
+                    style={{
+                      marginLeft: 6,
+                      cursor: "pointer",
+                      color: "#e53935",
+                      fontWeight: 700,
+                      fontSize: 14,
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                    title="Remove"
+                  >
+                    ×
+                  </span>
+                </span>
+              ))}
+              <input
+                type="text"
+                placeholder={skills.length === 0 ? "List your skills" : ""}
+                style={{
+                  border: "none",
+                  outline: "none",
+                  fontSize: 14,
+                  flex: 1,
+                  minWidth: 80,
+                  background: "#fff",
+                  padding: "4px 0",
+                  marginLeft: 2,
+                }}
+                value={skillInput}
+                onChange={handleSkillChange}
+                onKeyDown={handleSkillInput}
+                onBlur={() => addSkill(skillInput)}
+              />
+            </div>
           </label>
           <label style={labelStyle}>
             <span style={spanStyle}>
@@ -370,8 +462,8 @@ const Internship = () => {
               justifyContent: "space-between",
               marginTop: 8,
               width: "100%",
-              gap: 2, // reduced from 8 to 2 for less spacing between emojis
-              padding: "0 4px" // reduced side padding for tighter layout
+              gap: 2,
+              padding: "0 4px"
             }}>
               {emojiList.map((emoji, idx) => (
                 <button
