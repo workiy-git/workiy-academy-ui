@@ -18,20 +18,42 @@ import Diversity3Icon from '@mui/icons-material/Diversity3';
 const About = () => {
   // Partners carousel logic
   const partners = [
-    { src: "", alt: "Freshworks" },
+    { src: "https://i.ibb.co/DHDDq4rJ/images.png", alt: "Freshworks" },
     {
       src: "https://i.ibb.co/b5Df8Z9v/650c9830-9601-11eb-b593-972a7dbc1054-google-939112-1280.jpg",
       alt: "Google",
     },
     { src: "https://i.ibb.co/2YcHNgnn/OIP.webp[/img][/url]", alt: "Microsoft" },
-    { src: "", alt: "PhonePe" },
-    { src: "", alt: "PayPal" },
-    { src: "", alt: "TCS" },
+    { src: "https://i.ibb.co/hFXzk0cx/phonepe3248.jpg", alt: "PhonePe" },
+    { src: "https://i.ibb.co/GQfLyTdj/paypal-logo-transparent-free-png.webp", alt: "PayPal" },
+    { src: "https://i.ibb.co/3ysyyQ2F/aaa245759726ab04e968b9bff4981a52.jpg", alt: "TCS" },
+    { src: "https://i.ibb.co/TqJdTsPW/wipro-logo.jpg", alt: "Wipro" },
+    { src: "https://i.ibb.co/p6GqLGgg/infosys-logo-PNG.png", alt: "Infosys" },
+    { src: "https://i.ibb.co/G3cXxCV4/Accenture-Logo-Tagline-Slogan.webp", alt: "Accenture" },
+    { src: "https://i.ibb.co/FLHCkTHm/VECTOR69-COM-Cognizant-Logo-Download-Free-Vector-CDR-Corel-Draw.webp", alt: "Cognizant" },
+    { src: "https://i.ibb.co/G3Gh0ZhR/Hcl-logo-300x296.jpg", alt: "HCL" },
+    { src: "https://i.ibb.co/hJ2X6P0j/Tech-Mahindra-true-color-logo-42.jpg", alt: "Tech Mahindra" },
+    { src: "https://i.ibb.co/jkhQ4t2x/OIP-2.webp", alt: "Capgemini" },
+    { src: "https://i.ibb.co/B1GSP0C/OIP-1.webp", alt: "IBM" },
+    { src: "https://i.ibb.co/WWMFSX5H/OIP-3.webp", alt: "Oracle" },
   ];
   const [partnerIndex, setPartnerIndex] = useState(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const visibleCount = isMobile ? 1 : 3;
+  // Responsive visibleCount based on screen width
+  const [visibleCount, setVisibleCount] = useState(3);
+  useEffect(() => {
+    function updateVisibleCount() {
+      if (window.innerWidth < 600) setVisibleCount(1);
+      else if (window.innerWidth < 900) setVisibleCount(2);
+      else if (window.innerWidth < 1200) setVisibleCount(3);
+      else if (window.innerWidth < 1500) setVisibleCount(4);
+      else setVisibleCount(5);
+    }
+    updateVisibleCount();
+    window.addEventListener('resize', updateVisibleCount);
+    return () => window.removeEventListener('resize', updateVisibleCount);
+  }, []);
 
   const handlePrev = () => {
     setPartnerIndex((prev) => (prev - 1 + partners.length) % partners.length);
@@ -351,66 +373,116 @@ const About = () => {
         </Typography>
         <Box
           sx={{
-            display: "flex",
-            flexDirection: { xs: "column", sm: "row" },
-            alignItems: "center",
-            justifyContent: "center",
-            gap: { xs: 2, sm: 4 },
+            position: 'relative',
+            width: '100%',
+            minHeight: 80,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
-          { (
-            <IconButton onClick={handlePrev} size="large">
-              <ArrowBackIosNewIcon />
-            </IconButton>
-          )}
           <Box
+            id="partner-scroll"
             sx={{
-              display: "flex",
-              overflow: "hidden",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: { xs: 1, sm: 2 },
-              minWidth: { xs: 120, sm: 320 },
+              display: 'flex',
+              overflowX: 'auto',
+              gap: 2,
+              scrollBehavior: 'smooth',
+              width: '100%',
+              px: 5,
+              scrollbarWidth: 'none', // Firefox
+              msOverflowStyle: 'none', // IE/Edge
+              '&::-webkit-scrollbar': { display: 'none' }, // Chrome/Safari
             }}
           >
-            {partners
-              .slice(partnerIndex, partnerIndex + visibleCount)
-              .concat(
-                partnerIndex + visibleCount > partners.length
-                  ? partners.slice(
-                      0,
-                      (partnerIndex + visibleCount) % partners.length
-                    )
-                  : []
-              )
-              .map((partner, idx) => (
-                <Box
-                  key={idx}
-                  component="img"
-                  src={partner.src}
-                  alt={partner.alt}
-                  sx={{
-                    width: { xs: 80, sm: 100 },
-                    height: { xs: 40, sm: 60 },
-                    objectFit: "contain",
-                    borderRadius: 2,
-                    border: "1px solid #eee",
-                    background: "#ffffffff",
-                    transition: "all 0.3s",
-                    cursor: 'pointer',
-                    '&:hover': {
-                      borderColor: '#FFB703',
-                      transform: 'translateY(-2px) scale(1.05)',
-                    },
-                  }}
-                />
-              ))}
+            {partners.map((partner, idx) => (
+              <Box
+                key={idx}
+                sx={{
+                  width: 120,
+                  height: 70,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: 2,
+                  border: '1px solid #eee',
+                  background: '#fff',
+                  transition: 'all 0.3s',
+                  cursor: 'pointer',
+                  p: 1,
+                  m: 0,
+                  flex: '0 0 auto',
+                  '&:hover': {
+                    borderColor: '#FFB703',
+                    transform: 'translateY(-2px) scale(1.05)',
+                  },
+                }}
+              >
+                {partner.src ? (
+                  <Box
+                    component="img"
+                    src={partner.src}
+                    alt={partner.alt}
+                    sx={{
+                      maxWidth: '100%',
+                      maxHeight: '100%',
+                      objectFit: 'contain',
+                      m: 0,
+                    }}
+                  />
+                ) : (
+                  <Typography variant="body2" sx={{ color: '#aaa', fontWeight: 500 }}>
+                    {partner.alt}
+                  </Typography>
+                )}
+              </Box>
+            ))}
           </Box>
-          {(
-            <IconButton onClick={handleNext} size="large">
-              <ArrowForwardIosIcon />
-            </IconButton>
-          )}
+          {/* Arrows only if overflow */}
+          <IconButton
+            onClick={() => {
+              const el = document.getElementById('partner-scroll');
+              if (el) el.scrollBy({ left: -150, behavior: 'smooth' });
+            }}
+            size="large"
+            sx={{
+              position: 'absolute',
+              left: 0,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              zIndex: 2,
+              background: '#fff',
+              boxShadow: 1,
+              display: { xs: 'flex', sm: 'flex' },
+              '&:hover': { background: '#FFB703', color: '#100E85' },
+              opacity: 0.8,
+            }}
+            aria-label="Previous"
+          >
+            <ArrowBackIosNewIcon />
+          </IconButton>
+          <IconButton
+            onClick={() => {
+              const el = document.getElementById('partner-scroll');
+              if (el) el.scrollBy({ left: 150, behavior: 'smooth' });
+            }}
+            size="large"
+            sx={{
+              position: 'absolute',
+              right: 0,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              zIndex: 2,
+              background: '#fff',
+              boxShadow: 1,
+              display: { xs: 'flex', sm: 'flex' },
+              '&:hover': { background: '#FFB703', color: '#100E85' },
+              opacity: 0.8,
+            }}
+            aria-label="Next"
+          >
+            <ArrowForwardIosIcon />
+          </IconButton>
         </Box>
       </Box>
     </Box>
