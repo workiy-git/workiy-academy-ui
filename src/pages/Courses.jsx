@@ -69,7 +69,9 @@ const courses = [
   }
 ];
 
-
+const startTitle = "Ready to imagine your career?";
+const startSubtitle = "Get the skills with real world experience Employers want with career Accelators";
+const buttonName= "All Career Accelators";
 const Courses = () => {
   const [showAll, setShowAll] = useState(false);
 
@@ -80,24 +82,24 @@ const Courses = () => {
     <Box sx={{ bgcolor: "#F6F8FB", minHeight: "100vh" }}>
       {/* Hero Section */}
       <Box sx={{ py: 1, bgcolor: "#FFFFFF" }}>
-        <Container maxWidth="lg" sx={{ ml: { xs: 0, sm: 2, md: 4, lg: 8 } }}>
-          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", mb: 3, mt: { xs: 4, sm: 8, md: 10 }, ml: { xs: 0, sm: 1, md: 2 } }}>
-            <Typography variant="h3" align="left" sx={{ fontWeight: 800, mb: 2, color: "#22223b", fontFamily: 'Inter, sans-serif' }}>
-              Ready to imagine your career?
+        <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 }, mx: 'auto' }}>
+          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mb: 3, mt: { xs: 4, sm: 8, md: 10 } }}>
+            <Typography variant="h3" align="center" sx={{ fontWeight: 800, mb: 2, color: "#22223b", fontFamily: 'Inter, sans-serif', fontSize: { xs: '2rem', sm: '2.6rem', md: '3rem', lg: '3.6rem' }, lineHeight: 1.05 }}>
+              {startTitle}
             </Typography>
-            <Typography variant="h6" align="left" color="text.secondary" sx={{ mb: 5, fontWeight: 500, fontFamily: 'Inter, sans-serif' }}>
-              Get the skills with real world experience Employers want with career Accelators
+            <Typography variant="h6" align="center" color="text.secondary" sx={{ mb: 5, fontWeight: 500, fontFamily: 'Inter, sans-serif', fontSize: { xs: '0.95rem', sm: '1.05rem', md: '1.15rem' } }}>
+            {startSubtitle}
             </Typography>
           </Box>
-          <Grid container spacing={4} justifyContent="flex-start">
+          <Grid container spacing={4} justifyContent="center" alignItems="stretch">
             {displayedCourses.map((course, idx) => (
-              <Grid item xs={12} sm={6} md={3} lg={3} key={idx} sx={{ mb: 3 }}>
+              <Grid item xs={12} sm={6} md={4} lg={4} key={idx} sx={{ mb: 3, display: 'flex', justifyContent: 'center' }}>
                 <CourseCard course={course} />
               </Grid>
             ))}
           </Grid>
           {!showAll && (
-            <Box sx={{ textAlign: "left", mt: 5 }}>
+            <Box sx={{ textAlign: "center", mt: 5, width: '100%' }}>
               <Button
                 variant="contained"
                 sx={{
@@ -118,7 +120,7 @@ const Courses = () => {
                 }}
                 onClick={() => setShowAll(true)}
               >
-                All Career Accelators
+                {buttonName}
               </Button>
             </Box>
           )}
