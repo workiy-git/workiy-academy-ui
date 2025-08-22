@@ -2,8 +2,27 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Carousel from "react-material-ui-carousel";
 
-const BannerCarousel = ({ slides }) => {
 
+// All UI text and slides data in a single JSON object
+const bannerCarouselData = {
+  slides: [
+    {
+      image: "https://i.ibb.co/6bR6Q9d/banner1.jpg",
+      title: "AI for Everyone"
+    },
+    {
+      image: "https://i.ibb.co/3yQw6kF/banner2.jpg",
+      title: "Build Your Future with AI"
+    },
+    {
+      image: "https://i.ibb.co/0j1n6kF/banner3.jpg",
+      title: "Learn from Industry Experts"
+    }
+  ]
+};
+
+const BannerCarousel = ({ slides }) => {
+  const carouselSlides = slides && slides.length > 0 ? slides : bannerCarouselData.slides;
   const [active, setActive] = useState(0);
   const handleChange = (now) => setActive(now);
 
@@ -20,7 +39,7 @@ const BannerCarousel = ({ slides }) => {
         index={active}
         onChange={handleChange}
       >
-        {slides.map((slide, idx) => (
+        {carouselSlides.map((slide, idx) => (
           <Box
             key={idx}
             sx={{
@@ -55,7 +74,7 @@ const BannerCarousel = ({ slides }) => {
         pointerEvents: 'none',
       }}>
         <Box sx={{ display: 'flex', gap: 1.2 }}>
-          {slides.map((_, idx) => (
+          {carouselSlides.map((_, idx) => (
             <Box
               key={idx}
               sx={{

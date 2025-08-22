@@ -1,3 +1,4 @@
+
 import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -7,8 +8,24 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Paper from "@mui/material/Paper";
 
+// All UI text and labels in a single JSON object
+const contactUsData = {
+  title: "Contact Us",
+  subtitle: "Your email address will not be published. Required fields are marked *",
+  fields: {
+    name: { label: "Name*", placeholder: "Enter your name" },
+    email: { label: "Email*", placeholder: "Enter your email" },
+    comment: { label: "Comment", placeholder: "Enter your comment" },
+    save: { label: "Save my name, email in this browser for the next time I comment" }
+  },
+  button: { text: "Send" },
+  alert: "Thank you for contacting us!"
+};
+
+
 const ContactUs = () => {
   const [form, setForm] = React.useState({ name: "", email: "", comment: "", save: false });
+  const [submittedData, setSubmittedData] = React.useState(null); // To save submitted form data
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -17,15 +34,16 @@ const ContactUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can add form submission logic here
-    alert("Thank you for contacting us!");
+    setSubmittedData(form); // Save form data to variable
+    alert(contactUsData.alert);
   };
 
   return (
     <Paper
       elevation={3}
       sx={{
-        mx: 0,
+        width: '80%',
+        mx: 'auto',
         my: { xs: 2, md: 6 },
         p: { xs: 2, sm: 3, md: 4 },
         borderRadius: 6,
@@ -49,7 +67,7 @@ const ContactUs = () => {
             fontFamily: 'Inter, Roboto, Arial, sans-serif',
           }}
         >
-          Contact Us
+          {contactUsData.title}
         </Typography>
       </Box>
       <Typography
@@ -63,12 +81,12 @@ const ContactUs = () => {
           fontFamily: 'Inter, Roboto, Arial, sans-serif',
         }}
       >
-        Your email address will not be published. Required fields are marked *
+        {contactUsData.subtitle}
       </Typography>
       <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 2, mb: 2 }}>
           <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-            <Typography sx={{ mb: 0.5, ml: 0.5, fontWeight: 400, color: '#23235B', fontSize: { xs: 14, sm: 15 }, fontFamily: 'Inter, Roboto, Arial, sans-serif' }}>Name*</Typography>
+            <Typography sx={{ mb: 0.5, ml: 0.5, fontWeight: 400, color: '#23235B', fontSize: { xs: 14, sm: 15 }, fontFamily: 'Inter, Roboto, Arial, sans-serif' }}>{contactUsData.fields.name.label}</Typography>
             <TextField
               name="name"
               value={form.name}
@@ -76,7 +94,7 @@ const ContactUs = () => {
               fullWidth
               required
               variant="outlined"
-              placeholder="Enter your name"
+              placeholder={contactUsData.fields.name.placeholder}
               sx={{
                 fontSize: { xs: 15, sm: 17 },
                 borderRadius: 3,
@@ -96,7 +114,7 @@ const ContactUs = () => {
             />
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-            <Typography sx={{ mb: 0.5, ml: 0.5, fontWeight: 400, color: '#23235B', fontSize: { xs: 14, sm: 15 }, fontFamily: 'Inter, Roboto, Arial, sans-serif' }}>Email*</Typography>
+            <Typography sx={{ mb: 0.5, ml: 0.5, fontWeight: 400, color: '#23235B', fontSize: { xs: 14, sm: 15 }, fontFamily: 'Inter, Roboto, Arial, sans-serif' }}>{contactUsData.fields.email.label}</Typography>
             <TextField
               name="email"
               type="email"
@@ -105,7 +123,7 @@ const ContactUs = () => {
               fullWidth
               required
               variant="outlined"
-              placeholder="Enter your email"
+              placeholder={contactUsData.fields.email.placeholder}
               sx={{
                 fontSize: { xs: 15, sm: 17 },
                 borderRadius: 3,
@@ -126,7 +144,7 @@ const ContactUs = () => {
           </Box>
         </Box>
         <Box sx={{ mb: 2 }}>
-          <Typography sx={{ mb: 0.5, ml: 0.5, fontWeight: 400, color: '#23235B', fontSize: { xs: 14, sm: 15 }, fontFamily: 'Inter, Roboto, Arial, sans-serif' }}>Comment</Typography>
+          <Typography sx={{ mb: 0.5, ml: 0.5, fontWeight: 400, color: '#23235B', fontSize: { xs: 14, sm: 15 }, fontFamily: 'Inter, Roboto, Arial, sans-serif' }}>{contactUsData.fields.comment.label}</Typography>
           <TextField
             name="comment"
             value={form.comment}
@@ -135,7 +153,7 @@ const ContactUs = () => {
             multiline
             minRows={3}
             variant="outlined"
-            placeholder="Enter your comment"
+            placeholder={contactUsData.fields.comment.placeholder}
             sx={{
               fontSize: { xs: 15, sm: 17 },
               borderRadius: 3,
@@ -164,7 +182,7 @@ const ContactUs = () => {
                 color="primary"
               />
             }
-            label={<span style={{ fontSize: '0.97em', color: '#23235B', fontFamily: 'Inter, Roboto, Arial, sans-serif' }}>Save my name, email in this browser for the next time I comment</span>}
+            label={<span style={{ fontSize: '0.97em', color: '#23235B', fontFamily: 'Inter, Roboto, Arial, sans-serif' }}>{contactUsData.fields.save.label}</span>}
             sx={{ flex: 1, ml: 0 }}
           />
         </Box>
@@ -193,10 +211,17 @@ const ContactUs = () => {
               },
             }}
           >
-            Send
+            {contactUsData.button.text}
           </Button>
         </Box>
       </Box>
+      {/* For debugging: show submitted data */}
+      {submittedData && (
+        <Box sx={{ mt: 3, p: 2, background: '#f7f8fa', borderRadius: 2, color: '#23235B', fontSize: 14 }}>
+          <strong>Submitted Data:</strong>
+          <pre style={{ margin: 0 }}>{JSON.stringify(submittedData, null, 2)}</pre>
+        </Box>
+      )}
     </Paper>
   );
 };

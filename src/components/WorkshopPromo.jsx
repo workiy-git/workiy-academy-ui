@@ -4,6 +4,20 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 
+
+// All UI text, image, and button label in a single JSON object
+const workshopPromoData = {
+  image: {
+    src: "https://i.ibb.co/9HyTYn2Q/Group-3625.png",
+    alt: "Build Your First AI Chatbot"
+  },
+  title: "Build Your First AI Chatbot",
+  subtitle: "Join Our ₹9 Workshop!",
+  description: "We believe learning should be accessible to everyone! That’s why we’re offering our exclusive introductory workshop for only ₹9. Whether you’re a beginner or looking to enhance your skills, this is your golden chance.",
+  button: "Buy ₹9",
+  note: "Unlock your learning journey for less than the price of a cup of tea!"
+};
+
 const WorkshopPromo = () => (
   <Box
     sx={{
@@ -46,8 +60,8 @@ const WorkshopPromo = () => (
           }}
         >
           <img
-            src="https://i.ibb.co/9HyTYn2Q/Group-3625.png"
-            alt="Build Your First AI Chatbot"
+            src={workshopPromoData.image.src}
+            alt={workshopPromoData.image.alt}
             style={{ width: '100%', height: 'auto', display: 'block' }}
           />
         </Box>
@@ -79,19 +93,19 @@ const WorkshopPromo = () => (
               fontSize: { xs: 20, sm: 24, md: 32 },
             }}
           >
-            Build Your First AI Chatbot
+            {workshopPromoData.title}
           </Typography>
           <Typography
             variant="h6"
             sx={{ fontWeight: 600, mb: 2, fontSize: { xs: 16, sm: 18, md: 22 } }}
           >
-            Join Our ₹9 Workshop!
+            {workshopPromoData.subtitle}
           </Typography>
           <Typography
             variant="body1"
             sx={{ mb: 3, fontSize: { xs: 14, sm: 15, md: 16 } }}
           >
-            We believe learning should be accessible to everyone! That’s why we’re offering our exclusive introductory workshop for only ₹9. Whether you’re a beginner or looking to enhance your skills, this is your golden chance.
+            {workshopPromoData.description}
           </Typography>
           <Button
             variant="contained"
@@ -108,13 +122,13 @@ const WorkshopPromo = () => (
               '&:hover': { bgcolor: '#808080' },
             }}
           >
-            Buy ₹9
+            {workshopPromoData.button}
           </Button>
           <Typography
             variant="body2"
             sx={{ mt: 3, color: '#fff', fontSize: { xs: 13, sm: 14 } }}
           >
-            Unlock your learning journey for less than the price of a cup of tea!
+            {workshopPromoData.note}
           </Typography>
         </Box>
       </Grid>

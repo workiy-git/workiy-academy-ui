@@ -8,28 +8,43 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Paper from "@mui/material/Paper";
 
-const categories = [
-  "All",
-  "Artificial Intelligence",
-  "Machine Learning",
-  "Deep Learning",
-  "Natural Language Processing",
-  "Computer Vision",
-  "Business & Strategy",
-  "Ethics & Responsible AI",
-  "Programming",
-  "Design",
-  "Data Science",
-  "Mobile Development",
-  "Other"
-];
+
+// All UI text, labels, and categories in a single JSON object
+const courseSearchBarData = {
+  sectionTitle: 'Search among <span style="color: #5A69F2">307</span> courses and find your favorite course',
+  sectionTitleText: 'Search among',
+  sectionTitleCount: 307,
+  sectionTitleSuffix: 'courses and find your favorite course',
+  categoriesLabel: 'Categories',
+  categories: [
+    "All",
+    "Artificial Intelligence",
+    "Machine Learning",
+    "Deep Learning",
+    "Natural Language Processing",
+    "Computer Vision",
+    "Business & Strategy",
+    "Ethics & Responsible AI",
+    "Programming",
+    "Design",
+    "Data Science",
+    "Mobile Development",
+    "Other"
+  ],
+  searchLabel: 'Search anything',
+  button: 'Search',
+  orView: 'Or view the following courses...'
+};
+
 
 const CourseSearchBar = () => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
+  const [submittedData, setSubmittedData] = useState(null); // Save submitted search and category
 
   const handleSearch = (e) => {
     e.preventDefault();
+    setSubmittedData({ search, category });
     // Add search logic here
   };
 
@@ -56,7 +71,7 @@ const CourseSearchBar = () => {
           fontSize: { xs: 18, sm: 20, md: 24 },
         }}
       >
-        Search among <span style={{ color: '#5A69F2' }}>307</span> courses and find your favorite course
+        {courseSearchBarData.sectionTitleText} <span style={{ color: '#5A69F2' }}>{courseSearchBarData.sectionTitleCount}</span> {courseSearchBarData.sectionTitleSuffix}
       </Typography>
       <Box
         component="form"
@@ -73,7 +88,7 @@ const CourseSearchBar = () => {
       >
         <TextField
           select
-          label="Categories"
+          label={courseSearchBarData.categoriesLabel}
           value={category}
           onChange={e => setCategory(e.target.value)}
           sx={{
@@ -83,12 +98,12 @@ const CourseSearchBar = () => {
             mb: { xs: 1, md: 0 },
           }}
         >
-          {categories.map((cat, idx) => (
+          {courseSearchBarData.categories.map((cat, idx) => (
             <MenuItem key={idx} value={cat}>{cat}</MenuItem>
           ))}
         </TextField>
         <TextField
-          label="Search anything"
+          label={courseSearchBarData.searchLabel}
           value={search}
           onChange={e => setSearch(e.target.value)}
           sx={{
@@ -121,15 +136,22 @@ const CourseSearchBar = () => {
             mb: { xs: 1, md: 0 },
           }}
         >
-          Search
+          {courseSearchBarData.button}
         </Button>
       </Box>
       <Typography
         variant="body2"
         sx={{ mt: { xs: 2, md: 3 }, color: "#888", fontSize: { xs: 13, sm: 14 } }}
       >
-        Or view the following courses...
+        {courseSearchBarData.orView}
       </Typography>
+      {/* For debugging: show submitted data */}
+      {submittedData && (
+        <Box sx={{ mt: 2, p: 1, background: '#f7f8fa', borderRadius: 2, color: '#23235B', fontSize: 14 }}>
+          <strong>Submitted Data:</strong>
+          <pre style={{ margin: 0 }}>{JSON.stringify(submittedData, null, 2)}</pre>
+        </Box>
+      )}
     </Paper>
   );
 };

@@ -2,16 +2,19 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-const partnerImages = [
 
-  "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
-  "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
-  "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg",
-  "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
-  
-  "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg",
-  "https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png"
-];
+// All UI text and partner images in a single JSON object
+const ourPotentialPartnersData = {
+  title: "OUR POTENTIAL PARTNERS",
+  partners: [
+    "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png"
+  ]
+};
 
 const OurPotentialPartners = () => (
   <Box
@@ -43,7 +46,7 @@ const OurPotentialPartners = () => (
         mb: { xs: 0.5, md: 0 },
       }}
     >
-      OUR POTENTIAL PARTNERS
+      {ourPotentialPartnersData.title}
     </Typography>
     <Box
       sx={{
@@ -65,7 +68,7 @@ const OurPotentialPartners = () => (
         },
       }}
     >
-      {partnerImages.map((img, idx) => (
+  {ourPotentialPartnersData.partners.map((img, idx) => (
         <Box
           key={idx}
           sx={{

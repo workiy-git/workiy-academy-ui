@@ -5,29 +5,35 @@ import Avatar from "@mui/material/Avatar";
 import Rating from "@mui/material/Rating";
 import Paper from "@mui/material/Paper";
 
-const reviews = [
-  {
-    name: "Aarav Sharma",
-    course: "Machine Learning Fundamentals",
-    review: "The course was well-structured and the hands-on projects helped me land my first AI internship!",
-    rating: 5,
-    avatar: "https://randomuser.me/api/portraits/men/32.jpg"
-  },
-  {
-    name: "Priya Patel",
-    course: "Deep Learning with Neural Networks",
-    review: "Amazing instructors and real-world examples. I feel confident building deep learning models now.",
-    rating: 5,
-    avatar: "https://randomuser.me/api/portraits/women/44.jpg"
-  },
-  {
-    name: "John Lee",
-    course: "AI for Business & Strategy",
-    review: "The business applications were eye-opening. Highly recommend for anyone in management!",
-    rating: 5,
-    avatar: "https://randomuser.me/api/portraits/men/65.jpg"
-  }
-];
+
+// All UI text and reviews data in a single JSON object
+const homepageReviewsData = {
+  title: "What our Learners Say",
+  subtitle: "100+ thousand people have already joined FutureEdge",
+  reviews: [
+    {
+      name: "Aarav Sharma",
+      course: "Machine Learning Fundamentals",
+      review: "The course was well-structured and the hands-on projects helped me land my first AI internship!",
+      rating: 5,
+      avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+    },
+    {
+      name: "Priya Patel",
+      course: "Deep Learning with Neural Networks",
+      review: "Amazing instructors and real-world examples. I feel confident building deep learning models now.",
+      rating: 5,
+      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+    },
+    {
+      name: "John Lee",
+      course: "AI for Business & Strategy",
+      review: "The business applications were eye-opening. Highly recommend for anyone in management!",
+      rating: 5,
+      avatar: "https://randomuser.me/api/portraits/men/65.jpg"
+    }
+  ]
+};
 
 const ReviewCard = ({ name, course, review, rating, avatar }) => (
   <Paper
@@ -63,10 +69,10 @@ const HomepageReviews = () => (
       align="center"
       sx={{ fontWeight: 700, mb: 1, fontSize: { xs: 18, sm: 22, md: 28 } }}
     >
-      What our Learners Say
+      {homepageReviewsData.title}
     </Typography>
     <Typography align="center" sx={{ color: "#4ea8de", mb: { xs: 3, sm: 5 }, fontSize: { xs: 13, sm: 15 } }}>
-      100+ thousand people have already joined FutureEdge
+      {homepageReviewsData.subtitle}
     </Typography>
     <Box
       sx={{
@@ -78,7 +84,7 @@ const HomepageReviews = () => (
         gap: { xs: 2, sm: 4 },
       }}
     >
-      {reviews.map((r, i) => (
+      {homepageReviewsData.reviews.map((r, i) => (
         <ReviewCard key={i} {...r} />
       ))}
     </Box>
