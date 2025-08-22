@@ -18,6 +18,7 @@ const AppRouter = () => (
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Courses />} />
+         <Route path="/courses/:courseSlug" element={<Course />} /> {/* <-- DYNAMIC ROUTE */}
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/internship" element={<Internship />} />
