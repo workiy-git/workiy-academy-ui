@@ -6,9 +6,7 @@ import "flatpickr/dist/flatpickr.min.css";
 
 const fontFamily = "'Poppins', 'Inter', sans-serif";
 
-const emojiList = [
-  "😞", "😕", "😐", "🙂", "😊", "😃", "😁", "😎", "🤩", "🥇"
-];
+const ratingOptions = Array.from({ length: 10 }, (_, idx) => idx + 1);
 
 const Internship = () => {
   const [fullName, setFullName] = useState("");
@@ -460,42 +458,49 @@ const Internship = () => {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
+              flexWrap: "wrap",
               marginTop: 8,
               width: "100%",
-              gap: 2,
+              gap: 6,
               padding: "0 4px"
             }}>
-              {emojiList.map((emoji, idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  aria-label={`Rate ${idx + 1}`}
-                  onClick={() => setSkillRating(idx + 1)}
+              {ratingOptions.map((option) => (
+                <label
+                  key={option}
+                  htmlFor={`skill-rate-${option}`}
                   style={{
-                    background: "none",
-                    border: "none",
-                    outline: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: 28,
+                    height: 28,
                     cursor: "pointer",
-                    fontSize: skillRating === idx + 1 ? 24 : 18,
-                    transition: "font-size 0.15s, filter 0.15s",
-                    filter: skillRating === idx + 1 ? "drop-shadow(0 2px 8px #ffc24b)" : "none",
-                    color: skillRating === idx + 1 ? "#ffc24b" : "#bbb",
-                    padding: 0,
-                    margin: 0,
+                    userSelect: "none"
                   }}
+                  title={`Rate ${option}`}
                 >
+                  <input
+                    type="radio"
+                    id={`skill-rate-${option}`}
+                    name="skillRating"
+                    value={option}
+                    checked={skillRating === option}
+                    onChange={() => setSkillRating(option)}
+                    style={{ display: "none" }}
+                    required
+                  />
                   <span
+                    aria-hidden="true"
                     style={{
-                      borderRadius: "50%",
-                      background: skillRating === idx + 1 ? "#ffc24b33" : "transparent",
-                      padding: skillRating === idx + 1 ? 2 : 0,
-                      display: "inline-block",
-                      transition: "background 0.15s",
+                      fontSize: 22,
+                      lineHeight: 1,
+                      color: option <= (skillRating || 0) ? "#ffc24b" : "#cfcfcf",
+                      transition: "color 0.15s ease"
                     }}
                   >
-                    {emoji}
+                    {option <= (skillRating || 0) ? "★" : "☆"}
                   </span>
-                </button>
+                </label>
               ))}
             </div>
             <div style={{ textAlign: "center", fontSize: 13, color: "#888", marginTop: 4 }}>
