@@ -71,7 +71,7 @@ const CourseCard = ({ title, lessons, students, level, rating, image, path, less
       sx={{
         minWidth: { xs: 220, sm: 260, md: 320 },
         maxWidth: { xs: 260, sm: 300, md: 340 },
-        mx: { xs: 0.5, sm: 1.5, md: 2 },
+        mx: "auto",
         borderRadius: 3,
         boxShadow: 3,
         position: "relative",

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const CheckIcon = ({ color = "#10b981", size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
@@ -14,7 +15,7 @@ const CheckIcon = ({ color = "#10b981", size = 20 }) => (
 );
 
 const Course = () => {
-  React.useEffect(() => {
+  useEffect(() => {
     document.body.classList.add("hide-scrollbar");
     document.documentElement.classList.add("hide-scrollbar");
     return () => {
@@ -23,57 +24,28 @@ const Course = () => {
     };
   }, []);
 
-  // ✅ EVERYTHING comes from JSON (like DB)
-  const courseData = {
-    hero: {
-      title: "Prompt Engineering & LLM Mastery",
-      caption:
-        "Master the art of designing effective prompts to maximize the performance of Large Language Models like GPT, Claude, and Gemini.",
-      cta: "Enroll Now",
-      image:
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=512&auto=format&fit=crop",
-    },
-    badges: [
-      "⏱ 20 hours / 2 weeks",
-      "📊 Beginner to Intermediate",
-      "💻 Basic Computer Literacy + English",
-      "🏆 Certified Prompt Engineer (CPE)",
-    ],
-    sections: [
-      {
-        title: "What You’ll Learn",
-        type: "bullets",
-        items: [
-          "Craft contextually strong prompts",
-          "Solve real-world tasks using LLMs",
-          "Build Prompt Libraries for enterprises",
-        ],
-      },
-      {
-        title: "Course Modules",
-        type: "modules",
-        items: [
-          "Introduction to LLMs & Prompting Paradigm",
-          "Prompt Structures: Zero-shot, Few-shot, CoT",
-          "Task-Specific Prompting (Content, Coding, Legal)",
-          "Prompt Debugging & Optimization Strategies",
-          "Automating Workflows with Prompt Templates",
-        ],
-      },
-    ],
-    highlights: [
-      "📝 Hands-on Assignments + Case Study",
-      "🏅 Certified Prompt Engineer",
-    ],
-  };
+  const coursePath = window.location.pathname.split("/").pop();
+  const [courseData, setCourse] = useState(null);
 
-  // ✅ Same styles as before
+  useEffect(() => {
+    axios
+      .get(`http://127.0.0.1:8000/api/course-details/${coursePath}`)
+      .then((res) => {
+        setCourse(res.data.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [coursePath]);
+  console.log("Course Data:", courseData);
+
+  // 🟢 Prevent rendering until data is loaded
+  if (!courseData) {
+    return <div style={{ padding: 20 }}>Loading course details...</div>;
+  }
+
   const styles = {
     page: {
-      width: "100vw",
-      height: "100vh",
-      margin: 0,
-      padding: 0,
       overflow: "hidden",
       background: "#f8fafc",
       color: "#0f172a",
@@ -251,7 +223,6 @@ const Course = () => {
         {courseData.sections.map((section, sIndex) => (
           <section key={sIndex} style={styles.section}>
             <div style={styles.sectionTitle}>{section.title}</div>
-
 
             {section.type === "bullets" && (
               <ul style={styles.bulletList}>

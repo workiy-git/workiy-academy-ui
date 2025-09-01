@@ -8,7 +8,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Internship from './pages/Internship';
 import Course from './pages/Course';
-
+import Admin from './pages/Admin';
 
 const AppRouter = () => (
   <Router>
@@ -23,6 +23,7 @@ const AppRouter = () => (
         <Route path="/contact" element={<Contact />} />
         <Route path="/internship" element={<Internship />} />
         <Route path="/course" element={<Course />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </div>
   </Router>

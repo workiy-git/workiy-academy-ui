@@ -1,73 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Container, Grid, Typography, Button, Box, AppBar, Toolbar, Link, Stack } from "@mui/material";
 import CourseCard from "../components/CourseCard";
-import reactImg from "../assets/course1.png";
 
-const courses = [
-  {
-    title: "Full Stack Web Developer",
-    description: "Get the skills with real world experience Employers want with career Accelators.",
-    duration: "12 weeks",
-    level: "Beginner",
-    image: reactImg,
-    path: "/courses/full-stack-web-developer"
-  },
-  {
-    title: "Data Scientist",
-    description: "Master data analysis, machine learning, and AI for real-world business solutions.",
-    duration: "10 weeks",
-    level: "Intermediate",
-    image: reactImg,
-    path: "/courses/data-scientist"
-  },
-  {
-    title: "MERN Stack with Gen AI",
-    description: "Build modern web apps using MongoDB, Express, React, Node, and Generative AI.",
-    duration: "12 weeks",
-    level: "Advanced",
-    image: reactImg,
-    path: "/courses/mern-stack-gen-ai"
-  },
-  {
-    title: "AI and ML",
-    description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
-    duration: "10 weeks",
-    level: "Intermediate",
-    image: reactImg,
-    path: "/courses/ai-ml"
-  }, {
-    title: "figma",
-    description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
-    duration: "10 weeks",
-    level: "Intermediate",
-    image: reactImg,
-    path: "/courses/figma"
-  },
-  {
-    title: "photoshop",
-    description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
-    duration: "10 weeks",
-    level: "Intermediate",
-    image: reactImg,
-    path: "/courses/photoshop"
-  },
-  {
-    title: "danvis",
-    description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
-    duration: "10 weeks",
-    level: "Intermediate",
-    image: reactImg,
-    path: "/courses/danvis"
-  },
-    {
-    title: "Certified AI Automation Specialist Program",
-    description: "Learn AI and ML fundamentals, algorithms, and practical applications.",
-    duration: "10 weeks",
-    level: "Intermediate",
-    image: reactImg,
-    path: "/courses/certified-ai-automation-specialist"
-  }
-];
+
+
+
 
 const startTitle = "Ready to imagine your career?";
 const startSubtitle = "Get the skills with real world experience Employers want with career Accelators";
@@ -76,7 +14,20 @@ const Courses = () => {
   const [showAll, setShowAll] = useState(false);
 
   // Determine which courses to show
-  const displayedCourses = showAll ? courses : courses.slice(0, 6);
+
+
+      const [course, setCourses] = useState([]);
+  
+        useEffect(() => {
+          axios.get("http://127.0.0.1:8000/api/courses")
+            .then((res) => setCourses(res.data))
+            .catch((err) => console.error("Error fetching courses:", err));
+        }, []);
+  
+        console.log("Fetched Courses:", course);
+
+  const displayedCourses = showAll ? course : course.slice(0, 6);
+
 
   return (
     <Box sx={{ bgcolor: "#F6F8FB", minHeight: "100vh" }}>
