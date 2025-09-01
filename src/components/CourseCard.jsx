@@ -54,6 +54,9 @@ const CourseCard = ({ course }) => {
         >
           {course.title}
         </Typography>
+        <Typography>
+          {course.duration} | {course.level}
+        </Typography>
         <Typography
           variant="body2"
           color="text.secondary"
