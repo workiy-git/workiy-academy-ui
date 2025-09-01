@@ -5,153 +5,110 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
 import Paper from "@mui/material/Paper";
 
 
-// All UI text, labels, and categories in a single JSON object
-const courseSearchBarData = {
-  sectionTitle: 'Search among <span style="color: #5A69F2">307</span> courses and find your favorite course',
-  sectionTitleText: 'Search among',
-  sectionTitleCount: 307,
-  sectionTitleSuffix: 'courses and find your favorite course',
-  categoriesLabel: 'Categories',
-  categories: [
-    "All",
-    "Artificial Intelligence",
-    "Machine Learning",
-    "Deep Learning",
-    "Natural Language Processing",
-    "Computer Vision",
-    "Business & Strategy",
-    "Ethics & Responsible AI",
-    "Programming",
-    "Design",
-    "Data Science",
-    "Mobile Development",
-    "Other"
-  ],
-  searchLabel: 'Search anything',
-  button: 'Search',
-  orView: 'Or view the following courses...'
-};
 
+const courseList = [
+  {
+    title: "Learn Figma - UI/UX Design Essential Training",
+    lessons: 8,
+    students: 198,
+    level: "Beginner",
+    rating: 4,
+    image: "https://i.ibb.co/hFBsFqGP/unsplash-7u-SKXpks-CKg.png",
+    path: "https://production.d2ggwqvu23n3mj.amplifyapp.com/courses"
+  },
+  {
+    title: "Python for Beginners - Learn Programming from scratch",
+    lessons: 21,
+    students: 99,
+    level: "Beginner",
+    rating: 3,
+    image: "https://i.ibb.co/1G268Rjx/learning-education-ideas-insight-intelligence-study-concept.png",
+    path: "https://production.d2ggwqvu23n3mj.amplifyapp.com/courses"
+  },
+  {
+    title: "Mobile App Development with Flutter & Dart",
+    lessons: 15,
+    students: 215,
+    level: "Advanced",
+    rating: 2,
+    image: "https://i.ibb.co/rKb60RNF/unsplash-b-OKIpt-Pzd-Pk.png",
+    path: "https://production.d2ggwqvu23n3mj.amplifyapp.com/courses"
+  }
+];
 
 const CourseSearchBar = () => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
-  const [submittedData, setSubmittedData] = useState(null); // Save submitted search and category
+  const [suggestions, setSuggestions] = useState([]);
+
+  const handleCategoryClick = (cat) => {
+    setCategory(cat);
+  };
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+    if (value.length > 0) {
+      const filtered = courseList.filter(course =>
+        course.title.toLowerCase().includes(value.toLowerCase())
+      );
+      setSuggestions(filtered);
+    } else {
+      setSuggestions([]);
+    }
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
-    setSubmittedData({ search, category });
     // Add search logic here
   };
 
   return (
-
-    <Paper
-      elevation={0}
-      sx={{
-        mx: 0,
-        my: { xs: 2, md: 6 },
-        p: { xs: 1.5, sm: 2, md: 4 },
-        borderRadius: 0,
-        textAlign: "center",
-        bgcolor: "#fff",
-        boxShadow: 'none',
-      }}
-    >
-      <Typography
-        variant="h6"
-        sx={{
-          fontWeight: 700,
-          mb: { xs: 1, md: 1 },
-          color: "#262627",
-          fontSize: { xs: 18, sm: 20, md: 24 },
-        }}
-      >
-        {courseSearchBarData.sectionTitleText} <span style={{ color: '#5A69F2' }}>{courseSearchBarData.sectionTitleCount}</span> {courseSearchBarData.sectionTitleSuffix}
+    <Paper elevation={0} sx={{ width: '100vw', maxWidth: '100vw', mx: 0, my: 6, p: { xs: 2, md: 4 }, borderRadius: 0, textAlign: "center", bgcolor: "#fff", boxShadow: 'none', position: 'relative' }}>
+      <Typography variant="h5" sx={{ fontWeight: 700, mb: 1, color: "#262627" }}>
+        Search among <span style={{ color: '#5A69F2' }}>307</span> courses and find your favorite course
       </Typography>
-      <Box
-        component="form"
-        onSubmit={handleSearch}
-        sx={{
-          display: "flex",
-          flexDirection: { xs: "column", sm: "column", md: "row" },
-          gap: { xs: 1.5, sm: 2 },
-          alignItems: { xs: "stretch", md: "center" },
-          justifyContent: "center",
-          mt: { xs: 2, md: 3 },
-          width: '100%',
-        }}
-      >
-        <TextField
-          select
-          label={courseSearchBarData.categoriesLabel}
-          value={category}
-          onChange={e => setCategory(e.target.value)}
-          sx={{
-            minWidth: { xs: '100%', sm: 160 },
-            bgcolor: "#f9f9fb",
-            fontSize: { xs: 14, sm: 16 },
-            mb: { xs: 1, md: 0 },
-          }}
-        >
-          {courseSearchBarData.categories.map((cat, idx) => (
-            <MenuItem key={idx} value={cat}>{cat}</MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          label={courseSearchBarData.searchLabel}
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-          sx={{
-            flex: 1,
-            maxWidth: 900,
-            bgcolor: "#FAFAFA",
-            '& .MuiOutlinedInput-notchedOutline': { border: 'none' },
-            fontSize: { xs: 14, sm: 16 },
-            mb: { xs: 1, md: 0 },
-          }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon color="primary" />
-              </InputAdornment>
-            )
-          }}
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          sx={{
-            fontWeight: 600,
-            px: { xs: 2, sm: 4 },
-            height: { xs: 44, sm: 48, md: 56 },
-            fontSize: { xs: 14, sm: 16 },
-            backgroundColor: "#262627",
-            color: "#fff",
-            width: { xs: '100%', md: 'auto' },
-            mb: { xs: 1, md: 0 },
-          }}
-        >
-          {courseSearchBarData.button}
-        </Button>
-      </Box>
-      <Typography
-        variant="body2"
-        sx={{ mt: { xs: 2, md: 3 }, color: "#888", fontSize: { xs: 13, sm: 14 } }}
-      >
-        {courseSearchBarData.orView}
-      </Typography>
-      {/* For debugging: show submitted data */}
-      {submittedData && (
-        <Box sx={{ mt: 2, p: 1, background: '#f7f8fa', borderRadius: 2, color: '#23235B', fontSize: 14 }}>
-          <strong>Submitted Data:</strong>
-          <pre style={{ margin: 0 }}>{JSON.stringify(submittedData, null, 2)}</pre>
+     
+      <Box component="form" sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 1, alignItems: "center", justifyContent: "center", mt: 3, position: 'relative' }}>
+        <Box sx={{ width: '100%', position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <TextField
+            label="Search anything"
+            value={search}
+            onChange={handleSearchChange}
+            sx={{ flex: 1, maxWidth: 900, bgcolor: "#FAFAFA", '& .MuiOutlinedInput-notchedOutline': { border: 'none' } }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon color="primary" />
+                </InputAdornment>
+              )
+            }}
+            autoComplete="off"
+            fullWidth
+          />
+          {suggestions.length > 0 && (
+            <Box sx={{ position: "absolute", top: 56, left: '50%', transform: 'translateX(-50%)', zIndex: 10, bgcolor: "#fff", boxShadow: 2, borderRadius: 1, maxHeight: 240, overflowY: 'auto', width: '100%', maxWidth: 900 }}>
+              {suggestions.map((course, idx) => (
+                <Box
+                  key={idx}
+                  sx={{ p: 1.5, cursor: "pointer", textAlign: 'left', '&:hover': { bgcolor: "#f0f0f0" }, borderBottom: idx !== suggestions.length - 1 ? '1px solid #eee' : 'none' }}
+                  onClick={() => window.open(course.path, "_blank")}
+                >
+                  {course.title}
+                </Box>
+              ))}
+            </Box>
+          )}
         </Box>
-      )}
+        <Button type="submit" variant="contained" sx={{ mr: { xs: 0, md: 10 }, fontWeight: 600, px: 4, height: 56, backgroundColor: "#262627", color: "#fff" }}>
+          Search
+        </Button>
+      
+      </Box>
+      
     </Paper>
   );
 };
