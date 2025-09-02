@@ -1,4 +1,5 @@
-import React, { useRef } from "react";
+import React, { useRef,useEffect, useState} from "react";
+import axios from "axios";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -66,6 +67,19 @@ const CourseCard = ({ title, lessons, students, level, rating, image, path, less
   const handleStartCourse = () => {
     window.location.href = path;
   };
+
+
+  const [course, setCourses] = useState([]);
+    
+          useEffect(() => {
+            axios.get("http://127.0.0.1:8000/api/courses")
+              .then((res) => setCourses(res.data))
+              .catch((err) => console.error("Error fetching courses:", err));
+          }, []);
+    
+          console.log("Fetched Courses:", course);
+
+          
   return (
     <Card
       sx={{

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   Container,
@@ -27,6 +28,7 @@ const Admin = () => {
   const [courses, setCourses] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   // Form States
   const [newCourse, setNewCourse] = useState({
@@ -208,9 +210,21 @@ const Admin = () => {
     setCourseDetailsData(null);
     setShowForm(false);
   };
+    const handleLogout = () => {
+    localStorage.removeItem("isAdminAuthenticated");
+    navigate("/login");
+  };
 
   return (
     <Box sx={{ bgcolor: "#F6F8FB", minHeight: "100vh", py: 4 }}>
+       <div style={{textAlign: "right", marginRight: "50px"}}>
+          <button
+            onClick={handleLogout}
+            className="bg-red-600 text-white px-4 py-2 rounded mt-4"
+          >
+            Logout
+          </button>
+        </div>
       <Container>
         <Typography variant="h4" sx={{ mb: 3, fontWeight: "bold" }}>
           Admin Dashboard - Manage Courses
