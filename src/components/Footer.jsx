@@ -18,7 +18,7 @@ const footerData = {
     "CRM", "Mobile Design", "Motion Graphic", "Web Design", "Development", "SEO"
   ],
   company: [
-    "Service", "Courses", "Our Team", "Internship", "Blog", "Contact Us"
+    "Site Map", "Courses", "Our Team", "Internship", "Blog", "Contact Us"
   ],
   newsletter: {
     title: "Join a Newsletter",
