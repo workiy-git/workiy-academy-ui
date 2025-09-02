@@ -9,6 +9,8 @@ import Contact from './pages/Contact';
 import Internship from './pages/Internship';
 import Course from './pages/Course';
 import Admin from './pages/Admin';
+import PrivateRoute from './components/PrivateRoute';
+import Login from './pages/Login';
 
 const AppRouter = () => (
   <Router>
@@ -23,7 +25,17 @@ const AppRouter = () => (
         <Route path="/contact" element={<Contact />} />
         <Route path="/internship" element={<Internship />} />
         <Route path="/course" element={<Course />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/login" element={<Login />} />
+        {/* <Route path="/admin" element={<Admin />} /> */}
+         {/* 🔒 Protecting Admin Route */}
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute>
+              <Admin />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </div>
   </Router>
