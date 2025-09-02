@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -14,7 +14,7 @@ import { Add, Delete } from "@mui/icons-material";
 const sectionTypes = ["bullets", "modules"];
 
 const CourseDetailsForm = ({ onFormDataChange, initialData }) => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState(() => initialData || {
     path: "",
     data: {
       hero: {
@@ -35,15 +35,7 @@ const CourseDetailsForm = ({ onFormDataChange, initialData }) => {
     },
   });
 
-  // Only set form data from initialData when switching courses (by id or path)
-  const prevKeyRef = useRef();
-  React.useEffect(() => {
-    const key = initialData?.id || initialData?.path;
-    if (initialData && prevKeyRef.current !== key) {
-      setFormData(initialData);
-      prevKeyRef.current = key;
-    }
-  }, [initialData]);
+  // Only update formData if initialData changes (remount via key prop in parent is recommended)
 
   // Handle input change for hero and path
   const handleHeroChange = (e) => {
@@ -137,16 +129,7 @@ const CourseDetailsForm = ({ onFormDataChange, initialData }) => {
         Course Details Form
       </Typography>
 
-      {/* Course Path */}
-      <TextField
-        label="Course Path"
-        name="path"
-        id="course-path"
-        value={formData.path}
-        onChange={(e) => setFormData({ ...formData, path: e.target.value })}
-        fullWidth
-        sx={{ mb: 2 }}
-      />
+  {/* Course Path hidden as it is set by backend */}
 
       <Divider sx={{ my: 2 }} />
       <Typography variant="h6">Hero Section</Typography>

@@ -226,6 +226,42 @@ const Contact = () => {
           </Grid>
         </Grid>
       </Box>
+      			{/* Subscribe Block */}
+			<Box sx={{ width: '70%', p: 4, margin:'auto' }}>
+				<Grid container alignItems="center" sx={{display:'flex', justifyContent:'space-between'}} spacing={2}>
+					<Grid item xs={12} md={6}>
+						<Typography variant="h6" sx={{ fontWeight: 600, fontSize: 22 }}>
+							Join 3,000+ subscribers
+						</Typography>
+					</Grid>
+					<Grid item xs={12} md={6}>
+						<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: { xs: 'stretch', md: 'flex-end' } }}>
+							<Box sx={{ display: 'flex', width: '100%' }}>
+								<input type="email" placeholder="Enter your email" style={{ flex: 1, padding: '12px', borderRadius: '6px 0 0 6px', border: '1px solid #E4E7EC', fontSize: '1rem', background: '#F9FAFB', borderRight: 'none' }} />
+								<button type="button" style={{ padding: '12px 24px', background: '#7F56D9', color: '#fff', border: 'none', borderRadius: '0 6px 6px 0', fontSize: '1rem', fontWeight: 600, cursor: 'pointer' }}>Subscribe</button>
+							</Box>
+							<Typography variant="body2" sx={{ color: '#666', mt: 1, textAlign: 'left' }}>
+								We care about your data in our <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" style={{ color: '#7c3aed', textDecoration: 'underline' }}>privacy policy</a>.
+							</Typography>
+						</Box>
+					</Grid>
+				</Grid>
+			</Box>
+    {/* Map */}
+	<Box sx={{ width: '100%', mt: 6, mb: 6, display: 'flex', justifyContent: 'center' }}>
+				<Box sx={{ width: '80%', height: 350, borderRadius: 3, overflow: 'hidden', boxShadow: 2 }}>
+					<iframe
+						title="Office Location"
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.2997788969333!2d80.18195657410162!3d12.888435216698145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5259bca6ba1e7f%3A0xa2ef3b6cb7355435!2sWorkiy%20Technologies%20private%20limited!5e0!3m2!1sen!2sin!4v1755085292200!5m2!1sen!2sin"
+						width="100%"
+						height="100%"
+						style={{ border: 0 }}
+						allowFullScreen=""
+						loading="lazy"
+						referrerPolicy="no-referrer-when-downgrade"
+					></iframe>
+				</Box>
+			</Box>
     </Box>
   );
 };
