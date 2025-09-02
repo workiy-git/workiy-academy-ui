@@ -1,4 +1,3 @@
-
 import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -24,7 +23,7 @@ const contactUsData = {
 
 
 const ContactUs = () => {
-  const [form, setForm] = React.useState({ name: "", email: "", comment: "", save: false });
+  const [form, setForm] = React.useState({ name: "", email: "", phone: "", comment: "", save: false });
   const [submittedData, setSubmittedData] = React.useState(null); // To save submitted form data
 
   const handleChange = (e) => {
@@ -143,7 +142,40 @@ const ContactUs = () => {
             />
           </Box>
         </Box>
+      
+        {/* Phone Number Input */}
         <Box sx={{ mb: 2 }}>
+          <Typography sx={{ mb: 0.5, ml: 0.5, fontWeight: 400, color: '#23235B', fontSize: { xs: 14, sm: 15 }, fontFamily: 'Inter, Roboto, Arial, sans-serif' }}>
+            Phone Number*
+          </Typography>
+          <TextField
+            name="phone"
+            type="tel"
+            value={form.phone}
+            onChange={handleChange}
+            fullWidth
+            required
+            variant="outlined"
+            placeholder="Enter your phone number"
+            sx={{
+              fontSize: { xs: 15, sm: 17 },
+              borderRadius: 3,
+              background: '#f7f8fa',
+              boxShadow: '0 1px 4px 0 rgba(90,105,242,0.04)',
+              fontFamily: 'Inter, Roboto, Arial, sans-serif',
+              '& .MuiOutlinedInput-root': {
+                borderRadius: 3,
+                fontFamily: 'Inter, Roboto, Arial, sans-serif',
+                '&.Mui-focused fieldset': {
+                  borderColor: '#5A69F2',
+                  boxShadow: '0 0 0 2px #e3e8ff',
+                },
+              },
+            }}
+            InputProps={{ style: { borderRadius: 12, background: '#f7f8fa', fontFamily: 'Inter, Roboto, Arial, sans-serif' } }}
+          />
+        </Box>
+          <Box sx={{ mb: 2 }}>
           <Typography sx={{ mb: 0.5, ml: 0.5, fontWeight: 400, color: '#23235B', fontSize: { xs: 14, sm: 15 }, fontFamily: 'Inter, Roboto, Arial, sans-serif' }}>{contactUsData.fields.comment.label}</Typography>
           <TextField
             name="comment"
