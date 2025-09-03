@@ -25,12 +25,17 @@ const Internship = () => {
   const [emailError, setEmailError] = useState("");
 
   const dobInputRef = useRef(null);
+  const fifteenYearsAgo = (() => {
+    const d = new Date();
+    d.setFullYear(d.getFullYear() - 15);
+    return d;
+  })();
 
   useEffect(() => {
     if (dobInputRef.current) {
       flatpickr(dobInputRef.current, {
         dateFormat: "d/m/Y",
-        maxDate: "today",
+        maxDate: fifteenYearsAgo,
         allowInput: true,
         onChange: (selectedDates, dateStr) => setDob(dateStr),
       });
@@ -120,6 +125,41 @@ const Internship = () => {
         margin: 0,
       }}
     >
+      <style>{`
+        .resume-file-input::file-selector-button {
+          background: #7c3aed;
+          color: #ffffff;
+          border: 1px solid #7c3aed;
+          border-radius: 6px;
+          padding: 8px 12px;
+          cursor: pointer;
+          transition: background 0.15s ease, border-color 0.15s ease;
+        }
+        .resume-file-input::file-selector-button:hover {
+          background: #6d28d9;
+          border-color: #6d28d9;
+        }
+        .resume-file-input::-webkit-file-upload-button {
+          background: #7c3aed;
+          color: #ffffff;
+          border: 1px solid #7c3aed;
+          border-radius: 6px;
+          padding: 8px 12px;
+          cursor: pointer;
+          transition: background 0.15s ease, border-color 0.15s ease;
+        }
+        .resume-file-input::-webkit-file-upload-button:hover {
+          background: #6d28d9;
+          border-color: #6d28d9;
+        }
+        /* Phone input: hide flag/dropdown and align sizing */
+        .phone-input-no-flag .flag-dropdown { display: none; }
+        .phone-input-no-flag .form-control {
+          padding-left: 14px !important;
+          height: auto;
+          line-height: 1.2;
+        }
+      `}</style>
       {/* Header Image */}
       <div
         style={{
@@ -267,16 +307,14 @@ const Internship = () => {
                 country={'in'}
                 value={phone}
                 onChange={setPhone}
+                containerClass="phone-input-no-flag"
                 inputStyle={{
                   ...inputStyle,
-                  paddingLeft: 48,
+                  paddingLeft: 14,
                   width: "100%",
                   marginTop: 0,
                 }}
-                buttonStyle={{
-                  border: "none",
-                  background: "transparent"
-                }}
+                buttonStyle={{ display: "none" }}
                 inputProps={{
                   name: 'phone',
                   required: true,
@@ -286,10 +324,8 @@ const Internship = () => {
                   width: "100%",
                   marginTop: 4
                 }}
-                onlyCountries={['in', 'us', 'gb', 'ae', 'au', 'ca', 'sg']}
-                enableSearch
                 disableCountryCode={false}
-                disableDropdown={false}
+                disableDropdown
                 countryCodeEditable={false}
               />
             </div>
@@ -396,7 +432,7 @@ const Internship = () => {
             <span style={spanStyle}>
               Skills <span style={asteriskStyle}>*</span>
             </span>
-            <div style={{ width: "100%", minHeight: 44, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 6, border: "1px solid #e0e0e0", borderRadius: 8, padding: "4px 8px", background: "#fff" }}>
+            <div style={{ width: "100%", display: "flex", flexWrap: "wrap", alignItems: "center", gap: 8, border: "1px solid #e0e0e0", borderRadius: 8, padding: "12px 14px", background: "#fff", boxSizing: "border-box" }}>
               {skills.map((skill, idx) => (
                 <span
                   key={idx}
@@ -406,8 +442,8 @@ const Internship = () => {
                     background: "#f5f5f5",
                     color: "#181b22",
                     borderRadius: 16,
-                    padding: "2px 10px 2px 8px",
-                    fontSize: 14,
+                    padding: "4px 10px 4px 10px",
+                    fontSize: 16,
                     marginRight: 4,
                     marginBottom: 2,
                   }}
@@ -420,7 +456,7 @@ const Internship = () => {
                       cursor: "pointer",
                       color: "#e53935",
                       fontWeight: 700,
-                      fontSize: 14,
+                      fontSize: 16,
                       display: "flex",
                       alignItems: "center",
                     }}
@@ -436,11 +472,11 @@ const Internship = () => {
                 style={{
                   border: "none",
                   outline: "none",
-                  fontSize: 14,
+                  fontSize: 16,
                   flex: 1,
                   minWidth: 80,
                   background: "#fff",
-                  padding: "4px 0",
+                  padding: "0",
                   marginLeft: 2,
                 }}
                 value={skillInput}
@@ -523,6 +559,7 @@ const Internship = () => {
                   cursor: "pointer",
                   color: "#181b22",
                 }}
+                className="resume-file-input"
                 accept=".pdf,.doc,.docx"
                 required
                 onChange={e => setResume(e.target.files[0])}
