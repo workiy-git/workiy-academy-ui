@@ -336,7 +336,7 @@ const Internship = () => {
             </span>
             <input
               type="email"
-              placeholder="e.g. name@gmail.com"
+              placeholder="e.g. name@email.com"
               style={inputStyle}
               required
               value={email}
@@ -488,7 +488,7 @@ const Internship = () => {
           </label>
           <label style={labelStyle}>
             <span style={spanStyle}>
-              Rate your Skills <span style={asteriskStyle}>*</span>
+              Rate your Skills
             </span>
             <div style={{
               display: "flex",
@@ -523,7 +523,6 @@ const Internship = () => {
                     checked={skillRating === option}
                     onChange={() => setSkillRating(option)}
                     style={{ display: "none" }}
-                    required
                   />
                   <span
                     aria-hidden="true"
