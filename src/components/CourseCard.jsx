@@ -73,7 +73,7 @@ const CourseCard = ({ course }) => {
           {course.description}
         </Typography>
         <Box sx={{ display: 'flex', gap: 1, mb: 2, justifyContent: 'left' }}>
-          {[...Array(5)].map((_, i) => (
+          {[...Array(course.rating)].map((_, i) => (
             <span key={i} style={{ fontSize: 18, color: '#FFD700', marginRight: 2 }}>⭐</span>
           ))}
         </Box>

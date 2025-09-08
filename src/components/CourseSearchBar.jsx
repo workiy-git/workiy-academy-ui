@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState} from "react";
+import axios from "axios";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -6,6 +7,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
+import config from "../config/config";
 
 
 
@@ -48,6 +50,17 @@ const CourseSearchBar = () => {
     setCategory(cat);
   };
 
+
+    const [course, setCourses] = useState([]);
+      
+            useEffect(() => {
+              axios.get(`${config.apiUrl}/courses`)
+                .then((res) => setCourses(res.data))
+                .catch((err) => console.error("Error fetching courses:", err));
+            }, []);
+      
+            console.log("Fetched Courses:", course.length);
+
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearch(value);
@@ -69,7 +82,7 @@ const CourseSearchBar = () => {
   return (
     <Paper elevation={0} sx={{ width: '100vw', maxWidth: '100vw', mx: 0, my: 6, p: { xs: 2, md: 4 }, borderRadius: 0, textAlign: "center", bgcolor: "#fff", boxShadow: 'none', position: 'relative' }}>
       <Typography variant="h5" sx={{ fontWeight: 700, mb: 1, color: "#262627" }}>
-        Search among <span style={{ color: '#5A69F2' }}>307</span> courses and find your favorite course
+        Search among <span style={{ color: '#5A69F2' }}>{course.length}</span> courses and find your favorite course
       </Typography>
      
       <Box component="form" sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 1, alignItems: "center", justifyContent: "center", mt: 3, position: 'relative' }}>
