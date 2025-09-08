@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import config from "../config/config";
 
 const CheckIcon = ({ color = "#10b981", size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
@@ -29,7 +30,7 @@ const Course = () => {
 
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api/course-details/${coursePath}`)
+      .get(`${config.apiUrl}/course-details/${coursePath}`)
       .then((res) => {
         setCourse(res.data.data);
       })

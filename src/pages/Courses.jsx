@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Grid, Typography, Button, Box, AppBar, Toolbar, Link, Stack } from "@mui/material";
 import CourseCard from "../components/CourseCard";
+import config from "../config/config";
 
 
 
@@ -19,7 +20,7 @@ const Courses = () => {
       const [course, setCourses] = useState([]);
   
         useEffect(() => {
-          axios.get("http://127.0.0.1:8000/api/courses")
+          axios.get(`${config.apiUrl}/courses`)
             .then((res) => setCourses(res.data))
             .catch((err) => console.error("Error fetching courses:", err));
         }, []);

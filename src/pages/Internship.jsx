@@ -156,7 +156,7 @@ const Internship = () => {
         style={{
           textAlign: "center",
           margin: "32px 0 8px",
-          fontWeight: 700,
+          fontWeight: "bold",
           fontFamily,
           fontSize: "clamp(1.5rem, 4vw, 2.2rem)",
           letterSpacing: 1,

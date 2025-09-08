@@ -11,9 +11,6 @@ import {
 const CourseForm = ({
   newCourse,
   setNewCourse,
-  handleAddCourse,
-  handleUpdateCourse,
-  setShowForm,
 }) => {
   // Handle input change
   const handleChange = (e) => {
@@ -40,18 +37,6 @@ const CourseForm = ({
     }
   };
 
-  // Handle cancel action
-  const handleCancel = () => {
-    setShowForm(false);
-    setNewCourse({
-      title: "",
-      description: "",
-      duration: "",
-      image: "",
-      level: "",
-      path: "",
-    });
-  };
 
   return (
     <Box
@@ -105,6 +90,8 @@ const CourseForm = ({
           ))}
         </TextField>
 
+
+
         {/* Image Upload */}
         <Button variant="outlined" component="label">
           {newCourse.image ? "Change Image" : "Upload Image"}
@@ -137,8 +124,31 @@ const CourseForm = ({
           <MenuItem value="Advanced">Advanced</MenuItem>
         </TextField>
 
+        <TextField
+          select
+          label="Rating"
+          name="rating"
+          value={newCourse.rating}
+          onChange={handleChange}
+          fullWidth
+        >
+          {[...Array(5)].map((_, i) => (
+            <MenuItem key={i + 1} value={i+1}>
+              {i + 1}
+            </MenuItem>
+          ))}
+        </TextField>
+
+        <TextField
+          label="Lessons"
+          name="lessons"
+          value={newCourse.lessons}
+          onChange={handleChange}
+          fullWidth
+        />
+
         {/* Action Buttons */}
-        <Stack direction="row" spacing={2} mt={2}>
+        {/* <Stack direction="row" spacing={2} mt={2}>
           <Button
             variant="contained"
             color="primary"
@@ -149,7 +159,7 @@ const CourseForm = ({
           <Button variant="outlined" color="secondary" onClick={handleCancel}>
             Cancel
           </Button>
-        </Stack>
+        </Stack> */}
       </Stack>
     </Box>
   );
