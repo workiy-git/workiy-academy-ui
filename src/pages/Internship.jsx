@@ -1,18 +1,20 @@
-import React, { useState, useRef, useEffect } from "react";
-import "react-phone-input-2/lib/style.css";
-import PhoneInput from "react-phone-input-2";
-import flatpickr from "flatpickr";
-import "flatpickr/dist/flatpickr.min.css";
-
-const fontFamily = "'Poppins', 'Inter', sans-serif";
-
-const ratingOptions = Array.from({ length: 10 }, (_, idx) => idx + 1);
+import React, { useState } from "react";
+import {
+  Box, TextField, Button, Chip, MenuItem, Rating, Typography
+} from "@mui/material";
+import {
+  LocalizationProvider,
+  DatePicker
+} from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { InputAdornment } from "@mui/material";
 
 const Internship = () => {
   const [fullName, setFullName] = useState("");
-  const [dob, setDob] = useState("");
+  const [dob, setDob] = useState(null);
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [areaOfStudy, setAreaOfStudy] = useState("");
   const [institute, setInstitute] = useState("");
   const [graduationYear, setGraduationYear] = useState("");
@@ -22,667 +24,230 @@ const Internship = () => {
   const [skillRating, setSkillRating] = useState(null);
   const [resume, setResume] = useState(null);
   const [description, setDescription] = useState("");
-  const [emailError, setEmailError] = useState("");
 
-  const dobInputRef = useRef(null);
-  const fifteenYearsAgo = (() => {
-    const d = new Date();
-    d.setFullYear(d.getFullYear() - 15);
-    return d;
-  })();
+  const getYearOptions = () => {
+    const current = new Date().getFullYear();
+    return Array.from({ length: 7 }, (_, i) => current - 3 + i);
+  };
 
-  useEffect(() => {
-    if (dobInputRef.current) {
-      flatpickr(dobInputRef.current, {
-        dateFormat: "d/m/Y",
-        maxDate: fifteenYearsAgo,
-        allowInput: true,
-        onChange: (selectedDates, dateStr) => setDob(dateStr),
-      });
-    }
-  }, []);
-
-  // Email validation on blur or change
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
-    if (
-      value &&
-      !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(value)
-    ) {
-      setEmailError("Please enter a valid email address.");
-    } else {
-      setEmailError("");
-    }
+    setEmailError(
+      value && !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(value)
+        ? "Enter a valid email"
+        : ""
+    );
   };
 
-  // Handle skill input and add on comma or enter
-  const handleSkillInput = (e) => {
-    const value = e.target.value;
-    // If comma or enter is pressed, add skill
-    if (
-      (e.key === "," || e.key === "Enter") &&
-      value.trim().replace(",", "") !== ""
-    ) {
-      e.preventDefault();
-      addSkill(value);
-    }
-  };
-
-  const addSkill = (value) => {
-    const skill = value.trim().replace(/,$/, "");
-    if (skill && !skills.includes(skill)) {
-      setSkills([...skills, skill]);
-    }
+  const addSkill = () => {
+    const s = skillInput.trim();
+    if (s && !skills.includes(s)) setSkills([...skills, s]);
     setSkillInput("");
-  };
-
-  const handleSkillChange = (e) => {
-    setSkillInput(e.target.value);
-  };
-
-  const removeSkill = (removeIdx) => {
-    setSkills(skills.filter((_, idx) => idx !== removeIdx));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      email &&
-      !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)
-    ) {
-      setEmailError("Please enter a valid email address.");
-      return;
-    }
+    if (emailError) return;
     console.log({
-      fullName,
-      dob,
-      phone,
-      email,
-      areaOfStudy,
-      institute,
-      graduationYear,
-      areaOfInterest,
-      skills,
-      skillRating,
-      resume,
-      description,
+      fullName, dob, phone, email, areaOfStudy, institute,
+      graduationYear, areaOfInterest, skills, skillRating, resume, description,
     });
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        width: "98.65vw",
-        background: "#fff",
-        fontFamily,
-        color: "#181b22",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: 0,
-        margin: 0,
-      }}
-    >
-      <style>{`
-        .resume-file-input::file-selector-button {
-          background: #7c3aed;
-          color: #ffffff;
-          border: 1px solid #7c3aed;
-          border-radius: 6px;
-          padding: 8px 12px;
-          cursor: pointer;
-          transition: background 0.15s ease, border-color 0.15s ease;
-        }
-        .resume-file-input::file-selector-button:hover {
-          background: #6d28d9;
-          border-color: #6d28d9;
-        }
-        .resume-file-input::-webkit-file-upload-button {
-          background: #7c3aed;
-          color: #ffffff;
-          border: 1px solid #7c3aed;
-          border-radius: 6px;
-          padding: 8px 12px;
-          cursor: pointer;
-          transition: background 0.15s ease, border-color 0.15s ease;
-        }
-        .resume-file-input::-webkit-file-upload-button:hover {
-          background: #6d28d9;
-          border-color: #6d28d9;
-        }
-        /* Phone input: hide flag/dropdown and align sizing */
-        .phone-input-no-flag .flag-dropdown { display: none; }
-        .phone-input-no-flag .form-control {
-          padding-left: 14px !important;
-          height: auto;
-          line-height: 1.2;
-        }
-      `}</style>
-      {/* Header Image */}
-      <div
-        style={{
-          width: "100vw",
-          height: "22vw",
-          minHeight: 120,
-          maxHeight: 220,
-          background: "#e6e6ef",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          margin: 0,
-          padding: 0,
-          position: "relative",
-          left: "50%",
-          right: "50%",
-          transform: "translate(-50%, 0)",
+    <Box sx={{ p: 0, m: 0 }}>
+      <Box
+        sx={{
+          width: "100%",
+          p: 0,
+          m: 0,
+          height: { xs: 160, md: 240 },
+          overflow: "hidden",
+          borderRadius: 0,
+          mb: 2,
         }}
       >
         <img
-          src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=900&q=80"
+          src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1600&q=80"
           alt="Internship"
-          style={{
-            width: "100vw",
-            height: "100%",
-            objectFit: "cover",
-            borderRadius: 0,
-            display: "block",
-          }}
+          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
         />
-      </div>
-      {/* Title */}
-      <h2
-        style={{
-          textAlign: "center",
-          margin: "32px 0 8px",
-          fontWeight: 700,
-          fontFamily,
-          fontSize: "clamp(1.5rem, 4vw, 2.2rem)",
-          letterSpacing: 1,
-          width: "100%",
-          color: "#181b22",
-        }}
-      >
-        INTERNSHIP FORM
-      </h2>
-      {/* Form */}
-      <form
-        style={{
-          width: "100%",
-          maxWidth: 600,
-          minWidth: 0,
-          margin: "0 auto",
-          background: "transparent",
-          borderRadius: 0,
-          boxShadow: "none",
-          padding: "0 4vw 32px 4vw",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          fontFamily,
-          boxSizing: "border-box",
-        }}
-        onSubmit={handleSubmit}
-      >
-        <h3
-          style={{
-            textAlign: "center",
-            marginBottom: 24,
-            fontWeight: 500,
-            fontFamily,
-            fontSize: 18,
-            color: "#888",
-            width: "100%",
-          }}
-        >
-          Please fill the below Details
-        </h3>
-        <div style={{ display: "flex", flexDirection: "column", gap: 22, width: "100%", minWidth: 0 }}>
-          <label style={labelStyle}>
-            <span style={spanStyle}>
-              Full Name <span style={asteriskStyle}>*</span>
-            </span>
-            <input
-              type="text"
-              placeholder="e.g. Alex Smith"
-              style={inputStyle}
-              required
-              value={fullName}
-              onChange={e => setFullName(e.target.value)}
-            />
-          </label>
-          <label style={labelStyle}>
-            <span style={spanStyle}>
-              Date Of Birth <span style={asteriskStyle}>*</span>
-            </span>
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                cursor: "pointer",
-                marginTop: 4,
-              }}
-              onClick={() => dobInputRef.current && dobInputRef.current._flatpickr.open()}
-            >
-              <input
-                ref={dobInputRef}
-                type="text"
-                value={dob}
-                placeholder="DD/MM/YYYY"
-                style={{
-                  ...inputStyle,
-                  cursor: "pointer",
-                  marginTop: 0,
-                }}
-                readOnly
+      </Box>
+      
+      <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: 700 }}>
+        Internship Form
+      </Typography>
+
+      <Box component="form" onSubmit={handleSubmit} sx={{ display: "grid", gap: 2.5, maxWidth: 900, mx: "auto" }}>
+        <TextField
+          label="Full Name"
+          placeholder="e.g. Alex Smith"
+          required
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+          InputLabelProps={{ shrink: true }}
+          sx={{ '& .MuiInputLabel-root': { fontWeight: 700 }, '& .MuiOutlinedInput-root': { backgroundColor: '#fff', borderRadius: 1.5 } }}
+        />
+
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            label="Date Of Birth"
+            value={dob}
+            onChange={setDob}
+            inputFormat="dd-MM-yyyy"
+            renderInput={(params) => (
+              <TextField
                 required
-                onFocus={e => e.target.blur()}
+                placeholder="dd-mm-yyyy"
+                {...params}
+                InputLabelProps={{ shrink: true }}
+                sx={{ '& .MuiInputLabel-root': { fontWeight: 700 }, '& .MuiOutlinedInput-root': { backgroundColor: '#fff', borderRadius: 1.5 } }}
               />
-              <span
-                style={{
-                  position: "absolute",
-                  right: 12,
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  pointerEvents: "none",
-                  opacity: 0.7,
-                  display: "flex",
-                  alignItems: "center"
-                }}
-              >
-                <svg width="20" height="20" fill="none" stroke="#888" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                  <rect x="3" y="4" width="18" height="18" rx="2" />
-                  <path d="M16 2v4M8 2v4M3 10h18" />
-                </svg>
-              </span>
-            </div>
-          </label>
-          <label style={labelStyle}>
-            <span style={spanStyle}>
-              Phone No. <span style={asteriskStyle}>*</span>
-            </span>
-            <div style={{ width: "100%" }}>
-              <PhoneInput
-                country={'in'}
-                value={phone}
-                onChange={setPhone}
-                containerClass="phone-input-no-flag"
-                inputStyle={{
-                  ...inputStyle,
-                  paddingLeft: 14,
-                  width: "100%",
-                  marginTop: 0,
-                }}
-                buttonStyle={{ display: "none" }}
-                inputProps={{
-                  name: 'phone',
-                  required: true,
-                  autoFocus: false
-                }}
-                containerStyle={{
-                  width: "100%",
-                  marginTop: 4
-                }}
-                disableCountryCode={false}
-                disableDropdown
-                countryCodeEditable={false}
-              />
-            </div>
-          </label>
-          <label style={labelStyle}>
-            <span style={spanStyle}>
-              Email <span style={asteriskStyle}>*</span>
-            </span>
-            <input
-              type="email"
-              placeholder="e.g. name@email.com"
-              style={inputStyle}
-              required
-              value={email}
-              onChange={handleEmailChange}
-              onBlur={handleEmailChange}
-            />
-            {emailError && (
-              <span style={{ color: "red", fontSize: 13, marginTop: 2 }}>{emailError}</span>
             )}
-          </label>
-          <label style={labelStyle}>
-            <span style={spanStyle}>
-              Area of study <span style={asteriskStyle}>*</span>
-            </span>
-            <input
-              type="text"
-              placeholder="e.g. Computer Science"
-              style={inputStyle}
-              required
-              value={areaOfStudy}
-              onChange={e => setAreaOfStudy(e.target.value)}
-            />
-          </label>
-          <label style={labelStyle}>
-            <span style={spanStyle}>
-              Name of Educational Institute <span style={asteriskStyle}>*</span>
-            </span>
-            <input
-              type="text"
-              placeholder="Institute Name"
-              style={inputStyle}
-              required
-              value={institute}
-              onChange={e => setInstitute(e.target.value)}
-            />
-          </label>
-          <label style={labelStyle}>
-            <span style={spanStyle}>
-              Year of Graduation <span style={asteriskStyle}>*</span>
-            </span>
-            <div style={{ position: "relative", width: "100%" }}>
-              <select
-                style={{
-                  ...inputStyle,
-                  appearance: "none",
-                  WebkitAppearance: "none",
-                  MozAppearance: "none",
-                  paddingRight: 36,
-                }}
-                required
-                value={graduationYear}
-                onChange={e => setGraduationYear(e.target.value)}
-              >
-                <option value="" disabled>
-                  Select
-                </option>
-                {getYearOptions().map(year => (
-                  <option key={year} value={year}>{year}</option>
-                ))}
-              </select>
-              <span
-                style={{
-                  position: "absolute",
-                  right: 18,
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  pointerEvents: "none",
-                  opacity: 0.7,
-                  display: "flex",
-                  alignItems: "center"
-                }}
-              >
-                <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-                  <path d="M6 8l4 4 4-4" stroke="#888" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </span>
-            </div>
-          </label>
-          <label style={labelStyle}>
-            <span style={spanStyle}>
-              Area of Interest in Internship <span style={asteriskStyle}>*</span>
-            </span>
-            <input
-              type="text"
-              placeholder="e.g. AI, ML, Data Science"
-              style={inputStyle}
-              required
-              value={areaOfInterest}
-              onChange={e => setAreaOfInterest(e.target.value)}
-            />
-          </label>
-          <label style={labelStyle}>
-            <span style={spanStyle}>
-              Skills <span style={asteriskStyle}>*</span>
-            </span>
-            <div style={{ width: "100%", display: "flex", flexWrap: "wrap", alignItems: "center", gap: 8, border: "1px solid #e0e0e0", borderRadius: 8, padding: "12px 14px", background: "#fff", boxSizing: "border-box" }}>
-              {skills.map((skill, idx) => (
-                <span
-                  key={idx}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    background: "#f5f5f5",
-                    color: "#181b22",
-                    borderRadius: 16,
-                    padding: "4px 10px 4px 10px",
-                    fontSize: 16,
-                    marginRight: 4,
-                    marginBottom: 2,
-                  }}
-                >
-                  {skill}
-                  <span
-                    onClick={() => removeSkill(idx)}
-                    style={{
-                      marginLeft: 6,
-                      cursor: "pointer",
-                      color: "#e53935",
-                      fontWeight: 700,
-                      fontSize: 16,
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                    title="Remove"
-                  >
-                    ×
-                  </span>
-                </span>
-              ))}
-              <input
-                type="text"
-                placeholder={skills.length === 0 ? "List your skills" : ""}
-                style={{
-                  border: "none",
-                  outline: "none",
-                  fontSize: 16,
-                  flex: 1,
-                  minWidth: 80,
-                  background: "#fff",
-                  padding: "0",
-                  marginLeft: 2,
-                }}
-                value={skillInput}
-                onChange={handleSkillChange}
-                onKeyDown={handleSkillInput}
-                onBlur={() => addSkill(skillInput)}
-              />
-            </div>
-          </label>
-          <label style={labelStyle}>
-            <span style={spanStyle}>
-              Rate your Skills
-            </span>
-            <div style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              marginTop: 8,
-              width: "100%",
-              gap: 6,
-              padding: "0 4px"
-            }}>
-              {ratingOptions.map((option) => (
-                <label
-                  key={option}
-                  htmlFor={`skill-rate-${option}`}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: 28,
-                    height: 28,
-                    cursor: "pointer",
-                    userSelect: "none"
-                  }}
-                  title={`Rate ${option}`}
-                >
-                  <input
-                    type="radio"
-                    id={`skill-rate-${option}`}
-                    name="skillRating"
-                    value={option}
-                    checked={skillRating === option}
-                    onChange={() => setSkillRating(option)}
-                    style={{ display: "none" }}
-                  />
-                  <span
-                    aria-hidden="true"
-                    style={{
-                      fontSize: 22,
-                      lineHeight: 1,
-                      color: option <= (skillRating || 0) ? "#ffc24b" : "#cfcfcf",
-                      transition: "color 0.15s ease"
-                    }}
-                  >
-                    {option <= (skillRating || 0) ? "★" : "☆"}
-                  </span>
-                </label>
-              ))}
-            </div>
-            <div style={{ textAlign: "center", fontSize: 13, color: "#888", marginTop: 4 }}>
-              {skillRating ? `Selected: ${skillRating}` : "Select your skill level"}
-            </div>
-          </label>
-          <label style={labelStyle}>
-            <span style={spanStyle}>
-              Attach your Resume <span style={asteriskStyle}>*</span>
-            </span>
-            <div style={{ position: "relative", width: "100%" }}>
-              <input
-                type="file"
-                style={{
-                  ...inputStyle,
-                  paddingRight: 36,
-                  background: "#fff",
-                  border: "1px solid #e0e0e0",
-                  borderRadius: 6,
-                  cursor: "pointer",
-                  color: "#181b22",
-                }}
-                className="resume-file-input"
-                accept=".pdf,.doc,.docx"
-                required
-                onChange={e => setResume(e.target.files[0])}
-              />
-              <span
-                style={{
-                  position: "absolute",
-                  right: 10,
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  pointerEvents: "none",
-                  opacity: 0.8,
-                  display: "flex",
-                  alignItems: "center"
-                }}
-              >
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#888" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21.44 11.05l-8.49 8.49a5.5 5.5 0 0 1-7.78-7.78l9.19-9.19a3.5 3.5 0 0 1 4.95 4.95l-9.19 9.19a1.5 1.5 0 0 1-2.12-2.12l8.49-8.49" />
-                </svg>
-              </span>
-            </div>
-          </label>
-          <label style={labelStyle}>
-            <span style={spanStyle}>Description</span>
-            <textarea
-              placeholder="Type here"
-              style={{
-                ...inputStyle,
-                minHeight: 60,
-                resize: "vertical",
-                background: "#fff",
-                color: "#181b22",
-              }}
-              value={description}
-              onChange={e => setDescription(e.target.value)}
-            />
-          </label>
-        </div>
-        <button
-          type="submit"
-          style={{
-            marginTop: 32,
-            width: "100%",
-            background: "#ffc24b",
-            color: "#18181a",
-            border: "none",
-            borderRadius: 6,
-            padding: "14px 0",
-            fontWeight: 600,
-            fontSize: 18,
-            cursor: "pointer",
-            display: "block",
-            marginLeft: "auto",
-            marginRight: "auto",
-            fontFamily,
-            boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+            maxDate={(() => {
+              const d = new Date();
+              d.setFullYear(d.getFullYear() - 15);
+              return d;
+            })()}
+          />
+        </LocalizationProvider>
+
+        <TextField
+          label="Phone No."
+          placeholder="0000000000"
+          required
+          value={phone}
+          onChange={(e) => {
+            const digits = e.target.value.replace(/\D/g, '').slice(0, 10);
+            setPhone(digits);
           }}
+          InputLabelProps={{ shrink: true }}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">+91</InputAdornment>,
+          }}
+          sx={{ '& .MuiInputLabel-root': { fontWeight: 700 }, '& .MuiOutlinedInput-root': { backgroundColor: '#fff', borderRadius: 1.5 } }}
+        />
+
+        <TextField
+          label="Email"
+          placeholder="e.g. name@gmail.com"
+          type="email"
+          required
+          error={!!emailError}
+          helperText={emailError}
+          value={email}
+          onChange={handleEmailChange}
+          onBlur={handleEmailChange}
+          InputLabelProps={{ shrink: true }}
+          sx={{ '& .MuiInputLabel-root': { fontWeight: 700 }, '& .MuiOutlinedInput-root': { backgroundColor: '#fff', borderRadius: 1.5 } }}
+        />
+
+        <TextField
+          label="Area Of Study"
+          placeholder="Mention your field of study (e.g. Data Science)"
+          required
+          value={areaOfStudy}
+          onChange={(e) => setAreaOfStudy(e.target.value)}
+          InputLabelProps={{ shrink: true }}
+          sx={{ '& .MuiInputLabel-root': { fontWeight: 700 }, '& .MuiOutlinedInput-root': { backgroundColor: '#fff', borderRadius: 1.5 } }}
+        />
+
+        <TextField
+          label="Name Of Educational Institute"
+          placeholder="e.g. ABC College"
+          required
+          value={institute}
+          onChange={(e) => setInstitute(e.target.value)}
+          InputLabelProps={{ shrink: true }}
+          sx={{ '& .MuiInputLabel-root': { fontWeight: 700 }, '& .MuiOutlinedInput-root': { backgroundColor: '#fff', borderRadius: 1.5 } }}
+        />
+
+        <TextField
+          select
+          label="Year Of Graduation"
+          required
+          value={graduationYear}
+          onChange={(e) => setGraduationYear(e.target.value)}
+          InputLabelProps={{ shrink: true }}
+          sx={{ '& .MuiInputLabel-root': { fontWeight: 700 }, '& .MuiOutlinedInput-root': { backgroundColor: '#fff', borderRadius: 1.5 } }}
         >
+          {getYearOptions().map((yr) => (
+            <MenuItem key={yr} value={yr}>
+              {yr}
+            </MenuItem>
+          ))}
+        </TextField>
+
+        <TextField
+          label="Area Of Interest In Internship"
+          placeholder="e.g. Development"
+          required
+          value={areaOfInterest}
+          onChange={(e) => setAreaOfInterest(e.target.value)}
+          InputLabelProps={{ shrink: true }}
+          sx={{ '& .MuiInputLabel-root': { fontWeight: 700 }, '& .MuiOutlinedInput-root': { backgroundColor: '#fff', borderRadius: 1.5 } }}
+        />
+
+        <Box>
+          <TextField
+            fullWidth
+            label="Add Skill"
+            value={skillInput}
+            onChange={(e) => setSkillInput(e.target.value)}
+            onBlur={addSkill}
+            onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addSkill())}
+            InputLabelProps={{ shrink: true }}
+            sx={{ '& .MuiInputLabel-root': { fontWeight: 700 }, '& .MuiOutlinedInput-root': { backgroundColor: '#fff', borderRadius: 1.5 } }}
+          />
+          <Box sx={{ mt: 1, display: "flex", flexWrap: "wrap", gap: 1 }}>
+            {skills.map((sk, idx) => (
+              <Chip
+                key={sk}
+                label={sk}
+                onDelete={() =>
+                  setSkills(skills.filter((_, i) => i !== idx))
+                }
+              />
+            ))}
+          </Box>
+        </Box>
+
+        <Box>
+          <Typography component="legend">Rate your Skills</Typography>
+          <Rating
+            name="skill-rating"
+            value={skillRating}
+            onChange={(_, val) => setSkillRating(val)}
+            max={10}
+          />
+        </Box>
+
+        <Button variant="contained" component="label" sx={{ backgroundColor: '#7c3aed', ':hover': { backgroundColor: '#6d28d9' } }}>
+          Upload Resume *
+          <input
+            type="file"
+            hidden
+            accept=".pdf,.doc,.docx"
+            required
+            onChange={(e) => setResume(e.target.files?.[0])}
+          />
+        </Button>
+
+        <TextField
+          label="Description"
+          multiline
+          minRows={3}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+        <Button type="submit" variant="contained" sx={{ backgroundColor: '#ffc24b', color: '#18181a', ':hover': { backgroundColor: '#e0aa3f' } }}>
           Submit Form
-        </button>
-        <div
-          style={{
-            textAlign: "center",
-            marginTop: 18,
-            fontSize: 12,
-            color: "#888",
-            width: "100%",
-            fontFamily,
-          }}
-        >
-          Powered by Workiy Academy
-        </div>
-      </form>
-    </div>
+        </Button>
+      </Box>
+    </Box>
   );
-};
-
-function getYearOptions() {
-  const currentYear = new Date().getFullYear();
-  const years = [];
-  for (let i = currentYear - 3; i <= currentYear + 3; i++) {
-    years.push(i);
-  }
-  return years;
-}
-
-const inputStyle = {
-  width: "100%",
-  padding: "12px 14px",
-  marginTop: 4,
-  border: "1px solid #e0e0e0",
-  borderRadius: 8,
-  fontSize: 16,
-  background: "#fff",
-  color: "#181b22",
-  fontFamily: "'Poppins', 'Inter', sans-serif",
-  boxSizing: "border-box",
-  outline: "none",
-};
-
-const labelStyle = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "flex-start",
-  fontWeight: 500,
-  width: "100%",
-  fontFamily: "'Poppins', 'Inter', sans-serif",
-  fontSize: 16,
-  background: "transparent",
-  borderRadius: 0,
-  padding: 0,
-};
-
-const spanStyle = {
-  fontFamily: "'Poppins', 'Inter', sans-serif",
-  fontSize: 16,
-  marginBottom: 2,
-};
-
-const asteriskStyle = {
-  color: "red",
-  marginLeft: 2,
-  fontFamily: "'Poppins', 'Inter', sans-serif",
-  fontSize: 16,
 };
 
 export default Internship;
