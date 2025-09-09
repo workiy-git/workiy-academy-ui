@@ -6,6 +6,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 import "./Contact.css";
+import config from "../config/config";
 
 const contactInfo = [
   {
@@ -37,74 +38,68 @@ const Contact = () => {
 
   // Handle form submit dynamically
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMessage("");
-    setIsError(false);
+  e.preventDefault();
+  setMessage("");
+  setIsError(false);
 
-    const form = e.target;
-    const formData = new FormData(form);
+  const form = e.target;
+  const formData = new FormData(form);
 
-    // Convert FormData to an object
-    const data = {};
-    formData.forEach((value, key) => {
-      data[key] = value;
+  // Convert FormData into an object
+  const data = Object.fromEntries(formData.entries());
+
+  // Check for empty required fields dynamically (excluding privacy checkbox)
+  const emptyFields = Object.entries(data).filter(
+    ([key, value]) => key !== "privacy" && !value.trim()
+  );
+
+  if (emptyFields.length > 0) {
+    setMessage("⚠️ Please fill in all required fields.");
+    setIsError(true);
+    return;
+  }
+
+  // Validate privacy checkbox
+  if (!formData.get("privacy")) {
+    setMessage("⚠️ You must agree to the privacy policy.");
+    setIsError(true);
+    return;
+  }
+
+  try {
+    setLoading(true);
+
+    // Send POST request to API
+    const response = await fetch(`${config.apiUrl}/enquiry`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
     });
 
-    // Validation: check empty fields dynamically
-    const emptyFields = Object.entries(data).filter(([key, value]) => key !== "privacy" && !value.trim());
-    if (emptyFields.length > 0) {
-      setMessage("⚠️ Please fill in all required fields.");
+    const result = await response.json();
+
+    if (response.ok) {
+      // ✅ Success case
+      setMessage("✅ Your message has been sent successfully!");
+      setIsError(false);
+      form.reset();
+    } else {
+      // ❌ API error response
+      setMessage(result.message || "❌ Failed to send your message. Please try again.");
       setIsError(true);
-      return;
     }
+  } catch (error) {
+    // ❌ Network or server error
+    console.error("Error submitting form:", error);
+    setMessage("❌ Something went wrong. Please try again later.");
+    setIsError(true);
+  } finally {
+    setLoading(false);
+  }
 
-    // Check privacy checkbox
-    if (!formData.get("privacy")) {
-      setMessage("⚠️ You must agree to the privacy policy.");
-      setIsError(true);
-      return;
-    }
+  console.log("Form Submitted Data:", data);
+};
 
-
-    // try {
-    //   setLoading(true);
-
-    //   // Send POST request to /appdata API
-    //   const response = await fetch("/appdata", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify(data),
-    //   });
-
-    //   const result = await response.json();
-
-    //   if (response.ok) {
-    //     setMessage("✅ Your message has been sent successfully!");
-    //     setIsError(false);
-    //     form.reset();
-    //   } else {
-    //     setMessage(result.message || "❌ Failed to send your message. Please try again.");
-    //     setIsError(true);
-    //   }
-    // } catch (error) {
-    //   setMessage("❌ Something went wrong. Please try again later.");
-	//   console.error("Error submitting form:", error);
-    //   setIsError(true);
-    // } finally {
-    //   setLoading(false);
-    // }
-
-
-	
-	 console.log("Form Submitted Data:", data);
-
-    // Show success message
-    setMessage("Your message has been sent successfully!");
-    setIsError(false);
-
-    // Reset form
-    form.reset();
-  };
 
   return (
     <Box sx={{ p: { xs: 2, sm: 4 }, bgcolor: "#f9f9fb", color: "#18181a" }}>

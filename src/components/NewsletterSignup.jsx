@@ -4,7 +4,8 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
-import { colors } from "@mui/material";
+import config from "../config/config";
+import axios from "axios";
 
 
 // All UI text and labels in a single JSON object
@@ -24,11 +25,21 @@ const NewsletterSignup = () => {
   const [submitted, setSubmitted] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState(""); // Save submitted email
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await axios.post(`${config.apiUrl}/newsletter`, { email });
+    
     setSubmitted(true);
-    setSubmittedEmail(email); // Save email to variable
-  };
+    setSubmittedEmail(email);
+    
+    console.log("Success:", response.data);
+  } catch (error) {
+    console.error("Error:", error.response?.data || error.message);
+    alert("Subscription failed. Please try again.");
+  }
+};
 
   return (
 

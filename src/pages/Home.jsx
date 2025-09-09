@@ -11,57 +11,6 @@ import BannerCarousel from "../components/BannerCarousel";
 import DirectLine from "../components/DirectLine";
 import OurPotentialPartners from "../components/OurPotentialPartners";
 
-const courses = [
-  {
-    title: "Introduction to Artificial Intelligence",
-    description:
-      "Master the fundamentals of AI, including machine learning basics, neural networks, and real-world applications.",
-    image: "https://source.unsplash.com/400x200/?artificial-intelligence",
-  },
-  {
-    title: "Machine Learning Fundamentals",
-    description:
-      "Learn supervised and unsupervised learning algorithms, data preprocessing, and model evaluation techniques.",
-    image: "https://source.unsplash.com/400x200/?machine-learning",
-  },
-  {
-    title: "Deep Learning with Neural Networks",
-    description:
-      "Explore convolutional neural networks, recurrent neural networks, and transformer architectures.",
-    image: "https://source.unsplash.com/400x200/?neural-network",
-  },
-  {
-    title: "Natural Language Processing (NLP)",
-    description:
-      "Build chatbots, sentiment analysis systems, and language models using modern NLP techniques.",
-    image: "https://source.unsplash.com/400x200/?text-analysis",
-  },
-  {
-    title: "Computer Vision & Image Recognition",
-    description:
-      "Develop image classification, object detection, and facial recognition systems using AI.",
-    image: "https://i.ibb.co/DDf3TQzq/modern-education-banner-design.png",
-  },
-  {
-    title: "AI for Business & Strategy",
-    description:
-      "Learn how to implement AI solutions in business, from automation to predictive analytics.",
-    image: "https://i.ibb.co/rKb60RNF/unsplash-b-OKIpt-Pzd-Pk.png",
-  },
-  {
-    title: "Reinforcement Learning",
-    description:
-      "Master Q-learning, policy gradients, and deep reinforcement learning for game AI and robotics.",
-    image: "https://i.ibb.co/rKb60RNF/unsplash-b-OKIpt-Pzd-Pk.png",
-  },
-  {
-    title: "AI Ethics & Responsible AI",
-    description:
-      "Understand bias, fairness, transparency, and ethical considerations in AI development.",
-    image: "https://i.ibb.co/rKb60RNF/unsplash-b-OKIpt-Pzd-Pk.png",
-  },
-];
-
 const bannerSlides = [
   {
     title: "Welcome to Workiy Academy",
