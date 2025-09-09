@@ -10,45 +10,10 @@ import Paper from "@mui/material/Paper";
 import config from "../config/config";
 
 
-
-const courseList = [
-  {
-    title: "Learn Figma - UI/UX Design Essential Training",
-    lessons: 8,
-    students: 198,
-    level: "Beginner",
-    rating: 4,
-    image: "https://i.ibb.co/hFBsFqGP/unsplash-7u-SKXpks-CKg.png",
-    path: "https://production.d2ggwqvu23n3mj.amplifyapp.com/courses"
-  },
-  {
-    title: "Python for Beginners - Learn Programming from scratch",
-    lessons: 21,
-    students: 99,
-    level: "Beginner",
-    rating: 3,
-    image: "https://i.ibb.co/1G268Rjx/learning-education-ideas-insight-intelligence-study-concept.png",
-    path: "https://production.d2ggwqvu23n3mj.amplifyapp.com/courses"
-  },
-  {
-    title: "Mobile App Development with Flutter & Dart",
-    lessons: 15,
-    students: 215,
-    level: "Advanced",
-    rating: 2,
-    image: "https://i.ibb.co/rKb60RNF/unsplash-b-OKIpt-Pzd-Pk.png",
-    path: "https://production.d2ggwqvu23n3mj.amplifyapp.com/courses"
-  }
-];
-
 const CourseSearchBar = () => {
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("All");
   const [suggestions, setSuggestions] = useState([]);
 
-  const handleCategoryClick = (cat) => {
-    setCategory(cat);
-  };
 
 
     const [course, setCourses] = useState([]);
@@ -65,7 +30,7 @@ const CourseSearchBar = () => {
     const value = e.target.value;
     setSearch(value);
     if (value.length > 0) {
-      const filtered = courseList.filter(course =>
+      const filtered = course.filter(course =>
         course.title.toLowerCase().includes(value.toLowerCase())
       );
       setSuggestions(filtered);
@@ -74,10 +39,6 @@ const CourseSearchBar = () => {
     }
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    // Add search logic here
-  };
 
   return (
     <Paper elevation={0} sx={{ width: '100vw', maxWidth: '100vw', mx: 0, my: 6, p: { xs: 2, md: 4 }, borderRadius: 0, textAlign: "center", bgcolor: "#fff", boxShadow: 'none', position: 'relative' }}>
