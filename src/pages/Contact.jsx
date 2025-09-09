@@ -7,6 +7,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 import "./Contact.css";
 import config from "../config/config";
+import Snackbar from '@mui/material/Snackbar';
 
 const contactInfo = [
   {
@@ -31,10 +32,20 @@ const contactInfo = [
   },
 ];
 
+const newsletterSignupData = {
+  thankYou: "Thank you for subscribing!",
+};
+
 const Contact = () => {
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [subscribeEmail, setSubscribeEmail] = useState("");
+  const [subscribeSuccess, setSubscribeSuccess] = useState(false);
+  const [subscribeMsg, setSubscribeMsg] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState("");
 
   // Handle form submit dynamically
   const handleSubmit = async (e) => {
@@ -100,6 +111,40 @@ const Contact = () => {
   console.log("Form Submitted Data:", data);
 };
 
+  const handleSubscribe = async () => {
+    if (!subscribeEmail.trim()) {
+      setSubscribeMsg("Please enter your email.");
+      setSubscribeSuccess(false);
+      setOpenSnackbar(true);
+      return;
+    }
+    try {
+      const response = await fetch(`${config.apiUrl}/newsletter`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: subscribeEmail }),
+      });
+      if (response.ok) {
+        setSubscribeMsg("");
+        setSubscribeSuccess(true);
+        setSubmitted(true);
+        setSubmittedEmail(subscribeEmail);
+        setSubscribeEmail("");
+      } else {
+        setSubscribeMsg("Subscription failed. Please try again.");
+        setSubscribeSuccess(false);
+      }
+    } catch (error) {
+      setSubscribeMsg("Network error. Please try again later.");
+      setSubscribeSuccess(false);
+    }
+    setOpenSnackbar(true);
+  };
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') return;
+    setOpenSnackbar(false);
+  };
 
   return (
     <Box sx={{ p: { xs: 2, sm: 4 }, bgcolor: "#f9f9fb", color: "#18181a" }}>
@@ -232,15 +277,39 @@ const Contact = () => {
 					<Grid item xs={12} md={6}>
 						<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: { xs: 'stretch', md: 'flex-end' } }}>
 							<Box sx={{ display: 'flex', width: '100%' }}>
-								<input type="email" placeholder="Enter your email" style={{ flex: 1, padding: '12px', borderRadius: '6px 0 0 6px', border: '1px solid #E4E7EC', fontSize: '1rem', background: '#F9FAFB', borderRight: 'none' }} />
-								<button type="button" style={{ padding: '12px 24px', background: '#7F56D9', color: '#fff', border: 'none', borderRadius: '0 6px 6px 0', fontSize: '1rem', fontWeight: 600, cursor: 'pointer' }}>Subscribe</button>
+								<input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={subscribeEmail}
+                  onChange={e => setSubscribeEmail(e.target.value)}
+                  style={{ flex: 1, padding: '12px', borderRadius: '6px 0 0 6px', border: '1px solid #E4E7EC', fontSize: '1rem', background: '#F9FAFB', borderRight: 'none' }}
+                />
+                <button
+                  type="button"
+                  onClick={handleSubscribe}
+                  style={{ padding: '12px 24px', background: '#7F56D9', color: '#fff', border: 'none', borderRadius: '0 6px 6px 0', fontSize: '1rem', fontWeight: 600, cursor: 'pointer' }}
+                >
+                  Subscribe
+                </button>
 							</Box>
 							<Typography variant="body2" sx={{ color: '#666', mt: 1, textAlign: 'left' }}>
 								We care about your data in our <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" style={{ color: '#7c3aed', textDecoration: 'underline' }}>privacy policy</a>.
 							</Typography>
+              {submitted && (
+                <>
+                  <Typography sx={{ mt: 2, color: 'success.main', fontSize: { xs: 14, sm: 16 } }}>
+                    {newsletterSignupData.thankYou}
+                  </Typography>
+                  {/* For debugging: show submitted email */}
+                  <Typography sx={{ mt: 1, color: '#5A69F2', fontSize: { xs: 13, sm: 14 } }}>
+                    <strong>Submitted Email:</strong> {submittedEmail}
+                  </Typography>
+                </>
+              )}
 						</Box>
 					</Grid>
 				</Grid>
+       
 			</Box>
     {/* Map */}
 	<Box sx={{ width: '100%', mt: 6, mb: 6, display: 'flex', justifyContent: 'center' }}>
