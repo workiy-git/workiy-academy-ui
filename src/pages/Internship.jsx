@@ -20,6 +20,7 @@ const Internship = () => {
 
   const [dob, setDob] = useState(null);
   const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState("");
 
   const [email, setEmail] = useState("");
 
@@ -42,6 +43,7 @@ const Internship = () => {
   const [description, setDescription] = useState("");
 
   const [emailError, setEmailError] = useState("");
+  const [submitStatus, setSubmitStatus] = useState("");
 
 
 
@@ -84,10 +86,10 @@ const Internship = () => {
 
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
 
     e.preventDefault();
-
+    let hasError = false;
     if (
 
       email &&
@@ -98,15 +100,33 @@ const Internship = () => {
 
       setEmailError("Please enter a valid email address.");
 
-      return;
+      hasError = true;
+
+    } else {
+
+      setEmailError("");
 
     }
+    if (!/^\d{10}$/.test(phone)) {
 
-    console.log({
+      setPhoneError("Phone number must be exactly 10 digits.");
+
+      hasError = true;
+
+    } else {
+
+      setPhoneError("");
+
+    }
+    if (hasError) return;
+
+    // Prepare data for API
+
+    const payload = {
 
       fullName,
 
-      dob,
+      dob: dob ? new Date(dob).toISOString().split("T")[0] : "",
 
       phone,
 
@@ -116,19 +136,87 @@ const Internship = () => {
 
       institute,
 
-      graduationYear,
+      graduationYear: graduationYear ? Number(graduationYear) : "",
 
       areaOfInterest,
 
-      skills,
+      skillRating: skillRating ? Number(skillRating) : "",
 
-      skillRating,
-
-      resume,
+      resume: resume ? resume.name : "",
 
       description,
 
-    });
+      skills,
+
+    };
+
+    try {
+
+      setSubmitStatus("Submitting...");
+
+      const response = await fetch("http://127.0.0.1:8000/internship/", {
+
+        method: "POST",
+
+        headers: {
+
+          "Content-Type": "application/json",
+
+        },
+
+        body: JSON.stringify(payload),
+
+      });
+
+      if (response.ok) {
+
+        setSubmitStatus("Submitted successfully!");
+
+        alert("Form submitted successfully!");
+
+        // Reset all fields
+
+        setFullName("");
+
+        setDob(null);
+
+        setPhone("");
+
+        setEmail("");
+
+        setAreaOfStudy("");
+
+        setInstitute("");
+
+        setGraduationYear("");
+
+        setAreaOfInterest("");
+
+        setSkills([]);
+
+        setSkillRating(null);
+
+        setResume(null);
+
+        setResumeError("");
+
+        setDescription("");
+
+        setEmailError("");
+
+        setPhoneError("");
+
+      } else {
+
+        setSubmitStatus("Submission failed. Please try again.");
+
+      }
+
+    } catch (error) {
+
+      setSubmitStatus("Submission failed. Please try again.");
+
+    }
 
   };
 
@@ -261,7 +349,7 @@ const Internship = () => {
 
           <Box>
             <Typography sx={{ mb: 0.5, fontWeight: 500 }}>Phone No. <span style={{ color: "red" }}>*</span></Typography>
-            <TextField required fullWidth size="small" type="tel" placeholder="e.g. 9876543210" value={phone} onChange={e => setPhone(e.target.value.replace(/\D/g, '').slice(0,10))} InputProps={{ startAdornment: <InputAdornment position="start">+91</InputAdornment> }} />
+            <TextField required fullWidth size="small" type="tel" placeholder="e.g. 9876543210" value={phone} onChange={e => setPhone(e.target.value.replace(/\D/g, '').slice(0,10))} InputProps={{ startAdornment: <InputAdornment position="start">+91</InputAdornment> }} error={Boolean(phoneError)} helperText={phoneError || ""} />
           </Box>
 
           <Box>
@@ -343,8 +431,10 @@ const Internship = () => {
 
         <Button type="submit" variant="contained" fullWidth sx={{ mt: 4, backgroundColor: "#ffc24b", color: "#18181a", fontWeight: 400, fontSize: 16, padding: "10px 0", '&:hover': { backgroundColor: "#ffb41f" } }}>
           Submit Form
-
         </Button>
+        {submitStatus && (
+          <Typography sx={{ mt: 2, color: submitStatus.includes("success") ? "green" : "red", fontSize: 15, textAlign: "center", width: "100%" }}>{submitStatus}</Typography>
+        )}
         <div
 
           style={{
