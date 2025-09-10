@@ -4,17 +4,42 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
-import { colors } from "@mui/material";
+import config from "../config/config";
+import axios from "axios";
+
+
+// All UI text and labels in a single JSON object
+const newsletterSignupData = {
+  title: [
+    "Find out about the latest courses with the ",
+    { highlight: "academy" },
+    " newsletter"
+  ],
+  emailLabel: "Email",
+  button: "SUBMIT",
+  thankYou: "Thank you for subscribing!"
+};
 
 const NewsletterSignup = () => {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState(""); // Save submitted email
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await axios.post(`${config.apiUrl}/newsletter`, { email });
+    
     setSubmitted(true);
-    // Add newsletter signup logic here
-  };
+    setSubmittedEmail(email);
+    
+    console.log("Success:", response.data);
+  } catch (error) {
+    console.error("Error:", error.response?.data || error.message);
+    alert("Subscription failed. Please try again.");
+  }
+};
 
   return (
 
@@ -54,8 +79,11 @@ const NewsletterSignup = () => {
               mb: { xs: 1, md: 0 },
             }}
           >
-            Find out about the latest courses with the{' '}
-            <span style={{ color: '#5A69F2', borderRadius: 4, padding: '0 4px' }}>academy</span> newsletter
+            {newsletterSignupData.title.map((part, idx) =>
+              typeof part === 'string'
+                ? part
+                : <span key={idx} style={{ color: '#5A69F2', borderRadius: 4, padding: '0 4px' }}>{part.highlight}</span>
+            )}
           </Typography>
         </Box>
         <Box
@@ -73,7 +101,7 @@ const NewsletterSignup = () => {
         >
           <TextField
             type="email"
-            label="Email"
+            label={newsletterSignupData.emailLabel}
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
@@ -98,14 +126,20 @@ const NewsletterSignup = () => {
               mt: { xs: 1, md: 0 },
             }}
           >
-            SUBMIT
+            {newsletterSignupData.button}
           </Button>
         </Box>
-      </Box>
+  </Box>
       {submitted && (
-        <Typography sx={{ mt: 2, color: 'success.main', fontSize: { xs: 14, sm: 16 } }}>
-          Thank you for subscribing!
-        </Typography>
+        <>
+          <Typography sx={{ mt: 2, color: 'success.main', fontSize: { xs: 14, sm: 16 } }}>
+            {newsletterSignupData.thankYou}
+          </Typography>
+          {/* For debugging: show submitted email */}
+          <Typography sx={{ mt: 1, color: '#5A69F2', fontSize: { xs: 13, sm: 14 } }}>
+            <strong>Submitted Email:</strong> {submittedEmail}
+          </Typography>
+        </>
       )}
     </Paper>
   );
