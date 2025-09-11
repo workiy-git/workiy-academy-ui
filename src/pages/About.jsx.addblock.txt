@@ -1,2 +1,0 @@
-// Add a new unique block to the 'What Makes Us Different' section
-// Icon: Diversity3Icon, Title: "Inclusive Community", Desc: "We foster a welcoming environment where everyone can thrive, collaborate, and innovate together."
