@@ -49,15 +49,16 @@ const Contact = () => {
 
   // Handle form submit dynamically
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setMessage("");
-  setIsError(false);
+    e.preventDefault();
+    setMessage("");
+    setIsError(false);
+    alert("Your message has been submitted!");
 
-  const form = e.target;
-  const formData = new FormData(form);
+    const form = e.target;
+    const formData = new FormData(form);
 
-  // Convert FormData into an object
-  const data = Object.fromEntries(formData.entries());
+    // Convert FormData into an object
+    const data = Object.fromEntries(formData.entries());
 
   // Check for empty required fields dynamically (excluding privacy checkbox)
   const emptyFields = Object.entries(data).filter(
