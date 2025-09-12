@@ -19,7 +19,7 @@ const bannerSlides = [
     button: "View Courses",
     buttonHref: "#courses",
     bg: "linear-gradient(90deg, #007bff 100%, #212529 100%)",
-    image: "https://i.ibb.co/MDCDzSXP/banner.jpg",
+    image: "https://civilian-jade-t3rtwzmsfw.edgeone.app/banner.jpg",
   },
   {
     title: "Master AI & Machine Learning",
@@ -28,7 +28,7 @@ const bannerSlides = [
     button: "Explore Programs",
     buttonHref: "#courses",
     bg: "linear-gradient(90deg, #00c6ff 0%, #007bff 100%)",
-    image: "https://i.ibb.co/MDCDzSXP/banner.jpg",
+    image: "https://alright-teal-5l8bwa88yq.edgeone.app/internship-bannerbanner.png",
   },
   {
     title: "Future-Proof Your Career",
@@ -37,7 +37,7 @@ const bannerSlides = [
     button: "Start Learning",
     buttonHref: "#courses",
     bg: "linear-gradient(90deg, #007bff 0%, #00c6ff 100%)",
-    image: "https://i.ibb.co/MDCDzSXP/banner.jpg",
+    image: "https://spiritual-sapphire-b5yok2vufx.edgeone.app/Workshop-bannerbanner.png",
   },
 ];
 

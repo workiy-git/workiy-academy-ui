@@ -36,9 +36,11 @@ const NavbarMUI = () => {
 			}} />
 			<AppBar position="static" elevation={0} sx={{ bgcolor: '#fff', borderBottom: '2px solid #704FE6', borderRadius: '0 0 5px 5px', boxShadow: 'none', color: '#212529' }}>
 				<Toolbar sx={{ display: 'flex', justifyContent: 'space-between', minHeight: 64 }}>
-					<Typography variant="h6" sx={{ fontWeight: 700, color: '#212529', fontFamily: 'Sora, sans-serif' }}>
+					{/* <Typography variant="h6" sx={{ fontWeight: 700, color: '#212529', fontFamily: 'Sora, sans-serif' }}>
 						Workiy Academy
-					</Typography>
+					</Typography> */}
+					{/* Replace 'Workiy Academy' text with logo image in header */}
+					<img src="https://presidential-chocolate-nqjlbobz5v.edgeone.app/workiy-academy-logo-1.png" alt="Workiy Academy Logo" style={{ maxHeight: 60, marginRight: 12 }} />
 					{/* Desktop Menu */}
 					<Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 2 }}>
 						{menuItems.map((item) => (
