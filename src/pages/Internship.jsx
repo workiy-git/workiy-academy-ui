@@ -17,6 +17,7 @@ const ratingOptions = Array.from({ length: 10 }, (_, idx) => idx + 1);
 const Internship = () => {
 
   const [fullName, setFullName] = useState("");
+  const [fullNameError, setFullNameError] = useState("");
 
   const [dob, setDob] = useState(null);
   const [phone, setPhone] = useState("");
@@ -86,10 +87,32 @@ const Internship = () => {
 
 
 
+  // Name validation: should not accept numbers
+  const handleFullNameChange = (e) => {
+    const value = e.target.value;
+    if (/\d/.test(value)) {
+      setFullNameError("Name should not contain numbers.");
+    } else {
+      setFullNameError("");
+    }
+    setFullName(value);
+  };
+
+
+
   const handleSubmit = async (e) => {
 
     e.preventDefault();
     let hasError = false;
+
+    // Name validation
+    if (/\d/.test(fullName)) {
+      setFullNameError("Name should not contain numbers.");
+      hasError = true;
+    } else {
+      setFullNameError("");
+    }
+
     if (
 
       email &&
@@ -141,7 +164,7 @@ const Internship = () => {
       areaOfInterest,
 
       skillRating: skillRating ? Number(skillRating) : "",
-
+ 
       resume: resume ? resume.name : "",
 
       description,
@@ -336,14 +359,38 @@ const Internship = () => {
         <div style={{ display: "flex", flexDirection: "column", gap: 22, width: "100%", minWidth: 0 }}>
 
           <Box>
-            <Typography sx={{ mb: 0.5, fontWeight: 500 }}>Full Name <span style={{ color: "red" }}>*</span></Typography>
-            <TextField required fullWidth size="small" placeholder="e.g. Alex Smith" value={fullName} onChange={e => setFullName(e.target.value)} />
+            <Typography sx={{ mb: 0.5, fontWeight: 500 }}>
+              Full Name <span style={{ color: "red" }}>*</span>
+            </Typography>
+            <TextField
+              required
+              fullWidth
+              size="small"
+              placeholder="e.g. Alex Smith"
+              value={fullName}
+              onChange={handleFullNameChange}
+              error={Boolean(fullNameError)}
+              helperText={fullNameError || ""}
+            />
           </Box>
 
           <Box>
             <Typography sx={{ mb: 0.5, fontWeight: 500 }}>Date Of Birth <span style={{ color: "red" }}>*</span></Typography>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DatePicker value={dob} onChange={(newValue) => setDob(newValue)} slotProps={{ textField: { required: true, fullWidth: true, size: 'small', placeholder: "DD/MM/YYYY" } }} />
+              <DatePicker
+                value={dob}
+                onChange={(newValue) => setDob(newValue)}
+                slotProps={{
+                  textField: {
+                    required: true,
+                    fullWidth: true,
+                    size: 'small',
+                    placeholder: "DD/MM/YYYY"
+                  }
+                }}
+                maxDate={new Date(new Date().setFullYear(new Date().getFullYear() - 15) - 1)} // Not today-15y or after
+                minDate={new Date(1900, 0, 1)} // Or any earliest allowed date
+              />
             </LocalizationProvider>
           </Box>
 
@@ -354,7 +401,7 @@ const Internship = () => {
 
           <Box>
             <Typography sx={{ mb: 0.5, fontWeight: 500 }}>Email <span style={{ color: "red" }}>*</span></Typography>
-            <TextField required fullWidth size="small" type="email" placeholder="e.g. name@gmail.com" value={email} onChange={handleEmailChange} onBlur={handleEmailChange} error={Boolean(emailError)} helperText={emailError || ""} />
+            <TextField required fullWidth size="small" type="email" placeholder="e.g. name@email.com" value={email} onChange={handleEmailChange} onBlur={handleEmailChange} error={Boolean(emailError)} helperText={emailError || ""} />
           </Box>
 
           <Box>
@@ -402,26 +449,63 @@ const Internship = () => {
           </Box>
 
           <Box>
-            <Typography sx={{ mb: 0.5, fontWeight: 500 }}>Attach your Resume <span style={{ color: "red" }}>*</span></Typography>
+            <Typography sx={{ mb: 0.5, fontWeight: 500 }}>
+              Attach your Resume <span style={{ color: "red" }}>*</span>
+            </Typography>
             <Stack spacing={0.5}>
-              <Button fullWidth variant="contained" component="label" sx={{ padding: "10px 0", fontSize: 16, backgroundColor: "#7F56D9", color: "#ffffff", '&:hover': { backgroundColor: "#6f47cf" } }}>
+              <Button
+                fullWidth
+                variant="contained"
+                component="label"
+                sx={{
+                  padding: "10px 0",
+                  fontSize: 16,
+                  backgroundColor: "#7F56D9",
+                  color: "#ffffff",
+                  '&:hover': { backgroundColor: "#6f47cf" }
+                }}
+              >
                 Choose File
-                <input hidden type="file" accept=".pdf,.doc,.docx" onChange={e => {
-                  const file = e.target.files && e.target.files[0] ? e.target.files[0] : null;
-                  if (!file) { setResume(null); setResumeError(""); return; }
-                  const maxBytes = 5 * 1024 * 1024; // 5 MB
-                  if (file.size > maxBytes) {
-                    setResume(null);
-                    setResumeError("File too large. Maximum size is 5 MB.");
-                    e.target.value = "";
-                  } else {
-                    setResume(file);
-                    setResumeError("");
-                  }
-                }} />
+                <input
+                  hidden
+                  type="file"
+                  accept=".pdf,.doc,.docx"
+                  onChange={e => {
+                    const file = e.target.files && e.target.files[0] ? e.target.files[0] : null;
+                    if (!file) {
+                      setResume(null);
+                      setResumeError("");
+                      return;
+                    }
+                    const maxBytes = 5 * 1024 * 1024; // 5 MB
+                    if (file.size > maxBytes) {
+                      setResume(null);
+                      setResumeError("File too large. Maximum size is 5 MB.");
+                      e.target.value = "";
+                    } else {
+                      setResume(file);
+                      setResumeError("");
+                    }
+                  }}
+                />
               </Button>
-              <Typography variant="body2" color="text.secondary">{resume ? resume.name : "No file chosen"}</Typography>
-              {resumeError && <Typography variant="body2" color="error">{resumeError}</Typography>}
+              {/* Show file info if uploaded */}
+              {resume ? (
+                <Typography variant="body2" color="text.secondary">
+                  <strong>File:</strong> {resume.name} &nbsp;|&nbsp;
+                  <strong>Type:</strong> {resume.name.split('.').pop().toUpperCase()} &nbsp;|&nbsp;
+                  <strong>Size:</strong> {(resume.size / (1024 * 1024)).toFixed(2)} MB
+                </Typography>
+              ) : (
+                <Typography variant="body2" color="text.secondary">
+                  No file chosen
+                </Typography>
+              )}
+              {resumeError && (
+                <Typography variant="body2" color="error">
+                  {resumeError}
+                </Typography>
+              )}
             </Stack>
           </Box>
 
@@ -429,7 +513,20 @@ const Internship = () => {
             </div>
 
 
-        <Button type="submit" variant="contained" fullWidth sx={{ mt: 4, backgroundColor: "#ffc24b", color: "#18181a", fontWeight: 400, fontSize: 16, padding: "10px 0", '&:hover': { backgroundColor: "#ffb41f" } }}>
+        <Button
+          type="submit"
+          variant="contained"
+          fullWidth
+          sx={{
+            mt: 4,
+            backgroundColor: "#ffc24b",
+            color: "#18181a",
+            fontWeight: "bold", // Make button text bold
+            fontSize: 16,
+            padding: "10px 0",
+            '&:hover': { backgroundColor: "#ffb41f" }
+          }}
+        >
           Submit Form
         </Button>
         {submitStatus && (
