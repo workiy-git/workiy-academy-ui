@@ -13,14 +13,14 @@ const contactInfo = [
   {
     icon: <EmailIcon sx={{ fontSize: 40, color: "#7c3aed" }} />,
     label: "Email",
-    content: "hr@workiy.co",
+    content: "hr@workiy.ca",
     desc: "Our friendly team is here to help",
-    link: "mailto:hr@workiy.co",
+    link: "mailto:hr@workiy.ca",
   },
   {
     icon: <LocationOnIcon sx={{ fontSize: 40, color: "#7c3aed" }} />,
     label: "Location",
-    content: "#6-181, CityLinkMadican Road, Chennai - 115",
+    content: "#6-183, Ottiyambakkam Road, Chennai - 126",
     desc: "Come say hello at our office HQ.",
   },
   {
@@ -52,7 +52,7 @@ const Contact = () => {
     e.preventDefault();
     setMessage("");
     setIsError(false);
-    alert("Your message has been submitted!");
+    // alert("Your message has been submitted!");
 
     const form = e.target;
     const formData = new FormData(form);
@@ -60,23 +60,59 @@ const Contact = () => {
     // Convert FormData into an object
     const data = Object.fromEntries(formData.entries());
 
-  // Check for empty required fields dynamically (excluding privacy checkbox)
-  const emptyFields = Object.entries(data).filter(
-    ([key, value]) => key !== "privacy" && !value.trim()
-  );
+    // Check for empty required fields dynamically (excluding privacy checkbox)
+    const requiredFields = [
+      { key: 'firstName', label: 'First name' },
+      { key: 'lastName', label: 'Last name' },
+      { key: 'email', label: 'Email' },
+      { key: 'phone', label: 'Phone number' },
+      { key: 'message', label: 'Message' }
+    ];
+    const emptyFields = requiredFields.filter(
+      ({ key }) => !data[key] || !data[key].trim()
+    );
 
-  if (emptyFields.length > 0) {
-    setMessage("⚠️ Please fill in all required fields.");
-    setIsError(true);
-    return;
-  }
+    if (emptyFields.length > 0) {
+      const missing = emptyFields.map(f => f.label).join(', ');
+      setMessage(`⚠️ Please fill in the following required field(s): ${missing}`);
+      setIsError(true);
+      return;
+    }
 
-  // Validate privacy checkbox
-  if (!formData.get("privacy")) {
-    setMessage("⚠️ You must agree to the privacy policy.");
-    setIsError(true);
-    return;
-  }
+    // First name validation (letters only)
+    if (!/^[A-Za-z]+$/.test(data.firstName)) {
+      setMessage("⚠️ First name should contain only letters.");
+      setIsError(true);
+      return;
+    }
+
+    // Last name validation (letters only)
+    if (!/^[A-Za-z]+$/.test(data.lastName)) {
+      setMessage("⚠️ Last name should contain only letters.");
+      setIsError(true);
+      return;
+    }
+
+    // Email format validation
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+      setMessage("⚠️ Please enter a valid email address.");
+      setIsError(true);
+      return;
+    }
+
+    // Phone number validation (10-15 digits)
+    if (!/^[0-9]{10,15}$/.test(data.phone)) {
+      setMessage("⚠️ Phone number should contain only numbers (10-15 digits).\n");
+      setIsError(true);
+      return;
+    }
+
+    // Validate privacy checkbox
+    if (!formData.get("privacy")) {
+      setMessage("⚠️ You must agree to the privacy policy.");
+      setIsError(true);
+      return;
+    }
 
   try {
     setLoading(true);
@@ -151,7 +187,7 @@ const Contact = () => {
     <Box sx={{ p: { xs: 2, sm: 4 }, bgcolor: "#f9f9fb", color: "#18181a" }}>
       {/* Header */}
       <Box textAlign="center" sx={{ mb: { xs: 1, sm: 5 } }}>
-        <Typography variant="h6" sx={{ color: "#7c3aed", fontSize: { xs: 15, sm: 25 }, mb: 1 }}>Contact US</Typography>
+        <Typography variant="h6" sx={{ color: "#7c3aed", fontSize: { xs: 15, sm: 25 }, mb: 1 }}>Contact us</Typography>
         <Typography variant="h2" sx={{ fontWeight: 700, fontSize: { xs: 25, sm: 52 }, mb: 1 }}>We’d love to hear from you</Typography>
         <Typography variant="h6" sx={{ color: "#666", fontSize: { xs: 15, sm: 25 } }}>Our friendly team is always here to chat.</Typography>
       </Box>
@@ -163,7 +199,7 @@ const Contact = () => {
             <Box sx={{ p: 3, minWidth: 200, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
               {info.icon}
               <Typography variant="subtitle1" sx={{ fontWeight: 600, mt: 1 }}>{info.label}</Typography>
-              <Typography variant="body2" sx={{ color: "#666", mb: 1 }}>{info.desc}</Typography>
+              {/* <Typography variant="body2" sx={{ color: "#666", mb: 1 }}>{info.desc}</Typography> */}
               {info.link ? (
                 <Typography component="a" href={info.link} sx={{ color: "#7c3aed", fontWeight: 500, textDecoration: "none" }}>{info.content}</Typography>
               ) : (
@@ -176,28 +212,39 @@ const Contact = () => {
 
       {/* Contact Form */}
       <Box textAlign="center" mb={5}>
-        <Typography variant="h6" sx={{ color: "#7c3aed", fontSize: { xs: 15, sm: 25 }, mb: 1 }}>Contact US</Typography>
+        <Typography variant="h6" sx={{ color: "#7c3aed", fontSize: { xs: 15, sm: 25 }, mb: 1 }}>Contact us</Typography>
         <Typography variant="h3" sx={{ fontWeight: 700, fontSize: { xs: 25, sm: 52 }, mb: 1 }}>Get in touch</Typography>
         <Typography variant="h6" sx={{ color: "#666", fontSize: { xs: 15, sm: 25 } }}>We’d love to hear from you. Please fill out this form.</Typography>
       </Box>
 
       <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 600, mx: "auto", p: 4 }}>
         <Grid>
-          <Grid item xs={12} container spacing={2}>
-            <Grid item xs={12} sm={6}>
+          <Grid sx={{display:{sx:'block', sm:'flex'}, justifyContent:'space-between'}}>
+            <Grid item xs={12} sm={6}  sx={{ width: { xs: '100%', sm: '45%' }}}>
               <Box sx={{ display: "flex", flexDirection: "column" }}>
                 <Typography variant="subtitle2" sx={{ mb: 1, textAlign: "left", fontWeight: 500 }}>First name *</Typography>
-                <input type="text" name="firstName" placeholder="First name" style={{ padding: "12px", borderRadius: "6px", border: "1px solid #E4E7EC", fontSize: "1rem", background: "#F9FAFB" }} />
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder="First name"
+                  style={{ padding: "12px", borderRadius: "6px", border: "1px solid #E4E7EC", fontSize: "1rem", background: "#F9FAFB" }}
+                  onInput={e => e.target.value = e.target.value.replace(/[^a-zA-Z]/g, '')}
+                />
               </Box>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} sx={{ width: { xs: '100%', sm: '45%' }}}>
               <Box sx={{ display: "flex", flexDirection: "column" }}>
                 <Typography variant="subtitle2" sx={{ mb: 1, textAlign: "left", fontWeight: 500 }}>Last name *</Typography>
-                <input type="text" name="lastName" placeholder="Last name" style={{ padding: "12px", borderRadius: "6px", border: "1px solid #E4E7EC", fontSize: "1rem", background: "#F9FAFB" }} />
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="Last name"
+                  style={{ padding: "12px", borderRadius: "6px", border: "1px solid #E4E7EC", fontSize: "1rem", background: "#F9FAFB" }}
+                  onInput={e => e.target.value = e.target.value.replace(/[^a-zA-Z]/g, '')}
+                />
               </Box>
             </Grid>
           </Grid>
-
           <Grid item xs={12}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <Typography variant="subtitle2" sx={{ mb: 1, textAlign: "left", fontWeight: 500 }}>Email *</Typography>
@@ -208,7 +255,13 @@ const Contact = () => {
           <Grid item xs={12}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <Typography variant="subtitle2" sx={{ mb: 1, textAlign: "left", fontWeight: 500 }}>Phone number *</Typography>
-              <input type="tel" name="phone" placeholder="+91 00000 00000" style={{ padding: "12px", borderRadius: "6px", border: "1px solid #E4E7EC", fontSize: "1rem", background: "#F9FAFB" }} />
+              <input
+                type="tel"
+                name="phone"
+                placeholder="+91 00000 00000"
+                style={{ padding: "12px", borderRadius: "6px", border: "1px solid #E4E7EC", fontSize: "1rem", background: "#F9FAFB" }}
+                onInput={e => e.target.value = e.target.value.replace(/[^0-9]/g, '')}
+              />
             </Box>
           </Grid>
 
@@ -223,7 +276,7 @@ const Contact = () => {
             <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
               <input type="checkbox" name="privacy" id="privacy" style={{ marginRight: "8px", width: 20, height: 20 }} />
               <label htmlFor="privacy" style={{ fontSize: "1rem" }}>
-                You agree to our friendly{" "}
+                I agree to our friendly{" "}
                 <a href="/privacy-policy" target="_self" rel="noopener noreferrer" style={{ color: "#7c3aed", textDecoration: "underline" }}>
                   privacy policy
                 </a>.
