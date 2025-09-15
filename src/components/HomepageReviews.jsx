@@ -9,9 +9,9 @@ import Paper from "@mui/material/Paper";
 // All UI text and reviews data in a single JSON object
 const homepageReviewsData = {
   title: "What our Learners Say",
-  subtitle: "100+ thousand people have already joined FutureEdge",
+  subtitle: "100+ people have already joined FutureEdge",
   reviews: [
-    {
+    {     
       name: "Aarav Sharma",
       course: "Machine Learning Fundamentals",
       review: "The course was well-structured and the hands-on projects helped me land my first AI internship!",
