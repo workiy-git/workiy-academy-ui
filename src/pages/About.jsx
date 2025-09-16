@@ -22,7 +22,7 @@ const About = () => {
       { text: 'Where Learning', color: '#FFB703' },
       { text: 'Meets Doing.', color: '#100E85' },
     ],
-    description: `At Workiy Academy, we offer cutting-edge Generative AI courses designed to equip you with the most in-demand skills of today’s tech world. Our programs are built by industry experts to help you learn the concepts, apply them in practice, and master real-time project experience. We focus on hands-on learning where you work on live projects, solve real-world problems, and gain the confidence to apply AI solutions in practical scenarios. With guidance from experienced trainers, you’ll learn how to build and deploy AI-driven applications that match industry standards. Whether you’re a student, working professional, or beginner, our Gen AI course will help you gain future-ready skills and stay ahead in the evolving IT landscape.`
+    description: `At Workiy Academy, we offer cutting-edge Generative AI courses designed to equip you with the most in-demand skills in today’s tech world. Our programs are created by industry experts to help you learn key concepts, apply them in practice, and gain real-time project experience. We emphasize hands-on learning, where you work on live projects, solve real-world problems, and build the confidence to apply AI solutions in practical scenarios. With guidance from experienced trainers, you’ll learn how to build and deploy AI-driven applications that meet industry standards. Whether you’re a student, working professional, or beginner, our Generative AI course will help you acquire future-ready skills and stay ahead in the evolving IT landscape.`
     ,   
     image: {
       src: 'https://i.ibb.co/67zHv4jL/images.jpg',
@@ -116,7 +116,7 @@ const About = () => {
     {
       icon: <BuildIcon sx={{ color: '#100E85' }}/> ,
       title: "Industry Alignment",
-      desc: "Stay updated with skills that match industry needs.",
+      desc: "Stay updated with skills that meet industry needs.",
     },
     {
       icon: <GroupsIcon sx={{ color: '#100E85' }}/> ,
@@ -177,11 +177,15 @@ const About = () => {
 "Turning aspirations into thriving careers",
 "Shaping futures with lasting impact",];
   const principlesData = [
-    "Learning effectively by doing always",
-    "Staying relevant to the industry",
-    "Putting bold innovation first",
-    "Giving personal attention",
-    "Upholding integrity always",
+    "Keeping pace with cutting-edge technology.",
+
+"Bridging education to career success.",
+
+"Nurturing curiosity and continuous growth.",
+
+"Delivering practical, industry-aligned learning.",
+
+"Promoting innovation with lasting impact.",
   ];
   const valuesData = [
     "Showing true passion for learning",
@@ -396,10 +400,9 @@ const About = () => {
             sx={{
               display: 'flex',
               overflowX: 'auto',
-              gap: 2,
+              gap: 3,
               scrollBehavior: 'smooth',
               width: '100%',
-              px: 5,
               scrollbarWidth: 'none', // Firefox
               msOverflowStyle: 'none', // IE/Edge
               '&::-webkit-scrollbar': { display: 'none' }, // Chrome/Safari
@@ -409,8 +412,9 @@ const About = () => {
               <Box
                 key={idx}
                 sx={{
-                  width: 120,
-                  height: 70,
+                  width: 160,
+                  minWidth: 160,
+                  height: 100,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -422,9 +426,10 @@ const About = () => {
                   p: 1,
                   m: 0,
                   flex: '0 0 auto',
+                  boxSizing: 'border-box',
                   '&:hover': {
                     borderColor: '#FFB703',
-                    transform: 'translateY(-2px) scale(1.05)',
+                    transform: 'scale(0.9)',
                   },
                 }}
               >
