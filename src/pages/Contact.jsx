@@ -107,12 +107,6 @@ const Contact = () => {
       return;
     }
 
-    // Validate privacy checkbox
-    if (!formData.get("privacy")) {
-      setMessage("⚠️ You must agree to the privacy policy.");
-      setIsError(true);
-      return;
-    }
 
   try {
     setLoading(true);
@@ -272,17 +266,6 @@ const Contact = () => {
             </Box>
           </Grid>
 
-          <Grid item xs={12}>
-            <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
-              <input type="checkbox" name="privacy" id="privacy" style={{ marginRight: "8px", width: 20, height: 20 }} />
-              <label htmlFor="privacy" style={{ fontSize: "1rem" }}>
-                I agree to our friendly{" "}
-                <a href="/privacy-policy" target="_self" rel="noopener noreferrer" style={{ color: "#7c3aed", textDecoration: "underline" }}>
-                  privacy policy
-                </a>.
-              </label>
-            </Box>
-          </Grid>
 
           <Grid item sx={{ mt: { xs: 3, sm: 5 }, textAlign: "center" }} xs={12}>
             <button
