@@ -19,23 +19,17 @@ const CourseForm = ({
     // Auto-generate path based on title
     if (name === "title") {
       const generatedPath = `/courses/${value
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")}`;
+  .toLowerCase()                     // make lowercase
+  .replace(/[^a-z]+/g, "-")          // replace anything not a-z with "-"
+  .replace(/-+/g, "-")               // collapse multiple "-" into one
+  .replace(/^-|-$/g, "")}`;          // remove leading/trailing "-"
+
       setNewCourse({ ...newCourse, [name]: value, path: generatedPath });
     } else {
       setNewCourse({ ...newCourse, [name]: value });
     }
   };
 
-  // Handle image upload (store only image path)
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      // Store only the path instead of the File object
-      const imagePath = `/uploads/${file.name}`;
-      setNewCourse({ ...newCourse, image: imagePath });
-    }
-  };
 
 
   return (
@@ -92,23 +86,14 @@ const CourseForm = ({
 
 
 
-        {/* Image Upload */}
-        <Button variant="outlined" component="label">
-          {newCourse.image ? "Change Image" : "Upload Image"}
-          <input
-            type="file"
-            accept="image/*"
-            hidden
-            onChange={handleImageChange}
-          />
-        </Button>
-
-        {/* Show Selected Image Path */}
-        {newCourse.image && (
-          <Typography variant="body2" color="textSecondary">
-            Selected Image: {newCourse.image}
-          </Typography>
-        )}
+        {/* Image Path Text Field */}
+        <TextField
+          label="Image Path or URL"
+          name="image"
+          value={newCourse.image}
+          onChange={handleChange}
+          fullWidth
+        />
 
         {/* Level Dropdown */}
         <TextField
