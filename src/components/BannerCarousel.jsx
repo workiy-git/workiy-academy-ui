@@ -7,15 +7,15 @@ import Carousel from "react-material-ui-carousel";
 const bannerCarouselData = {
   slides: [
     {
-      image: "https://i.ibb.co/6bR6Q9d/banner1.jpg",
+      image: "https://negative-chocolate-819qieckcj.edgeone.app/banner.jpg",
       title: "AI for Everyone"
     },
     {
-      image: "https://i.ibb.co/3yQw6kF/banner2.jpg",
+      image: "https://negative-chocolate-819qieckcj.edgeone.app/banner.jpg",
       title: "Build Your Future with AI"
     },
     {
-      image: "https://i.ibb.co/0j1n6kF/banner3.jpg",
+      image: "https://negative-chocolate-819qieckcj.edgeone.app/banner.jpg",
       title: "Learn from Industry Experts"
     }
   ]
@@ -33,7 +33,7 @@ const BannerCarousel = ({ slides }) => {
         navButtonsAlwaysVisible={false}
         navButtonsWrapperProps={{ style: { display: 'none' } }}
         navButtonsProps={{ style: { display: 'none' } }}
-        interval={5000}
+        interval={2000}
         animation="slide"
         sx={{ width: "100%", height: { xs: '180px', sm: '260px', md: '400px' } }}
         index={active}

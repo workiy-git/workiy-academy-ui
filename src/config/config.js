@@ -7,7 +7,7 @@ const configMap = {
   production: prodConfig,
 };
 
-const environment = "development"; // Change this to switch environment
+const environment = "production"; // Change this to switch environment
 console.log(`Running in ${environment} mode`); 
 const config = configMap[environment];
 

@@ -11,9 +11,9 @@ import axios from "axios";
 // All UI text and labels in a single JSON object
 const newsletterSignupData = {
   title: [
-    "Find out about the latest courses with the ",
-    { highlight: "academy" },
-    " newsletter"
+    { highlight: "Subscribe" }," to the academy newsletter to find out about the latest courses. ",
+    
+  
   ],
   emailLabel: "Email",
   button: "SUBMIT",

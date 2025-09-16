@@ -12,7 +12,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 const footerData = {
   description: {
     title: "Workiy Academy",
-    text: "Workiy Academy is the leading Software Training Institute in Chennai which offers the latest and trending courses with a practical learning experience. In addition to the core curriculum, Workiy often offers a range of support services to help students succeed. These may include mentorship programs, career services, and access to a network of alumni and industry professionals."
+    text: "Workiy Academy is a leading software training institute in Chennai, offering the latest and most in-demand courses with a strong focus on practical learning. In addition to its core curriculum, Workiy provides various support services to help students succeed, including mentorship programs, career services, and access to a network of alumni and industry professionals."
   },
   service: [
     "CRM", "Mobile Design", "Motion Graphic", "Web Design", "Development", "SEO"
@@ -33,16 +33,33 @@ const footerData = {
   },
   copyright: `Copyright Workiy ${new Date().getFullYear()}`,
   social: [
-    { name: 'Instagram', icon: <InstagramIcon /> },
-    { name: 'Facebook', icon: <FacebookIcon /> },
-    { name: 'LinkedIn', icon: <LinkedInIcon /> },
-    { name: 'Email', icon: <EmailIcon /> },
+    { name: 'Instagram', icon: <InstagramIcon />, link: 'https://www.instagram.com/workiy_academy?igsh=Zmt1MzdtZXFheGZj' },
+    { name: 'Facebook', icon: <FacebookIcon />, link: 'https://www.facebook.com/p/Workiy-Inc-100063617845662/' },
+    { name: 'LinkedIn', icon: <LinkedInIcon />, link: 'https://in.linkedin.com/in/workiy-academy-666277270?trk=public_post_feed-actor-name' },
+    { name: 'Email', icon: <EmailIcon />, link: 'mailto:hr@Workiy.ca' },
   ],
 };
 
 const newsletterSignupData = {
   thankYou: "Thank you for subscribing!",
 };
+
+const serviceLinks = [
+  { name: "CRM", path: "/service/crm" },
+  { name: "Mobile Design", path: "/service/mobile-design" },
+  { name: "Motion Graphic", path: "/service/motion-graphic" },
+  { name: "Web Design", path: "/service/web-design" },
+  { name: "Development", path: "/service/development" },
+  { name: "SEO", path: "/service/seo" },
+];
+const companyLinks = [
+  { name: "Site Map", path: "/company/site-map" },
+  { name: "Courses", path: "/courses" },
+  { name: "Our Team", path: "/company/our-team" },
+  { name: "Internship", path: "/company/internship" },
+  { name: "Blog", path: "/company/blog" },
+  { name: "Contact Us", path: "/contact" },
+];
 
 const Footer = () => {
   const [email, setEmail] = React.useState("");
@@ -73,23 +90,27 @@ const Footer = () => {
             <Stack direction="row" spacing={4} alignItems="flex-start" justifyContent="space-between" sx={{ width: '100%' }}>
               {/* Description */}
               <Box flex={2} minWidth={220} sx={{ width: { md: 'auto' }, textAlign: 'left' }}>
-                <Typography variant="h5" fontWeight={700} gutterBottom>{footerData.description.title}</Typography>
+                <img src="https://hungry-blush-gqgbclxrgl.edgeone.app/workiy-academy-logo-white.png" alt="Workiy Academy Logo" style={{ maxWidth: 300, marginBottom: 12 }} />
                 <Typography variant="body2" sx={{ opacity: 0.85 }}>{footerData.description.text}</Typography>
               </Box>
               {/* Service and Company */}
               <Box flex={1} minWidth={120} sx={{ width: { md: 'auto' }, textAlign: 'left' }}>
                 <Typography variant="subtitle1" fontWeight={400} gutterBottom sx={{ color: '#3A86FF' }}>Service</Typography>
                 <Stack spacing={1}>
-                  {footerData.service.map((item) => (
-                    <Typography key={item} variant="body2">{item}</Typography>
+                  {serviceLinks.map((item) => (
+                    <Typography key={item.name} variant="body2">
+                      <a href={item.path} style={{ color: '#fff', textDecoration: 'none' }}>{item.name}</a>
+                    </Typography>
                   ))}
                 </Stack>
               </Box>
               <Box flex={1} minWidth={120} sx={{ width: { md: 'auto' }, textAlign: 'left' }}>
                 <Typography variant="subtitle1" fontWeight={400} gutterBottom sx={{ color: '#3A86FF' }}>Company</Typography>
                 <Stack spacing={1}>
-                  {footerData.company.map((item) => (
-                    <Typography key={item} variant="body2">{item}</Typography>
+                  {companyLinks.map((item) => (
+                    <Typography key={item.name} variant="body2">
+                      <a href={item.path} style={{ color: '#fff', textDecoration: 'none' }}>{item.name}</a>
+                    </Typography>
                   ))}
                 </Stack>
               </Box>
@@ -163,7 +184,7 @@ const Footer = () => {
               {/* Social Media */}
               <Stack direction="row" spacing={1} alignItems="center" justifyContent="center" sx={{ minWidth: 120 }}>
                 {footerData.social.map((item, idx) => (
-                  <IconButton key={item.name} color="inherit" size="small">
+                  <IconButton key={item.name} color="inherit" size="small" component="a" href={item.link} target="_blank" rel="noopener noreferrer">
                     {item.icon}
                   </IconButton>
                 ))}
@@ -181,16 +202,20 @@ const Footer = () => {
                 <Box sx={{ flex: 1, textAlign: 'center' }}>
                   <Typography variant="subtitle1" fontWeight={400} gutterBottom sx={{ color: '#3A86FF' }}>Service</Typography>
                   <Stack spacing={1}>
-                    {footerData.service.map((item) => (
-                      <Typography key={item} variant="body2">{item}</Typography>
+                    {serviceLinks.map((item) => (
+                      <Typography key={item.name} variant="body2">
+                        <a href={item.path} style={{ color: '#fff', textDecoration: 'none' }}>{item.name}</a>
+                      </Typography>
                     ))}
                   </Stack>
                 </Box>
                 <Box sx={{ flex: 1, textAlign: 'center' }}>
                   <Typography variant="subtitle1" fontWeight={400} gutterBottom sx={{ color: '#3A86FF' }}>Company</Typography>
                   <Stack spacing={1}>
-                    {footerData.company.map((item) => (
-                      <Typography key={item} variant="body2">{item}</Typography>
+                    {companyLinks.map((item) => (
+                      <Typography key={item.name} variant="body2">
+                        <a href={item.path} style={{ color: '#fff', textDecoration: 'none' }}>{item.name}</a>
+                      </Typography>
                     ))}
                   </Stack>
                 </Box>
@@ -274,7 +299,7 @@ const Footer = () => {
               {/* Social media icons centered */}
               <Stack direction="row" spacing={1} alignItems="center" justifyContent="center" sx={{ width: '100%', mt: 2 }}>
                 {footerData.social.map((item, idx) => (
-                  <IconButton key={item.name} color="inherit" size="small">
+                  <IconButton key={item.name} color="inherit" size="small" component="a" href={item.link} target="_blank" rel="noopener noreferrer">
                     {item.icon}
                   </IconButton>
                 ))}
