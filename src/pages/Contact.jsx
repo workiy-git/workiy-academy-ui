@@ -213,7 +213,7 @@ const Contact = () => {
 
       <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 600, mx: "auto", p: 4 }}>
         <Grid>
-          <Grid sx={{display:{sx:'block', sm:'flex'}, justifyContent:'space-between'}}>
+          <Grid sx={{display:{sx:'block', sm:'flex'}, justifyContent:'space-between', marginBottom: '10px'}}>
             <Grid item xs={12} sm={6}  sx={{ width: { xs: '100%', sm: '45%' }}}>
               <Box sx={{ display: "flex", flexDirection: "column" }}>
                 <Typography variant="subtitle2" sx={{ mb: 1, textAlign: "left", fontWeight: 500 }}>First name *</Typography>
@@ -239,14 +239,14 @@ const Contact = () => {
               </Box>
             </Grid>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ marginBottom: '10px' }}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <Typography variant="subtitle2" sx={{ mb: 1, textAlign: "left", fontWeight: 500 }}>Email *</Typography>
               <input type="email" name="email" placeholder="example@email.com" style={{ padding: "12px", borderRadius: "6px", border: "1px solid #E4E7EC", fontSize: "1rem", background: "#F9FAFB" }} />
             </Box>
           </Grid>
 
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ marginBottom: '10px' }}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <Typography variant="subtitle2" sx={{ mb: 1, textAlign: "left", fontWeight: 500 }}>Phone number *</Typography>
               <input
@@ -259,7 +259,7 @@ const Contact = () => {
             </Box>
           </Grid>
 
-          <Grid item xs={12}>
+          <Grid item xs={12 } sx={{ marginBottom: '10px' }}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <Typography variant="subtitle2" sx={{ mb: 1, textAlign: "left", fontWeight: 500 }}>Message *</Typography>
               <textarea name="message" placeholder="Leave us a message..." rows={4} style={{ padding: "12px", borderRadius: "6px", border: "1px solid #E4E7EC", fontSize: "1rem", background: "#F9FAFB", resize: "vertical" }} />
