@@ -4,22 +4,7 @@ import Carousel from "react-material-ui-carousel";
 
 
 // All UI text and slides data in a single JSON object
-const bannerCarouselData = {
-  slides: [
-    {
-      image: "https://negative-chocolate-819qieckcj.edgeone.app/banner.jpg",
-      title: "AI for Everyone"
-    },
-    {
-      image: "https://negative-chocolate-819qieckcj.edgeone.app/banner.jpg",
-      title: "Build Your Future with AI"
-    },
-    {
-      image: "https://negative-chocolate-819qieckcj.edgeone.app/banner.jpg",
-      title: "Learn from Industry Experts"
-    }
-  ]
-};
+
 
 const BannerCarousel = ({ slides }) => {
   const carouselSlides = slides && slides.length > 0 ? slides : bannerCarouselData.slides;
@@ -27,7 +12,7 @@ const BannerCarousel = ({ slides }) => {
   const handleChange = (now) => setActive(now);
 
   return (
-    <Box sx={{ width: "100%", p: 0, m: 0, position: 'relative' }}>
+    <Box sx={{ width: "100vw", maxWidth: "100vw", p: 0, m: 0, position: 'relative', left: '50%', right: '50%', transform: 'translateX(-50%)' }}>
       <Carousel
         indicators={false}
         navButtonsAlwaysVisible={false}
@@ -35,7 +20,7 @@ const BannerCarousel = ({ slides }) => {
         navButtonsProps={{ style: { display: 'none' } }}
         interval={2000}
         animation="slide"
-        sx={{ width: "100%", height: { xs: '180px', sm: '260px', md: '400px' } }}
+        sx={{ width: "100vw", height: { xs: '180px', sm: '260px', md: '400px' } }}
         index={active}
         onChange={handleChange}
       >
@@ -43,7 +28,7 @@ const BannerCarousel = ({ slides }) => {
           <Box
             key={idx}
             sx={{
-              width: "100%",
+              width: "100vw",
               height: { xs: '180px', sm: '260px', md: '400px' },
               position: "relative",
               overflow: "hidden",
@@ -53,7 +38,7 @@ const BannerCarousel = ({ slides }) => {
               src={slide.image}
               alt={slide.title}
               style={{
-                width: "100%",
+                width: "100vw",
                 height: "100%",
                 objectFit: "cover",
                 display: "block",
@@ -67,7 +52,7 @@ const BannerCarousel = ({ slides }) => {
         position: 'absolute',
         left: 0,
         bottom: { xs: 12, sm: 18 },
-        width: '100%',
+        width: '100vw',
         display: 'flex',
         justifyContent: 'center',
         zIndex: 2,

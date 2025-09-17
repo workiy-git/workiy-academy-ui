@@ -12,25 +12,30 @@ const homepageReviewsData = {
   subtitle: "100+ people have already joined FutureEdge",
   reviews: [
     {     
-      name: "Aarav Sharma",
-      course: "Machine Learning Fundamentals",
-      review: "The course was well-structured and the hands-on projects helped me land my first AI internship!",
-      rating: 5,
-      avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+      name: "Hari Krishnan",
+      course: "MERN Stack",
+review: "I recently completed the MERN Stack training program at Workiy Academy, and I'm thrilled with the results. The program was intensive and challenging, but the instructors were knowledgeable and supportive throughout the process. They taught us the latest technologies and industry trends, and we got hands-on experience working on real-world projects. They provided extensive placement assistance and connected me with various companies looking for software professionals. Thanks to their efforts, I received multiple job offers and accepted an excellent position with a reputable company.",
+rating: 5,
+avatar: "https://subtle-beige-cxacauzkop.edgeone.app/hari%20vc.jpg"
     },
     {
-      name: "Priya Patel",
-      course: "Deep Learning with Neural Networks",
-      review: "Amazing instructors and real-world examples. I feel confident building deep learning models now.",
+      name: "Supriya",
+      course: "MERN Stack",
+review: "I can't thank Workiy Academy enough for the exceptional training and placement support that helped me secure my dream job with the best package. Their training program was comprehensive and hands-on, and the instructors were experts in their fields who provided invaluable insights and guidance. Moreover, their placement team was exceptional in helping me identify job opportunities that aligned with my career goals and preferences. They provided me with several job leads, arranged mock interviews, and helped me refine my resume and interviewing skills. Thanks to their efforts, I landed an excellent job in a Workiy company that offered me the best package.",
       rating: 5,
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+      avatar: "https://rotten-orange-8ukiklmwr8.edgeone.app/supriya.png"
     },
     {
-      name: "John Lee",
-      course: "AI for Business & Strategy",
-      review: "The business applications were eye-opening. Highly recommend for anyone in management!",
+      name: "Sabica Jasmin",
+      course: "MERN Stack",
+review: `I am incredibly grateful to Workiy Academy for their outstanding training and placement support, which played a crucial role in helping me secure my dream job as a MERN Stack Developer with an exceptional compensation package.
+The training program offered by Workiy Academy was truly comprehensive and hands-on, allowing me to gain practical.
+
+Thanks to the tireless efforts of the Workiy Academy team, I was able to secure an excellent position with a highly reputable company.
+
+I cannot express enough gratitude to Workiy Academy for their unwavering support and dedication. Their training program and placement assistance truly made a significant difference in launching my career as a Web Developer.`,
       rating: 5,
-      avatar: "https://randomuser.me/api/portraits/men/65.jpg"
+      avatar: "https://curious-peach-kbjig0xujx.edgeone.app/sabica%20(1).jpg"
     }
   ]
 };
