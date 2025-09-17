@@ -202,7 +202,9 @@ const Course = () => {
           <div style={{ flex: 1, minWidth: "250px" }}>
             <div style={styles.heroTitle}>{courseData.hero.title}</div>
             <div style={styles.heroCaption}>{courseData.hero.caption}</div>
-            <button style={styles.heroCta}>{courseData.hero.cta}</button>
+            {/* <button style={styles.heroCta}>{courseData.hero.cta}</button> */}
+            <button style={styles.heroCta}><a href="/contact" target="_self" style={styles.heroCta} >Enroll Now</a></button>
+
           </div>
           <img
             src={courseData.hero.image}

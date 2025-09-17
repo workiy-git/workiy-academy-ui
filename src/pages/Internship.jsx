@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+import config from "../config/config";
 import { Box, TextField, MenuItem, Button, Rating, Chip, Stack, Typography, InputAdornment } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -164,7 +166,7 @@ const Internship = () => {
       areaOfInterest,
 
       skillRating: skillRating ? Number(skillRating) : "",
- 
+
       resume: resume ? resume.name : "",
 
       description,
@@ -177,63 +179,39 @@ const Internship = () => {
 
       setSubmitStatus("Submitting...");
 
-      const response = await fetch("http://127.0.0.1:8000/internship/", {
-
-        method: "POST",
-
+       const response = await axios.post(
+    `${config.apiUrl}/internship`,
+      payload, // ✅ send payload directly
+      {
         headers: {
-
           "Content-Type": "application/json",
-
         },
-
-        body: JSON.stringify(payload),
-
-      });
-
-      if (response.ok) {
-
-        setSubmitStatus("Submitted successfully!");
-
-        alert("Form submitted successfully!");
-
-        // Reset all fields
-
-        setFullName("");
-
-        setDob(null);
-
-        setPhone("");
-
-        setEmail("");
-
-        setAreaOfStudy("");
-
-        setInstitute("");
-
-        setGraduationYear("");
-
-        setAreaOfInterest("");
-
-        setSkills([]);
-
-        setSkillRating(null);
-
-        setResume(null);
-
-        setResumeError("");
-
-        setDescription("");
-
-        setEmailError("");
-
-        setPhoneError("");
-
-      } else {
-
-        setSubmitStatus("Submission failed. Please try again.");
-
       }
+    );
+
+      if (response.status === 200 || response.status === 201) {
+  setSubmitStatus("Submitted successfully!");
+  alert("Form submitted successfully!");
+
+  // Reset all fields
+  setFullName("");
+  setDob(null);
+  setPhone("");
+  setEmail("");
+  setAreaOfStudy("");
+  setInstitute("");
+  setGraduationYear("");
+  setAreaOfInterest("");
+  setSkills([]);
+  setSkillRating(null);
+  setResume(null);
+  setResumeError("");
+  setDescription("");
+  setEmailError("");
+  setPhoneError("");
+} else {
+  setSubmitStatus("Submission failed. Please try again.");
+}
 
     } catch (error) {
 
@@ -396,7 +374,7 @@ const Internship = () => {
 
           <Box>
             <Typography sx={{ mb: 0.5, fontWeight: 500 }}>Phone No. <span style={{ color: "red" }}>*</span></Typography>
-            <TextField required fullWidth size="small" type="tel" placeholder="e.g. 9876543210" value={phone} onChange={e => setPhone(e.target.value.replace(/\D/g, '').slice(0,10))} InputProps={{ startAdornment: <InputAdornment position="start">+91</InputAdornment> }} error={Boolean(phoneError)} helperText={phoneError || ""} />
+            <TextField required fullWidth size="small" type="tel" placeholder="e.g. 9876543210" value={phone} onChange={e => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))} InputProps={{ startAdornment: <InputAdornment position="start">+91</InputAdornment> }} error={Boolean(phoneError)} helperText={phoneError || ""} />
           </Box>
 
           <Box>
@@ -510,7 +488,7 @@ const Internship = () => {
           </Box>
 
           <TextField label="Description" fullWidth size="small" multiline minRows={3} placeholder="Type here" value={description} onChange={e => setDescription(e.target.value)} />
-            </div>
+        </div>
 
 
         <Button

@@ -9,6 +9,7 @@ import "./Contact.css";
 import config from "../config/config";
 import Snackbar from '@mui/material/Snackbar';
 
+
 const contactInfo = [
   {
     icon: <EmailIcon sx={{ fontSize: 40, color: "#7c3aed" }} />,
@@ -156,6 +157,7 @@ const Contact = () => {
         body: JSON.stringify({ email: subscribeEmail }),
       });
       if (response.ok) {
+        
         setSubscribeMsg("");
         setSubscribeSuccess(true);
         setSubmitted(true);
@@ -329,9 +331,9 @@ const Contact = () => {
                   Subscribe
                 </button>
 							</Box>
-							<Typography variant="body2" sx={{ color: '#666', mt: 1, textAlign: 'left' }}>
+							{/* <Typography variant="body2" sx={{ color: '#666', mt: 1, textAlign: 'left' }}>
 								We care about your data in our <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" style={{ color: '#7c3aed', textDecoration: 'underline' }}>privacy policy</a>.
-							</Typography>
+							</Typography> */}
               {submitted && (
                 <>
                   <Typography sx={{ mt: 2, color: 'success.main', fontSize: { xs: 14, sm: 16 } }}>

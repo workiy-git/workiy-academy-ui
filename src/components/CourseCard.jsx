@@ -29,7 +29,6 @@ const CourseCard = ({ course }) => {
         },
       }}
     >
-      <CardContent sx={{ p: 0 }}>
         <Box sx={{ width: '100%', height: { xs: 65, sm: 79, md: 94, lg: 101 }, display: 'flex', justifyContent: 'center', alignItems: 'center', mb: { xs: 1.4, sm: 1.8, md: 2.1 } }}>
           <img
             src={course.image}
@@ -96,7 +95,6 @@ const CourseCard = ({ course }) => {
         >
           {buttonName}
         </Button>
-      </CardContent>
     </Card>
   );
 };
