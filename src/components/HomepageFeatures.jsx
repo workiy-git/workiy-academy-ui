@@ -87,7 +87,7 @@ const HomepageFeatures = () => (
               flex: 1,
             }}
           >
-            <Box sx={{ mb: 2 }}>{iconMap[f.icon]}</Box>
+            <Box id={"feature-blog"} sx={{ mb: 2 }}>{iconMap[f.icon]}</Box>
             <CardContent sx={{ textAlign: "center", flexGrow: 1 }}>
               <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
                 {f.title}
