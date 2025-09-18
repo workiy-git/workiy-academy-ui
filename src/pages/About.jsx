@@ -32,25 +32,20 @@ const About = () => {
   // Partners carousel logic
   const partners = [
     { src: "https://i.ibb.co/DHDDq4rJ/images.png", alt: "Freshworks" },
-    {
-      src: "https://i.ibb.co/b5Df8Z9v/650c9830-9601-11eb-b593-972a7dbc1054-google-939112-1280.jpg",
-      alt: "Google",
-    },
+    { src: "https://i.ibb.co/b5Df8Z9v/650c9830-9601-11eb-b593-972a7dbc1054-google-939112-1280.jpg", alt: "Google" },
     { src: "https://i.ibb.co/2YcHNgnn/OIP.webp[/img][/url]", alt: "Microsoft" },
     { src: "https://i.ibb.co/hFXzk0cx/phonepe3248.jpg", alt: "PhonePe" },
     { src: "https://i.ibb.co/GQfLyTdj/paypal-logo-transparent-free-png.webp", alt: "PayPal" },
     { src: "https://i.ibb.co/3ysyyQ2F/aaa245759726ab04e968b9bff4981a52.jpg", alt: "TCS" },
-    { src: "https://i.ibb.co/TqJdTsPW/wipro-logo.jpg", alt: "Wipro" },
     { src: "https://i.ibb.co/p6GqLGgg/infosys-logo-PNG.png", alt: "Infosys" },
     { src: "https://i.ibb.co/G3cXxCV4/Accenture-Logo-Tagline-Slogan.webp", alt: "Accenture" },
     { src: "https://i.ibb.co/FLHCkTHm/VECTOR69-COM-Cognizant-Logo-Download-Free-Vector-CDR-Corel-Draw.webp", alt: "Cognizant" },
     { src: "https://i.ibb.co/G3Gh0ZhR/Hcl-logo-300x296.jpg", alt: "HCL" },
-    { src: "https://i.ibb.co/hJ2X6P0j/Tech-Mahindra-true-color-logo-42.jpg", alt: "Tech Mahindra" },
-    { src: "https://i.ibb.co/jkhQ4t2x/OIP-2.webp", alt: "Capgemini" },
-    { src: "https://i.ibb.co/B1GSP0C/OIP-1.webp", alt: "IBM" },
-    { src: "https://i.ibb.co/WWMFSX5H/OIP-3.webp", alt: "Oracle" },
+    { src: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg", alt: "Amazon" },
+    { src: "https://i.ibb.co/DPQhKbN8/download.webphttps://i.ibb.co/LXb8MC08/Swiggy-1697454976634.png", alt: "Swiggy" },
+    
   ];
-  const [partnerIndex, setPartnerIndex] = useState(0);
+  const [partnerIndex, setPartnerIndex] = useState(0); 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   // Responsive visibleCount based on screen width
@@ -171,28 +166,24 @@ const About = () => {
 
   // Mission, Principles, and Values data
   const missionData = [
-"Turning learners into future innovators",
-"Fueling skills for today and tomorrow",
-"Building strong hands-on industry expertise",
-"Turning aspirations into thriving careers",
-"Shaping futures with lasting impact",];
+"Turning learners into future-ready innovators.",
+"Fueling skills for today and tomorrow’s challenges.",
+"Building strong, hands-on industry expertise.",
+"Turning aspirations into thriving, successful careers.",
+"Shaping futures with lasting positive impact.",];
   const principlesData = [
-    "Keeping pace with cutting-edge technology.",
-
-"Bridging education to career success.",
-
-"Nurturing curiosity and continuous growth.",
-
 "Delivering practical, industry-aligned learning.",
-
-"Promoting innovation with lasting impact.",
+"Building strong foundations for lifelong learning.",
+"Bridging education to career success.",
+"Nurturing curiosity and continuous growth.",
+"Upholding integrity and excellence in every step.",
   ];
   const valuesData = [
-    "Showing true passion for learning",
-    "Driving strong commitment to quality",
-    "Embracing bold innovation every day",
-    "Respecting each and every learner",
-    "Delivering real results that matter",
+    "Fostering passion for continuous growth.",
+    "Ensuring excellence in every learning step.",
+    "Encouraging innovation with real impact.",
+    "Valuing and empowering every learner.",
+    "Transforming knowledge into meaningful outcomes.",
   ];
 
   return (
@@ -240,7 +231,7 @@ const About = () => {
           mb: { xs: 4, md: 8 },
         }}
       >
-  <Box sx={{ p: 2, border: "1px solid #eee", borderRadius: 2, transition: 'all 0.3s', cursor: 'pointer', '&:hover': { boxShadow: '0 8px 30px rgba(255, 184, 3, 0.38)', borderColor: '#FFB703',color: '#100E85',transform: 'translateY(-4px) scale(1.03)' } }}>
+  <Box sx={{ p: 2, border: "1px solid #eee", borderRadius: 2, transition: 'all 0.3s', cursor: 'default', '&:hover': { boxShadow: '0 8px 30px rgba(255, 184, 3, 0.38)', borderColor: '#FFB703',color: '#100E85',transform: 'translateY(-4px) scale(1.03)' } }}>
           <Typography variant="h5" sx={{ mb: 1, fontWeight: 'bold', color: '#100E85' }}>
             Our Mission
           </Typography>
@@ -250,7 +241,7 @@ const About = () => {
             ))}
           </ul>
         </Box>
-  <Box sx={{ p: 2, border: "1px solid #eee", borderRadius: 2, transition: 'all 0.3s', cursor: 'pointer', '&:hover': { boxShadow: '0 8px 30px rgba(255, 184, 3, 0.38)', borderColor: '#FFB703',color: '#100E85',transform: 'translateY(-4px) scale(1.03)' } }}>
+  <Box sx={{ p: 2, border: "1px solid #eee", borderRadius: 2, transition: 'all 0.3s', cursor: 'default', '&:hover': { boxShadow: '0 8px 30px rgba(255, 184, 3, 0.38)', borderColor: '#FFB703',color: '#100E85',transform: 'translateY(-4px) scale(1.03)' } }}>
           <Typography variant="h5" sx={{ mb: 1, fontWeight: 'bold', color: '#100E85' }}>
             Our Principles
           </Typography>
@@ -260,7 +251,7 @@ const About = () => {
             ))}
           </ul>
         </Box>
-  <Box sx={{ p: 2, border: "1px solid #eee", borderRadius: 2, transition: 'all 0.3s', cursor: 'pointer', '&:hover': { boxShadow: '0 8px 30px rgba(255,183,3,0.35)', borderColor: '#FFB703', color: '#100E85',transform: 'translateY(-4px) scale(1.03)' } }}>
+  <Box sx={{ p: 2, border: "1px solid #eee", borderRadius: 2, transition: 'all 0.3s', cursor: 'default', '&:hover': { boxShadow: '0 8px 30px rgba(255,183,3,0.35)', borderColor: '#FFB703', color: '#100E85',transform: 'translateY(-4px) scale(1.03)' } }}>
           <Typography variant="h5" sx={{ mb: 1, fontWeight: 'bold', color: '#100E85' }}>
             Our Values
           </Typography>
@@ -296,7 +287,7 @@ const About = () => {
                 borderRadius: 2,
                 textAlign: "center",
                 transition: 'all 0.3s',
-                cursor: 'pointer',
+                cursor: 'default',
                 '&:hover': {
                   boxShadow: '0 8px 30px rgba(255,183,3,0.35)',
                   color: '#100E85',
@@ -338,7 +329,7 @@ const About = () => {
                 border: "1px solid #eee",
                 borderRadius: 2,
                 transition: 'all 0.3s',
-                cursor: 'pointer',
+                cursor: 'default',
                 '&:hover': {
                   boxShadow: '0 12px 40px 0 rgba(255,183,3,0.35), 0 2px 10px 0 rgba(16,14,133,0.10)',
                   borderColor: '#FFB703',
@@ -422,7 +413,7 @@ const About = () => {
                   border: '1px solid #eee',
                   background: '#fff',
                   transition: 'all 0.3s',
-                  cursor: 'pointer',
+                  cursor: 'default',
                   p: 1,
                   m: 0,
                   flex: '0 0 auto',
