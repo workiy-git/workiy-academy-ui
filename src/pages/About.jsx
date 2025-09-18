@@ -25,7 +25,7 @@ const About = () => {
     description: `At Workiy Academy, we offer cutting-edge Generative AI courses designed to equip you with the most in-demand skills in today’s tech world. Our programs are created by industry experts to help you learn key concepts, apply them in practice, and gain real-time project experience. We emphasize hands-on learning, where you work on live projects, solve real-world problems, and build the confidence to apply AI solutions in practical scenarios. With guidance from experienced trainers, you’ll learn how to build and deploy AI-driven applications that meet industry standards. Whether you’re a student, working professional, or beginner, our Generative AI course will help you acquire future-ready skills and stay ahead in the evolving IT landscape.`
     ,   
     image: {
-      src: 'https://i.ibb.co/67zHv4jL/images.jpg',
+      src: 'https://large-ivory-fala6psajj.edgeone.app/about-us-metaphor-company-inform.png',
       alt: 'AI Brain Visual',
     },
   };
@@ -216,7 +216,7 @@ const About = () => {
           alt={heroData.image.alt}
           sx={{
             flex: 1,
-            maxWidth: { xs: '100%', md: 350 },
+            maxWidth: { xs: '100%', md: 500 },
             borderRadius: 2,
           }}
         />
