@@ -20,7 +20,8 @@ const AppContent = () => {
   const adminPaths = [
     "/admin",
     "/enquiry-records",
-    "/internship-records"
+    "/internship-records",
+    "/newsletter-records"
   ];
   const isAdminRoute = adminPaths.some(path => location.pathname.startsWith(path));
 
@@ -44,6 +45,7 @@ const AppContent = () => {
           {/* Data Grid Pages (Show Admin Header) */}
           <Route path="/enquiry-records" element={<DataGrid />} />
           <Route path="/internship-records" element={<DataGrid />} />
+          <Route path="/newsletter-records" element={<DataGrid />} />
 
           {/* 🔒 Protecting Admin Route */}
           <Route
