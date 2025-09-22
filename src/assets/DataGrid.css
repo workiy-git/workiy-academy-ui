@@ -1,0 +1,26 @@
+.action-button:focus, .MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-sortButton{
+  outline: none;
+}
+.custom-datagrid .MuiDataGrid-virtualScrollerRenderZone .MuiDataGrid-row:nth-child(odd) {
+  background-color: #F7F6FE; /* Light gray background for even rows */
+}
+.custom-datagrid .MuiDataGrid-virtualScrollerRenderZone .MuiDataGrid-row:nth-child(even) {
+    background-color: #ffffff; /* White background for odd rows */
+}
+.custom-datagrid .MuiDataGrid-virtualScrollerRenderZone .MuiDataGrid-row:hover {
+  background-color: #B1D1FF; /* Slightly darker gray on hover */
+}
+.MuiDataGrid-columnHeaders{
+    background-color: #212529 !important;
+    color: white !important;
+    font-weight: bold !important;
+}
+.MuiDataGrid-root {
+  --DataGrid-t-header-background-base: transparent !important;
+}
+.MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-iconButtonContainer{
+    margin: auto;
+}
+.MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-sortButton{
+    color: white;
+}

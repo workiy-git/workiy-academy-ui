@@ -8,6 +8,7 @@ const menuItems = [
     { label: 'Courses', path: '/admin' },
     { label: 'Internship', path: '/internship-records' },
     { label: 'Enquiry', path: '/enquiry-records' },
+    { label: 'Newsletter', path: '/newsletter-records' },
 ];
 
 
@@ -35,9 +36,16 @@ const AdminNavbarMUI = () => {
             }} />
             <AppBar position="static" elevation={0} sx={{ bgcolor: '#fff', borderBottom: '2px solid #704FE6', borderRadius: '0 0 5px 5px', boxShadow: 'none', color: '#212529' }}>
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', minHeight: 64 }}>
-                    <Typography variant="h6" sx={{ fontWeight: 700, color: '#212529', fontFamily: 'Sora, sans-serif' }}>
-                        Workiy Academy
-                    </Typography>
+                    <Box
+                        sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                        onClick={() => navigate('/admin')}
+                    >
+                        <img
+                            src="https://presidential-chocolate-nqjlbobz5v.edgeone.app/workiy-academy-logo-1.png"
+                            alt="Workiy Academy Logo"
+                            style={{ maxHeight: 60, marginRight: 12 }}
+                        />
+                    </Box>
                     {/* Desktop Menu */}
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 2 }}>
                         {menuItems.map((item) => (
@@ -45,8 +53,13 @@ const AdminNavbarMUI = () => {
                                 key={item.path}
                                 component={Link}
                                 to={item.path}
+                                state={
+                                    item.path === '/enquiry-records' ? { type: 'enquiry' } :
+                                        item.path === '/internship-records' ? { type: 'internship' } :
+                                            item.path === '/newsletter-records' ? { type: 'newsletter' } : undefined
+                                }
                                 sx={{
-                                    fontFamily: 'Sora, sans-serif',
+                                    fontFamily: 'Sora, sans-seriFf',
                                     color: location.pathname === item.path ? '#704FE6' : '#212529',
                                     fontSize: 10,
                                     fontWeight: 600,
@@ -102,7 +115,15 @@ const AdminNavbarMUI = () => {
                     <List>
                         {menuItems.map((item) => (
                             <ListItem key={item.path} disablePadding>
-                                <ListItemButton component={Link} to={item.path} selected={location.pathname === item.path}>
+                                <ListItemButton
+                                    component={Link}
+                                    to={item.path}
+                                    state={
+                                        item.path === '/enquiry-records' ? { type: '/enquiry' } :
+                                            item.path === '/internship-records' ? { type: '/internship' } : undefined
+                                    }
+                                    selected={location.pathname === item.path}
+                                >
                                     <ListItemText primary={item.label} primaryTypographyProps={{ fontWeight: location.pathname === item.path ? 700 : 500, color: location.pathname === item.path ? '#704FE6' : '#212529', fontFamily: 'Sora, sans-serif' }} />
                                 </ListItemButton>
                             </ListItem>
@@ -138,4 +159,4 @@ const AdminNavbarMUI = () => {
     );
 }
 
-        export default AdminNavbarMUI;
+export default AdminNavbarMUI;

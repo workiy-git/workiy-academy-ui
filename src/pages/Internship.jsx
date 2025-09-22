@@ -182,39 +182,39 @@ const Internship = () => {
 
       setSubmitStatus("Submitting...");
 
-       const response = await axios.post(
-    `${config.apiUrl}/internship`,
-      payload, // ✅ send payload directly
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+      const response = await axios.post(
+        `${config.apiUrl}/internship`,
+        payload, // ✅ send payload directly
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.status === 200 || response.status === 201) {
-  setSubmitStatus("Submitted successfully!");
-  alert("Form submitted successfully!");
+        setSubmitStatus("Submitted successfully!");
+        alert("Form submitted successfully!");
 
-  // Reset all fields
-  setFullName("");
-  setDob(null);
-  setPhone("");
-  setEmail("");
-  setAreaOfStudy("");
-  setInstitute("");
-  setGraduationYear("");
-  setAreaOfInterest("");
-  setSkills([]);
-  setSkillRating(null);
-  setResume(null);
-  setResumeError("");
-  setDescription("");
-  setEmailError("");
-  setPhoneError("");
-} else {
-  setSubmitStatus("Submission failed. Please try again.");
-}
+        // Reset all fields
+        setFullName("");
+        setDob(null);
+        setPhone("");
+        setEmail("");
+        setAreaOfStudy("");
+        setInstitute("");
+        setGraduationYear("");
+        setAreaOfInterest("");
+        setSkills([]);
+        setSkillRating(null);
+        setResume(null);
+        setResumeError("");
+        setDescription("");
+        setEmailError("");
+        setPhoneError("");
+      } else {
+        setSubmitStatus("Submission failed. Please try again.");
+      }
 
     } catch (error) {
 
