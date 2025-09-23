@@ -45,12 +45,12 @@ const newsletterSignupData = {
 };
 
 const serviceLinks = [
-  { name: "CRM", path: "/service/crm" },
-  { name: "Mobile Design", path: "/service/mobile-design" },
-  { name: "Motion Graphic", path: "/service/motion-graphic" },
-  { name: "Web Design", path: "/service/web-design" },
-  { name: "Development", path: "/service/development" },
-  { name: "SEO", path: "/service/seo" },
+  { name: "CRM", path: "/about#crm" },
+  { name: "Mobile Design", path: "/about#mobile-design" },
+  { name: "Motion Graphic", path: "/about#motion-graphic" },
+  { name: "Web Design", path: "/about#web-design" },
+  { name: "Development", path: "/about#development" },
+  { name: "SEO", path: "/about#seo" },
 ];
 const companyLinks = [
   { name: "Site Map", path: "/company/site-map" },

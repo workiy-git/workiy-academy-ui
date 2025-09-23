@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Box, Typography, IconButton } from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
+import { Box, Typography, Fade, IconButton } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -14,8 +14,54 @@ import ConstructionIcon from "@mui/icons-material/Construction";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import Diversity3Icon from '@mui/icons-material/Diversity3';
+import { id } from "date-fns/locale";
 
 const About = () => {
+  // Services block data and logic
+  const services = [
+    { 
+      title: "CRM",
+      description:
+        "Workiy helps businesses streamline customer relationships with custom CRM solutions. We centralize sales, service, and marketing workflows, automate repetitive tasks, and ensure your data is easily accessible. Solid CRM boosts efficiency, improves customer experience, and drives growth.",
+      image: '/src/assets/course1.png',
+      id: "crm"
+    },
+    {
+      title: "Mobile Design",
+      description:
+        "Our mobile design services focus on cAt Workiy, mobile design isn’t just about shrinking down a website—it’s about creating intuitive, touch-friendly user experiences. Clean layouts, responsive visuals, fast load times and usability on all screen sizes make your app or mobile site delightful and effective.  reating intuitive, engaging, and responsive interfaces that deliver seamless experiences across all devices.",
+      image: '/src/assets/course1.png',
+      id: "mobile-design"
+    },
+    {
+      title: "Motion Graphic",
+      description:
+        "Captivate your audience with animated storytelling. Workiy’s motion graphics bring your brand to life—through dynamic visuals, motion-driven UI elements or explainer videos. These designs enhance user engagement, convey complex ideas clearly, and elevate the visual appeal of your digital presence.  ",
+      image: '/src/assets/course1.png',
+      id: "motion-graphic"
+    },
+    {
+      title: "Web Design",
+      description:
+        "Workiy builds websites that are both beautiful and functional. We focus on responsive layouts, intuitive navigation, fast performance, and user-centric design. Our web design services ensure your site not only looks professional but also converts visitors into customers.",
+      image: '/src/assets/course1.png',
+      id: "web-design"
+    },
+    {
+      title: "Development",
+      description:
+        "From custom web apps to backend systems, Workiy's development team delivers robust, scalable software using modern frameworks like Laravel, Ruby on Rails, LAMP stack and more. We build secure, efficient, and maintainable solutions that align with your business goals.",
+      image: '/src/assets/course1.png',
+      id: "development"
+    },
+    {
+      title: "SEO",
+      description:
+        "Workiy SEO services increase your visibility on search engines. We conduct keyword research, optimize on-page elements, improve site structure, and strengthen technical SEO. Our goal is more traffic, higher rankings, and quality leads through organic search.",
+      image: '/src/assets/course1.png',
+      id: "seo"
+    },
+  ];
   // Data-driven Hero Section
   const heroData = {
     title: [
@@ -178,6 +224,34 @@ const About = () => {
 "Nurturing curiosity and continuous growth.",
 "Upholding integrity and excellence in every step.",
   ];
+
+  // One-time on-view animation for Services using IntersectionObserver
+  const servicesRef = useRef(null);
+  const itemRefs = useRef([]);
+  const [visibleBoxes, setVisibleBoxes] = useState(() => Array(6).fill(false));
+
+  useEffect(() => {
+    if (!itemRefs.current) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const indexAttr = entry.target.getAttribute('data-index');
+          const index = Number(indexAttr);
+          if (entry.isIntersecting && !visibleBoxes[index]) {
+            setVisibleBoxes((prev) => {
+              const next = [...prev];
+              next[index] = true;
+              return next;
+            });
+            observer.unobserve(entry.target); // trigger once per box
+          }
+        });
+      },
+      { root: null, threshold: 0.25 }
+    );
+    itemRefs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
   const valuesData = [
     "Fostering passion for continuous growth.",
     "Ensuring excellence in every learning step.",
@@ -264,7 +338,7 @@ const About = () => {
       </Box>
 
       {/* Approach Section */}
-      <Box sx={{ mb: { xs: 4, md: 8 } }}>
+      <Box  sx={{ mb: { xs: 4, md: 8 } }}>
         <Typography
           variant="h4"
           sx={{ mb: 3, color: '#FFB703', fontWeight: 'bold', textAlign: 'center', background: 'none', textShadow: 'none', WebkitBackgroundClip: 'unset', WebkitTextFillColor: 'unset' }}
@@ -367,6 +441,118 @@ const About = () => {
           <Typography variant="h6" sx={{ fontWeight: 'bold' }}>GEN AI Courses</Typography>
         </Box>
       </Box>
+
+      {/* Services Section */}
+      <Box sx={{ mb: { xs: 4, md: 8 } }}>
+        <Typography
+          variant="h4"
+          sx={{ mb: 3, color: '#FFB703', fontWeight: 'bold', textAlign: 'center', background: 'none', textShadow: 'none', WebkitBackgroundClip: 'unset', WebkitTextFillColor: 'unset' }}
+        >
+          Our Services
+        </Typography>
+        <Box
+          ref={servicesRef}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 4,
+            overflow: "hidden",
+            position: "relative",
+          }}
+        >
+          {services.map((service, idx) => {
+            // Alternating layout: even boxes have image on left, odd boxes on right
+            const isImageLeft = idx % 2 === 0;
+            const isVisible = visibleBoxes[idx];
+            const imageOffset = isVisible ? 0 : (isImageLeft ? -200 : 200);
+            const textOffset = isVisible ? 0 : (isImageLeft ? 200 : -200);
+            return (
+              <Box
+               id={service.id}
+                key={idx}
+                data-index={idx}
+                ref={(el) => (itemRefs.current[idx] = el)}
+                sx={{
+                  border: "1px solid #eee",
+                  borderRadius: 3,
+                  background: "rgba(255,255,255,0.7)",
+                  backdropFilter: 'blur(12px)',
+                  boxShadow: "0 8px 32px 0 rgba(16,14,133,0.10), 0 1.5px 8px 0 rgba(255,183,3,0.10)",
+                  width: "100%",
+                  minHeight: { xs: "220px", md: "260px" },
+                  display: "grid",
+                  gridTemplateColumns: isImageLeft 
+                    ? { xs: '1fr', md: '300px 1fr' } 
+                    : { xs: '1fr', md: '1fr 300px' },
+                  alignItems: "center",
+                  gap: { xs: 3, md: 6 },
+                  opacity: 1,
+                }}
+              >
+                {/* Image: starts from one end and moves to center */}
+                <Box
+                  sx={{
+                    transform: `translateX(${imageOffset}px)`,
+                    transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    order: isImageLeft ? 1 : 2,
+                    overflow: 'hidden',
+                  }}
+                >
+                  <Box
+                    component="img"
+                    src={service.image}
+                    alt={`${service.title} illustration`}
+                    sx={{
+                      width: { xs: '80%', md: '100%' },
+                      maxWidth: 300,
+                      height: { xs: '150px', md: '200px' },
+                      borderRadius: 2,
+                      objectFit: 'cover',
+                    }}
+                  />
+                </Box>
+
+                {/* Text: starts from opposite end and moves to center */}
+                <Box
+                  sx={{
+                    transform: `translateX(${textOffset}px)`,
+                    transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+                    order: isImageLeft ? 2 : 1,
+                    overflow: 'hidden',
+                    p: { xs: 2, md: 4 },
+                  }}
+                >
+                  <Typography
+                    variant="h4"
+                    sx={{ 
+                      color: '#100E85', 
+                      fontWeight: 'bold',
+                      fontSize: { xs: 22, md: 28 },
+                      mb: 1.5
+                    }}
+                  >
+                    {service.title}
+                  </Typography>
+                  <Typography 
+                    variant="body1" 
+                    sx={{ 
+                      color: '#333',
+                      lineHeight: 1.8,
+                      fontSize: { xs: 15, md: 16 }
+                    }}
+                  >
+                    {service.description}
+                  </Typography>
+                </Box>
+              </Box>
+            );
+          })}
+        </Box>
+      </Box>
+
+
 
       {/* Partners Section */}
       <Box sx={{ textAlign: "center" }}>
