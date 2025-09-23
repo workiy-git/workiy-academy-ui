@@ -146,6 +146,13 @@ const Internship = () => {
       setPhoneError("");
 
     }
+
+    // Graduation year validation: must be current year or above
+    const currentYear = new Date().getFullYear();
+    if (!graduationYear || Number(graduationYear) < currentYear) {
+      setSubmitStatus(`Year of graduation should be ${currentYear} or above.`);
+      return;
+    }
     if (hasError) return;
 
     // Prepare data for API
@@ -307,7 +314,7 @@ const Internship = () => {
             <Typography sx={{ mb: 0.5, fontWeight: 500 }}>Year of Graduation <span style={{ color: "red" }}>*</span></Typography>
             <TextField required fullWidth size="small" select value={graduationYear} onChange={e => setGraduationYear(e.target.value)} SelectProps={{ displayEmpty: true, renderValue: (selected) => selected !== '' ? selected : 'Select year of graduation' }} sx={{ '& .MuiSelect-select.MuiPlaceholder, & .MuiSelect-select:has(> .placeholder)': { color: '#888' }, '& .MuiInputBase-input': { color: graduationYear ? '#181b22' : '#666' } }}>
               <MenuItem value="" disabled sx={{ color: '#888' }}>
-                Select year of graduation
+                Year of graduation should be {new Date().getFullYear()} or above
               </MenuItem>
               {getYearOptions().map(year => (
                 <MenuItem key={year} value={year}>{year}</MenuItem>
@@ -429,7 +436,7 @@ const Internship = () => {
           <Typography sx={{ mt: 2, color: submitStatus.includes("success") ? "green" : "red", fontSize: 15, textAlign: "center", width: "100%" }}>{submitStatus}</Typography>
         )}
         <div className="internship-footer">
-          Powered by Workiy Academy
+          
         </div>
       </form>
     </div>
