@@ -45,6 +45,7 @@ const Admin = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [deleteCourseId, setDeleteCourseId] = useState(null);
+  const [deleteCoursePath, setDeleteCoursePath] = useState(null);
 
   // Snackbar State
   const [snackbar, setSnackbar] = useState({
@@ -106,10 +107,15 @@ const Admin = () => {
 
     // Prepare updated course details with correct path
     const updatedCourseDetails = {
-      ...courseDetailsData,
-      course_id: savedCourse.id,
-      path: `${savedCourse.title.toLowerCase().replace(/\s+/g, "-")}`,
-    };
+  ...courseDetailsData,
+  course_id: savedCourse.id,
+  path: savedCourse.title
+    .toLowerCase()                      // lowercase
+    .replace(/[^a-z]+/g, "-")           // replace anything not a-z with "-"
+    .replace(/-+/g, "-")                // collapse multiple hyphens
+    .replace(/^-|-$/g, ""),             // trim leading/trailing hyphens
+};
+
 
     // Save or update course details
     if (courseDetailsData?.id) {
@@ -170,17 +176,32 @@ const Admin = () => {
   };
 
   // Handle Delete
-  const handleDeleteClick = (id) => {
+  const handleDeleteClick = (id, path) => {
     setDeleteCourseId(id);
+    setDeleteCoursePath(path);
     setOpenDeleteDialog(true);
   };
 
   const handleConfirmDelete = async () => {
     try {
+      // Delete the course
       await axios.delete(
         `${config.apiUrl}/courses/${deleteCourseId}`
       );
-      showSnackbar("Course deleted successfully!", "success");
+
+      // Also delete the course details using path if available, else fallback to id
+      const detailsKey = deleteCoursePath ? deleteCoursePath.split('/').pop() : deleteCourseId;
+
+      try {
+        await axios.delete(
+          `${config.apiUrl}/course-details/${detailsKey}`
+        );
+      } catch (err) {
+        // If course details do not exist, ignore error
+        console.warn("Course details not found or already deleted:", err);
+      }
+
+      showSnackbar("Course and details deleted successfully!", "success");
       fetchCourses();
     } catch (err) {
       console.error("Error deleting course:", err);
@@ -188,6 +209,7 @@ const Admin = () => {
     } finally {
       setOpenDeleteDialog(false);
       setDeleteCourseId(null);
+      setDeleteCoursePath(null);
     }
   };
 
@@ -309,7 +331,7 @@ const Admin = () => {
                       size="small"
                       color="error"
                       variant="contained"
-                      onClick={() => handleDeleteClick(course.id)}
+                      onClick={() => handleDeleteClick(course.id, course.path)}
                     >
                       Delete
                     </Button>

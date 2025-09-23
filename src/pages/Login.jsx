@@ -14,7 +14,7 @@ const Login = () => {
     e.preventDefault();
 
     // Dummy credentials (replace with API later)
-    if (username === "admin" && password === "1234") {
+    if (username === "Workiy-Academy" && password === "WorkiY2025!") {
       localStorage.setItem("isAdminAuthenticated", "true");
       navigate(from, { replace: true });
     } else {

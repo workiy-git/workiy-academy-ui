@@ -40,7 +40,16 @@ const NavbarMUI = () => {
 						Workiy Academy
 					</Typography> */}
 					{/* Replace 'Workiy Academy' text with logo image in header */}
-					<img src="https://presidential-chocolate-nqjlbobz5v.edgeone.app/workiy-academy-logo-1.png" alt="Workiy Academy Logo" style={{ maxHeight: 60, marginRight: 12 }} />
+					<Box
+						sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+						onClick={() => navigate('/')}
+					>
+						<img
+							src="https://presidential-chocolate-nqjlbobz5v.edgeone.app/workiy-academy-logo-1.png"
+							alt="Workiy Academy Logo"
+							style={{ maxHeight: 60, marginRight: 12 }}
+						/>
+					</Box>
 					{/* Desktop Menu */}
 					<Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 2 }}>
 						{menuItems.map((item) => (
@@ -141,4 +150,4 @@ const NavbarMUI = () => {
 	);
 }
 
-		export default NavbarMUI;
+export default NavbarMUI;

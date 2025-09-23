@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Box, Typography, IconButton } from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
+import { Box, Typography, Fade, IconButton } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -14,8 +14,54 @@ import ConstructionIcon from "@mui/icons-material/Construction";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import Diversity3Icon from '@mui/icons-material/Diversity3';
+import { id } from "date-fns/locale";
 
 const About = () => {
+  // Services block data and logic
+  const services = [
+    { 
+      title: "CRM",
+      description:
+        "Workiy helps businesses streamline customer relationships with custom CRM solutions. We centralize sales, service, and marketing workflows, automate repetitive tasks, and ensure your data is easily accessible. Solid CRM boosts efficiency, improves customer experience, and drives growth.",
+      image: '/src/assets/course1.png',
+      id: "crm"
+    },
+    {
+      title: "Mobile Design",
+      description:
+        "Our mobile design services focus on cAt Workiy, mobile design isn’t just about shrinking down a website—it’s about creating intuitive, touch-friendly user experiences. Clean layouts, responsive visuals, fast load times and usability on all screen sizes make your app or mobile site delightful and effective.  reating intuitive, engaging, and responsive interfaces that deliver seamless experiences across all devices.",
+      image: '/src/assets/course1.png',
+      id: "mobile-design"
+    },
+    {
+      title: "Motion Graphic",
+      description:
+        "Captivate your audience with animated storytelling. Workiy’s motion graphics bring your brand to life—through dynamic visuals, motion-driven UI elements or explainer videos. These designs enhance user engagement, convey complex ideas clearly, and elevate the visual appeal of your digital presence.  ",
+      image: '/src/assets/course1.png',
+      id: "motion-graphic"
+    },
+    {
+      title: "Web Design",
+      description:
+        "Workiy builds websites that are both beautiful and functional. We focus on responsive layouts, intuitive navigation, fast performance, and user-centric design. Our web design services ensure your site not only looks professional but also converts visitors into customers.",
+      image: '/src/assets/course1.png',
+      id: "web-design"
+    },
+    {
+      title: "Development",
+      description:
+        "From custom web apps to backend systems, Workiy's development team delivers robust, scalable software using modern frameworks like Laravel, Ruby on Rails, LAMP stack and more. We build secure, efficient, and maintainable solutions that align with your business goals.",
+      image: '/src/assets/course1.png',
+      id: "development"
+    },
+    {
+      title: "SEO",
+      description:
+        "Workiy SEO services increase your visibility on search engines. We conduct keyword research, optimize on-page elements, improve site structure, and strengthen technical SEO. Our goal is more traffic, higher rankings, and quality leads through organic search.",
+      image: '/src/assets/course1.png',
+      id: "seo"
+    },
+  ];
   // Data-driven Hero Section
   const heroData = {
     title: [
@@ -25,32 +71,27 @@ const About = () => {
     description: `At Workiy Academy, we offer cutting-edge Generative AI courses designed to equip you with the most in-demand skills in today’s tech world. Our programs are created by industry experts to help you learn key concepts, apply them in practice, and gain real-time project experience. We emphasize hands-on learning, where you work on live projects, solve real-world problems, and build the confidence to apply AI solutions in practical scenarios. With guidance from experienced trainers, you’ll learn how to build and deploy AI-driven applications that meet industry standards. Whether you’re a student, working professional, or beginner, our Generative AI course will help you acquire future-ready skills and stay ahead in the evolving IT landscape.`
     ,   
     image: {
-      src: 'https://i.ibb.co/67zHv4jL/images.jpg',
+      src: 'https://large-ivory-fala6psajj.edgeone.app/about-us-metaphor-company-inform.png',
       alt: 'AI Brain Visual',
     },
   };
   // Partners carousel logic
   const partners = [
     { src: "https://i.ibb.co/DHDDq4rJ/images.png", alt: "Freshworks" },
-    {
-      src: "https://i.ibb.co/b5Df8Z9v/650c9830-9601-11eb-b593-972a7dbc1054-google-939112-1280.jpg",
-      alt: "Google",
-    },
+    { src: "https://i.ibb.co/b5Df8Z9v/650c9830-9601-11eb-b593-972a7dbc1054-google-939112-1280.jpg", alt: "Google" },
     { src: "https://i.ibb.co/2YcHNgnn/OIP.webp[/img][/url]", alt: "Microsoft" },
     { src: "https://i.ibb.co/hFXzk0cx/phonepe3248.jpg", alt: "PhonePe" },
     { src: "https://i.ibb.co/GQfLyTdj/paypal-logo-transparent-free-png.webp", alt: "PayPal" },
     { src: "https://i.ibb.co/3ysyyQ2F/aaa245759726ab04e968b9bff4981a52.jpg", alt: "TCS" },
-    { src: "https://i.ibb.co/TqJdTsPW/wipro-logo.jpg", alt: "Wipro" },
     { src: "https://i.ibb.co/p6GqLGgg/infosys-logo-PNG.png", alt: "Infosys" },
     { src: "https://i.ibb.co/G3cXxCV4/Accenture-Logo-Tagline-Slogan.webp", alt: "Accenture" },
     { src: "https://i.ibb.co/FLHCkTHm/VECTOR69-COM-Cognizant-Logo-Download-Free-Vector-CDR-Corel-Draw.webp", alt: "Cognizant" },
     { src: "https://i.ibb.co/G3Gh0ZhR/Hcl-logo-300x296.jpg", alt: "HCL" },
-    { src: "https://i.ibb.co/hJ2X6P0j/Tech-Mahindra-true-color-logo-42.jpg", alt: "Tech Mahindra" },
-    { src: "https://i.ibb.co/jkhQ4t2x/OIP-2.webp", alt: "Capgemini" },
-    { src: "https://i.ibb.co/B1GSP0C/OIP-1.webp", alt: "IBM" },
-    { src: "https://i.ibb.co/WWMFSX5H/OIP-3.webp", alt: "Oracle" },
+    { src: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg", alt: "Amazon" },
+    { src: "https://i.ibb.co/DPQhKbN8/download.webphttps://i.ibb.co/LXb8MC08/Swiggy-1697454976634.png", alt: "Swiggy" },
+    
   ];
-  const [partnerIndex, setPartnerIndex] = useState(0);
+  const [partnerIndex, setPartnerIndex] = useState(0); 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   // Responsive visibleCount based on screen width
@@ -171,28 +212,52 @@ const About = () => {
 
   // Mission, Principles, and Values data
   const missionData = [
-"Turning learners into future innovators",
-"Fueling skills for today and tomorrow",
-"Building strong hands-on industry expertise",
-"Turning aspirations into thriving careers",
-"Shaping futures with lasting impact",];
+"Turning learners into future-ready innovators.",
+"Fueling skills for today and tomorrow’s challenges.",
+"Building strong, hands-on industry expertise.",
+"Turning aspirations into thriving, successful careers.",
+"Shaping futures with lasting positive impact.",];
   const principlesData = [
-    "Keeping pace with cutting-edge technology.",
-
-"Bridging education to career success.",
-
-"Nurturing curiosity and continuous growth.",
-
 "Delivering practical, industry-aligned learning.",
-
-"Promoting innovation with lasting impact.",
+"Building strong foundations for lifelong learning.",
+"Bridging education to career success.",
+"Nurturing curiosity and continuous growth.",
+"Upholding integrity and excellence in every step.",
   ];
+
+  // One-time on-view animation for Services using IntersectionObserver
+  const servicesRef = useRef(null);
+  const itemRefs = useRef([]);
+  const [visibleBoxes, setVisibleBoxes] = useState(() => Array(6).fill(false));
+
+  useEffect(() => {
+    if (!itemRefs.current) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const indexAttr = entry.target.getAttribute('data-index');
+          const index = Number(indexAttr);
+          if (entry.isIntersecting && !visibleBoxes[index]) {
+            setVisibleBoxes((prev) => {
+              const next = [...prev];
+              next[index] = true;
+              return next;
+            });
+            observer.unobserve(entry.target); // trigger once per box
+          }
+        });
+      },
+      { root: null, threshold: 0.25 }
+    );
+    itemRefs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
   const valuesData = [
-    "Showing true passion for learning",
-    "Driving strong commitment to quality",
-    "Embracing bold innovation every day",
-    "Respecting each and every learner",
-    "Delivering real results that matter",
+    "Fostering passion for continuous growth.",
+    "Ensuring excellence in every learning step.",
+    "Encouraging innovation with real impact.",
+    "Valuing and empowering every learner.",
+    "Transforming knowledge into meaningful outcomes.",
   ];
 
   return (
@@ -225,7 +290,7 @@ const About = () => {
           alt={heroData.image.alt}
           sx={{
             flex: 1,
-            maxWidth: { xs: '100%', md: 350 },
+            maxWidth: { xs: '100%', md: 500 },
             borderRadius: 2,
           }}
         />
@@ -240,7 +305,7 @@ const About = () => {
           mb: { xs: 4, md: 8 },
         }}
       >
-  <Box sx={{ p: 2, border: "1px solid #eee", borderRadius: 2, transition: 'all 0.3s', cursor: 'pointer', '&:hover': { boxShadow: '0 8px 30px rgba(255, 184, 3, 0.38)', borderColor: '#FFB703',color: '#100E85',transform: 'translateY(-4px) scale(1.03)' } }}>
+  <Box sx={{ p: 2, border: "1px solid #eee", borderRadius: 2, transition: 'all 0.3s', cursor: 'default', '&:hover': { boxShadow: '0 8px 30px rgba(255, 184, 3, 0.38)', borderColor: '#FFB703',color: '#100E85',transform: 'translateY(-4px) scale(1.03)' } }}>
           <Typography variant="h5" sx={{ mb: 1, fontWeight: 'bold', color: '#100E85' }}>
             Our Mission
           </Typography>
@@ -250,7 +315,7 @@ const About = () => {
             ))}
           </ul>
         </Box>
-  <Box sx={{ p: 2, border: "1px solid #eee", borderRadius: 2, transition: 'all 0.3s', cursor: 'pointer', '&:hover': { boxShadow: '0 8px 30px rgba(255, 184, 3, 0.38)', borderColor: '#FFB703',color: '#100E85',transform: 'translateY(-4px) scale(1.03)' } }}>
+  <Box sx={{ p: 2, border: "1px solid #eee", borderRadius: 2, transition: 'all 0.3s', cursor: 'default', '&:hover': { boxShadow: '0 8px 30px rgba(255, 184, 3, 0.38)', borderColor: '#FFB703',color: '#100E85',transform: 'translateY(-4px) scale(1.03)' } }}>
           <Typography variant="h5" sx={{ mb: 1, fontWeight: 'bold', color: '#100E85' }}>
             Our Principles
           </Typography>
@@ -260,7 +325,7 @@ const About = () => {
             ))}
           </ul>
         </Box>
-  <Box sx={{ p: 2, border: "1px solid #eee", borderRadius: 2, transition: 'all 0.3s', cursor: 'pointer', '&:hover': { boxShadow: '0 8px 30px rgba(255,183,3,0.35)', borderColor: '#FFB703', color: '#100E85',transform: 'translateY(-4px) scale(1.03)' } }}>
+  <Box sx={{ p: 2, border: "1px solid #eee", borderRadius: 2, transition: 'all 0.3s', cursor: 'default', '&:hover': { boxShadow: '0 8px 30px rgba(255,183,3,0.35)', borderColor: '#FFB703', color: '#100E85',transform: 'translateY(-4px) scale(1.03)' } }}>
           <Typography variant="h5" sx={{ mb: 1, fontWeight: 'bold', color: '#100E85' }}>
             Our Values
           </Typography>
@@ -273,7 +338,7 @@ const About = () => {
       </Box>
 
       {/* Approach Section */}
-      <Box sx={{ mb: { xs: 4, md: 8 } }}>
+      <Box  sx={{ mb: { xs: 4, md: 8 } }}>
         <Typography
           variant="h4"
           sx={{ mb: 3, color: '#FFB703', fontWeight: 'bold', textAlign: 'center', background: 'none', textShadow: 'none', WebkitBackgroundClip: 'unset', WebkitTextFillColor: 'unset' }}
@@ -296,7 +361,7 @@ const About = () => {
                 borderRadius: 2,
                 textAlign: "center",
                 transition: 'all 0.3s',
-                cursor: 'pointer',
+                cursor: 'default',
                 '&:hover': {
                   boxShadow: '0 8px 30px rgba(255,183,3,0.35)',
                   color: '#100E85',
@@ -338,7 +403,7 @@ const About = () => {
                 border: "1px solid #eee",
                 borderRadius: 2,
                 transition: 'all 0.3s',
-                cursor: 'pointer',
+                cursor: 'default',
                 '&:hover': {
                   boxShadow: '0 12px 40px 0 rgba(255,183,3,0.35), 0 2px 10px 0 rgba(16,14,133,0.10)',
                   borderColor: '#FFB703',
@@ -376,6 +441,118 @@ const About = () => {
           <Typography variant="h6" sx={{ fontWeight: 'bold' }}>GEN AI Courses</Typography>
         </Box>
       </Box>
+
+      {/* Services Section */}
+      <Box sx={{ mb: { xs: 4, md: 8 } }}>
+        <Typography
+          variant="h4"
+          sx={{ mb: 3, color: '#FFB703', fontWeight: 'bold', textAlign: 'center', background: 'none', textShadow: 'none', WebkitBackgroundClip: 'unset', WebkitTextFillColor: 'unset' }}
+        >
+          Our Services
+        </Typography>
+        <Box
+          ref={servicesRef}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 4,
+            overflow: "hidden",
+            position: "relative",
+          }}
+        >
+          {services.map((service, idx) => {
+            // Alternating layout: even boxes have image on left, odd boxes on right
+            const isImageLeft = idx % 2 === 0;
+            const isVisible = visibleBoxes[idx];
+            const imageOffset = isVisible ? 0 : (isImageLeft ? -200 : 200);
+            const textOffset = isVisible ? 0 : (isImageLeft ? 200 : -200);
+            return (
+              <Box
+               id={service.id}
+                key={idx}
+                data-index={idx}
+                ref={(el) => (itemRefs.current[idx] = el)}
+                sx={{
+                  border: "1px solid #eee",
+                  borderRadius: 3,
+                  background: "rgba(255,255,255,0.7)",
+                  backdropFilter: 'blur(12px)',
+                  boxShadow: "0 8px 32px 0 rgba(16,14,133,0.10), 0 1.5px 8px 0 rgba(255,183,3,0.10)",
+                  width: "100%",
+                  minHeight: { xs: "220px", md: "260px" },
+                  display: "grid",
+                  gridTemplateColumns: isImageLeft 
+                    ? { xs: '1fr', md: '300px 1fr' } 
+                    : { xs: '1fr', md: '1fr 300px' },
+                  alignItems: "center",
+                  gap: { xs: 3, md: 6 },
+                  opacity: 1,
+                }}
+              >
+                {/* Image: starts from one end and moves to center */}
+                <Box
+                  sx={{
+                    transform: `translateX(${imageOffset}px)`,
+                    transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    order: isImageLeft ? 1 : 2,
+                    overflow: 'hidden',
+                  }}
+                >
+                  <Box
+                    component="img"
+                    src={service.image}
+                    alt={`${service.title} illustration`}
+                    sx={{
+                      width: { xs: '80%', md: '100%' },
+                      maxWidth: 300,
+                      height: { xs: '150px', md: '200px' },
+                      borderRadius: 2,
+                      objectFit: 'cover',
+                    }}
+                  />
+                </Box>
+
+                {/* Text: starts from opposite end and moves to center */}
+                <Box
+                  sx={{
+                    transform: `translateX(${textOffset}px)`,
+                    transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+                    order: isImageLeft ? 2 : 1,
+                    overflow: 'hidden',
+                    p: { xs: 2, md: 4 },
+                  }}
+                >
+                  <Typography
+                    variant="h4"
+                    sx={{ 
+                      color: '#100E85', 
+                      fontWeight: 'bold',
+                      fontSize: { xs: 22, md: 28 },
+                      mb: 1.5
+                    }}
+                  >
+                    {service.title}
+                  </Typography>
+                  <Typography 
+                    variant="body1" 
+                    sx={{ 
+                      color: '#333',
+                      lineHeight: 1.8,
+                      fontSize: { xs: 15, md: 16 }
+                    }}
+                  >
+                    {service.description}
+                  </Typography>
+                </Box>
+              </Box>
+            );
+          })}
+        </Box>
+      </Box>
+
+
 
       {/* Partners Section */}
       <Box sx={{ textAlign: "center" }}>
@@ -422,7 +599,7 @@ const About = () => {
                   border: '1px solid #eee',
                   background: '#fff',
                   transition: 'all 0.3s',
-                  cursor: 'pointer',
+                  cursor: 'default',
                   p: 1,
                   m: 0,
                   flex: '0 0 auto',

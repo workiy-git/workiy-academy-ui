@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import axios from "axios";
+import config from "../config/config";
 import { Box, TextField, MenuItem, Button, Rating, Chip, Stack, Typography, InputAdornment } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Autocomplete from "@mui/material/Autocomplete";
+
+import "../assets/InternshipBanner.css";
+import InternshipBannerImg from "../assets/Internship_image.png";
 
 
 const fontFamily = "'Poppins', 'Inter', sans-serif";
@@ -141,6 +146,13 @@ const Internship = () => {
       setPhoneError("");
 
     }
+
+    // Graduation year validation: must be current year or above
+    const currentYear = new Date().getFullYear();
+    if (!graduationYear || Number(graduationYear) < currentYear) {
+      setSubmitStatus(`Year of graduation should be ${currentYear} or above.`);
+      return;
+    }
     if (hasError) return;
 
     // Prepare data for API
@@ -164,7 +176,7 @@ const Internship = () => {
       areaOfInterest,
 
       skillRating: skillRating ? Number(skillRating) : "",
- 
+
       resume: resume ? resume.name : "",
 
       description,
@@ -177,62 +189,38 @@ const Internship = () => {
 
       setSubmitStatus("Submitting...");
 
-      const response = await fetch("http://127.0.0.1:8000/internship/", {
+      const response = await axios.post(
+        `${config.apiUrl}/internship`,
+        payload, // ✅ send payload directly
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-        method: "POST",
-
-        headers: {
-
-          "Content-Type": "application/json",
-
-        },
-
-        body: JSON.stringify(payload),
-
-      });
-
-      if (response.ok) {
-
+      if (response.status === 200 || response.status === 201) {
         setSubmitStatus("Submitted successfully!");
-
         alert("Form submitted successfully!");
 
         // Reset all fields
-
         setFullName("");
-
         setDob(null);
-
         setPhone("");
-
         setEmail("");
-
         setAreaOfStudy("");
-
         setInstitute("");
-
         setGraduationYear("");
-
         setAreaOfInterest("");
-
         setSkills([]);
-
         setSkillRating(null);
-
         setResume(null);
-
         setResumeError("");
-
         setDescription("");
-
         setEmailError("");
-
         setPhoneError("");
-
       } else {
-
         setSubmitStatus("Submission failed. Please try again.");
-
       }
 
     } catch (error) {
@@ -246,118 +234,26 @@ const Internship = () => {
 
 
   return (
-
-    <div style={{ minHeight: "100vh", width: "100%", background: "#fff", fontFamily, color: "#181b22", display: "flex", flexDirection: "column", alignItems: "center", padding: 0, margin: 0, overflowX: "hidden" }}>
+    <div className="internship-page-root">
       {/* Header Image */}
-
-      <div
-
-        style={{
-
-          width: "100%",
-
-          height: "clamp(140px, 22vw, 220px)",
-
-          background: "#e6e6ef",
-
-          display: "flex",
-
-          alignItems: "center",
-
-          justifyContent: "center",
-
-          margin: 0,
-
-          padding: 0
-        }}
-
-      >
-
+      <div className="internship-banner">
         <img
-
-          src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=900&q=80"
-
-          alt="Internship"
-
-
-          style={{
-
-            width: "100%",
-
-            height: "100%",
-
-            objectFit: "cover",
-
-            borderRadius: 0,
-
-            display: "block",
-          }}
-
+          src={InternshipBannerImg}
+          alt="Internship Banner"
+          className="internship-banner-img"
         />
-
       </div>
-
       {/* Title */}
-
-      <h2
-
-        style={{
-
-          textAlign: "center",
-
-          margin: "32px 0 8px",
-
-          fontWeight: "bold",
-
-          fontFamily,
-
-          fontSize: "clamp(1.5rem, 4vw, 2.2rem)",
-
-          letterSpacing: 1,
-
-          width: "100%",
-
-          color: "#181b22",
-
-        }}
-
-      >
-
+      <h2 className="internship-title">
         INTERNSHIP FORM
-
       </h2>
-
+      {/* Subtitle */}
+      <h3 className="internship-subtitle">
+        Please fill the below Details
+      </h3>
       {/* Form */}
-
-      <form style={{ width: "100%", maxWidth: "min(900px, 95vw)", minWidth: 0, margin: "0 auto", background: "transparent", borderRadius: 0, boxShadow: "none", padding: "0 clamp(12px,5vw,48px) 32px clamp(12px,5vw,48px)", display: "flex", flexDirection: "column", alignItems: "center", fontFamily, boxSizing: "border-box" }} onSubmit={handleSubmit}>
-        <h3
-
-          style={{
-
-            textAlign: "center",
-
-            marginBottom: 24,
-
-            fontWeight: 500,
-
-            fontFamily,
-
-            fontSize: 18,
-
-            color: "#888",
-
-            width: "100%",
-
-          }}
-
-        >
-
-          Please fill the below Details
-
-        </h3>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: 22, width: "100%", minWidth: 0 }}>
-
+      <form className="internship-form" onSubmit={handleSubmit}>
+        <div className="internship-form-fields">
           <Box>
             <Typography sx={{ mb: 0.5, fontWeight: 500 }}>
               Full Name <span style={{ color: "red" }}>*</span>
@@ -396,7 +292,7 @@ const Internship = () => {
 
           <Box>
             <Typography sx={{ mb: 0.5, fontWeight: 500 }}>Phone No. <span style={{ color: "red" }}>*</span></Typography>
-            <TextField required fullWidth size="small" type="tel" placeholder="e.g. 9876543210" value={phone} onChange={e => setPhone(e.target.value.replace(/\D/g, '').slice(0,10))} InputProps={{ startAdornment: <InputAdornment position="start">+91</InputAdornment> }} error={Boolean(phoneError)} helperText={phoneError || ""} />
+            <TextField required fullWidth size="small" type="tel" placeholder="e.g. 9876543210" value={phone} onChange={e => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))} InputProps={{ startAdornment: <InputAdornment position="start">+91</InputAdornment> }} error={Boolean(phoneError)} helperText={phoneError || ""} />
           </Box>
 
           <Box>
@@ -418,7 +314,7 @@ const Internship = () => {
             <Typography sx={{ mb: 0.5, fontWeight: 500 }}>Year of Graduation <span style={{ color: "red" }}>*</span></Typography>
             <TextField required fullWidth size="small" select value={graduationYear} onChange={e => setGraduationYear(e.target.value)} SelectProps={{ displayEmpty: true, renderValue: (selected) => selected !== '' ? selected : 'Select year of graduation' }} sx={{ '& .MuiSelect-select.MuiPlaceholder, & .MuiSelect-select:has(> .placeholder)': { color: '#888' }, '& .MuiInputBase-input': { color: graduationYear ? '#181b22' : '#666' } }}>
               <MenuItem value="" disabled sx={{ color: '#888' }}>
-                Select year of graduation
+                Year of graduation should be {new Date().getFullYear()} or above
               </MenuItem>
               {getYearOptions().map(year => (
                 <MenuItem key={year} value={year}>{year}</MenuItem>
@@ -469,7 +365,7 @@ const Internship = () => {
                 <input
                   hidden
                   type="file"
-                  accept=".pdf,.doc,.docx"
+                  accept="application/pdf"
                   onChange={e => {
                     const file = e.target.files && e.target.files[0] ? e.target.files[0] : null;
                     if (!file) {
@@ -482,6 +378,10 @@ const Internship = () => {
                       setResume(null);
                       setResumeError("File too large. Maximum size is 5 MB.");
                       e.target.value = "";
+                    } else if (file.type !== "application/pdf") {
+                      setResume(null);
+                      setResumeError("Only PDF files are accepted.");
+                      e.target.value = "";
                     } else {
                       setResume(file);
                       setResumeError("");
@@ -489,6 +389,9 @@ const Internship = () => {
                   }}
                 />
               </Button>
+              <Typography variant="caption" color="text.secondary" sx={{ mt: 0.5 }}>
+                Note: File size must be less than 5MB. Only PDF files are accepted.
+              </Typography>
               {/* Show file info if uploaded */}
               {resume ? (
                 <Typography variant="body2" color="text.secondary">
@@ -510,7 +413,7 @@ const Internship = () => {
           </Box>
 
           <TextField label="Description" fullWidth size="small" multiline minRows={3} placeholder="Type here" value={description} onChange={e => setDescription(e.target.value)} />
-            </div>
+        </div>
 
 
         <Button
@@ -532,32 +435,10 @@ const Internship = () => {
         {submitStatus && (
           <Typography sx={{ mt: 2, color: submitStatus.includes("success") ? "green" : "red", fontSize: 15, textAlign: "center", width: "100%" }}>{submitStatus}</Typography>
         )}
-        <div
-
-          style={{
-
-            textAlign: "center",
-
-            marginTop: 18,
-
-            fontSize: 12,
-
-            color: "#888",
-
-            width: "100%",
-
-            fontFamily,
-
-          }}
-
-        >
-
-          Powered by Workiy Academy
-
+        <div className="internship-footer">
+          
         </div>
-
       </form>
-
     </div>
 
   );
@@ -567,13 +448,9 @@ const Internship = () => {
 
 
 function getYearOptions() {
-
   const currentYear = new Date().getFullYear();
-
   const years = [];
-
-  for (let i = currentYear - 3; i <= currentYear + 3; i++) {
-
+  for (let i = currentYear; i <= currentYear + 3; i++) {
     years.push(i);
   }
   return years;
