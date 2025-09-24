@@ -77,6 +77,9 @@ const Contact = () => {
       const missing = emptyFields.map(f => f.label).join(', ');
       setMessage(`⚠️ Please fill in the following required field(s): ${missing}`);
       setIsError(true);
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
       return;
     }
 
@@ -84,6 +87,9 @@ const Contact = () => {
     if (!/^[A-Za-z]+$/.test(data.firstName)) {
       setMessage("⚠️ First name should contain only letters.");
       setIsError(true);
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
       return;
     }
 
@@ -91,6 +97,9 @@ const Contact = () => {
     if (!/^[A-Za-z]+$/.test(data.lastName)) {
       setMessage("⚠️ Last name should contain only letters.");
       setIsError(true);
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
       return;
     }
 
@@ -98,6 +107,9 @@ const Contact = () => {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
       setMessage("⚠️ Please enter a valid email address.");
       setIsError(true);
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
       return;
     }
 
@@ -105,6 +117,9 @@ const Contact = () => {
     if (!/^[0-9]{10,15}$/.test(data.phone)) {
       setMessage("⚠️ Phone number should contain only numbers (10-15 digits).\n");
       setIsError(true);
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
       return;
     }
 
@@ -125,17 +140,26 @@ const Contact = () => {
       // ✅ Success case
       setMessage("✅ Your message has been sent successfully!");
       setIsError(false);
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
       form.reset();
     } else {
       // ❌ API error response
       setMessage(result.message || "❌ Failed to send your message. Please try again.");
       setIsError(true);
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
     }
   } catch (error) {
     // ❌ Network or server error
     console.error("Error submitting form:", error);
     setMessage("❌ Something went wrong. Please try again later.");
     setIsError(true);
+    setTimeout(() => {
+      setMessage("");
+    }, 3000);
   } finally {
     setLoading(false);
   }
@@ -146,6 +170,9 @@ const Contact = () => {
   const handleSubscribe = async () => {
     if (!subscribeEmail.trim()) {
       setSubscribeMsg("Please enter your email.");
+      setTimeout(() => {
+        setSubscribeMsg("");
+      }, 3000);
       setSubscribeSuccess(false);
       setOpenSnackbar(true);
       return;
@@ -163,12 +190,21 @@ const Contact = () => {
         setSubmitted(true);
         setSubmittedEmail(subscribeEmail);
         setSubscribeEmail("");
+        setTimeout(() => {
+          setSubmitted(false);
+          setSubscribeMsg("");
+          setSubscribeSuccess(false);
+          setSubmittedEmail("");
+        }, 3000);
       } else {
         setSubscribeMsg("Subscription failed. Please try again.");
         setSubscribeSuccess(false);
       }
     } catch (error) {
       setSubscribeMsg("Network error. Please try again later.");
+      setTimeout(() => {
+        setSubscribeMsg("");
+      }, 3000);
       setSubscribeSuccess(false);
     }
     setOpenSnackbar(true);
@@ -334,6 +370,11 @@ const Contact = () => {
 							{/* <Typography variant="body2" sx={{ color: '#666', mt: 1, textAlign: 'left' }}>
 								We care about your data in our <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" style={{ color: '#7c3aed', textDecoration: 'underline' }}>privacy policy</a>.
 							</Typography> */}
+              {subscribeMsg && (
+                <Typography sx={{ mt: 2, color: subscribeSuccess ? 'success.main' : 'error.main', fontSize: { xs: 14, sm: 16 } }}>
+                  {subscribeMsg}
+                </Typography>
+              )}
               {submitted && (
                 <>
                   <Typography sx={{ mt: 2, color: 'success.main', fontSize: { xs: 14, sm: 16 } }}>
