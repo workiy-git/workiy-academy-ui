@@ -66,18 +66,41 @@ const Footer = () => {
   const [submitted, setSubmitted] = React.useState(false);
   const [submittedEmail, setSubmittedEmail] = React.useState("");
   const [successMsg, setSuccessMsg] = React.useState("");
+  const [errorMsg, setErrorMsg] = React.useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMsg("");
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setErrorMsg("Please enter a valid email address.");
+      setTimeout(() => {
+        setErrorMsg("");
+        setEmail("");
+      }, 3000);
+      return;
+    }
     try {
       const response = await axios.post(`${config.apiUrl}/newsletter`, { email });
       setSubmitted(true);
       setSubmittedEmail(email);
       setSuccessMsg("Thank you for subscribing!");
+      setErrorMsg("");
       console.log("Success:", response.data);
+      setTimeout(() => {
+        setSubmitted(false);
+        setSuccessMsg("");
+        setEmail("");
+      }, 3000);
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
-      alert("Subscription failed. Please try again.");
+      setErrorMsg(error.response?.data?.message || "Subscription failed. Please try again.");
+      setTimeout(() => {
+        setSubmitted(false);
+        setErrorMsg("");
+        setEmail("");
+      }, 3000);
     }
   };
 
@@ -147,7 +170,7 @@ const Footer = () => {
                     {footerData.newsletter.button}
                   </Button>
                 </Stack>
-                {submitted && (
+                {submitted && successMsg && (
                   <>
                     <Typography sx={{ mt: 2, color: 'success.main', fontSize: { xs: 14, sm: 16 } }}>
                       {newsletterSignupData.thankYou}
@@ -157,6 +180,11 @@ const Footer = () => {
                       <strong>Submitted Email:</strong> {submittedEmail}
                     </Typography>
                   </>
+                )}
+                {errorMsg && (
+                  <Typography sx={{ mt: 2, color: 'error.main', fontSize: { xs: 14, sm: 16 } }}>
+                    {errorMsg}
+                  </Typography>
                 )}
               </Box>
             </Stack>
@@ -174,12 +202,12 @@ const Footer = () => {
               {/* Email */}
               <Stack direction="row" alignItems="center" spacing={1} sx={{ minWidth: 180 }}>
                 <EmailIcon fontSize="small" sx={{ color: '#3A86FF' }} />
-                <Typography variant="body2" sx={{ wordBreak: 'break-all' }}>{footerData.contact.email}</Typography>
+                <Typography component="a" href="mailto:hr@workiy.ca" sx={{ wordBreak: 'break-all', color:'white', cursor:'pointer'  }}>{footerData.contact.email}</Typography>
               </Stack>
               {/* Phone */}
               <Stack direction="row" alignItems="center" spacing={1} sx={{ minWidth: 150 }}>
                 <PhoneIcon fontSize="small" sx={{ color: '#3A86FF' }} />
-                <Typography variant="body2" sx={{ wordBreak: 'break-all' }}>{footerData.contact.phone}</Typography>
+                <Typography component="a" href= "tel:+919342482504" sx={{ wordBreak: 'break-all', color:'white', cursor:'pointer' }}>{footerData.contact.phone}</Typography>
               </Stack>
               {/* Social Media */}
               <Stack direction="row" spacing={1} alignItems="center" justifyContent="center" sx={{ minWidth: 120 }}>
@@ -255,7 +283,7 @@ const Footer = () => {
                     {footerData.newsletter.button}
                   </Button>
                 </Stack>
-                {submitted && (
+                {submitted && successMsg && (
                   <>
                     <Typography sx={{ mt: 2, color: 'success.main', fontSize: { xs: 14, sm: 16 } }}>
                       {newsletterSignupData.thankYou}
@@ -266,6 +294,11 @@ const Footer = () => {
                     </Typography>
                   </>
                 )}
+                {errorMsg && (
+                  <Typography sx={{ mt: 2, color: 'error.main', fontSize: { xs: 14, sm: 16 } }}>
+                    {errorMsg}
+                  </Typography>
+                )}
               </Box>
               <Box sx={{ width: '100%',  display:'flex', justifyContent:'center', mt: 2 }}>
                         {/* Address, Email, Phone as 2 columns: icon left, text right */}
@@ -275,7 +308,7 @@ const Footer = () => {
                     <LocationOnIcon fontSize="small" sx={{ color: '#3A86FF' }} />
                   </Grid>
                   <Grid item xs={10} sx={{ textAlign: 'left' }}>
-                    <Typography variant="body2" sx={{ wordBreak: 'break-word' }}>{footerData.contact.address}</Typography>
+                    <Typography variant="body2" sx={{ wordBreak: 'break-word'}}>{footerData.contact.address}</Typography>
                   </Grid>
                 </Grid>
                 <Grid container alignItems="center" spacing={1} sx={{ width: '100%' }}>
@@ -283,7 +316,7 @@ const Footer = () => {
                     <EmailIcon fontSize="small" sx={{ color: '#3A86FF' }} />
                   </Grid>
                   <Grid item xs={10} sx={{ textAlign: 'left' }}>
-                    <Typography variant="body2" sx={{ wordBreak: 'break-all' }}>{footerData.contact.email}</Typography>
+                    <Typography component="a" href="mailto:hr@workiy.ca" sx={{ wordBreak: 'break-all', color:'white', cursor:'pointer'  }}>{footerData.contact.email}</Typography>
                   </Grid>
                 </Grid>
                 <Grid container alignItems="center" spacing={1} sx={{ width: '100%' }}>
@@ -291,7 +324,7 @@ const Footer = () => {
                     <PhoneIcon fontSize="small" sx={{ color: '#3A86FF' }} />
                   </Grid>
                   <Grid item xs={10} sx={{ textAlign: 'left' }}>
-                    <Typography variant="body2" sx={{ wordBreak: 'break-all' }}>{footerData.contact.phone}</Typography>
+                    <Typography component="a" href= "tel:+919342482504" sx={{ wordBreak: 'break-all', color:'white', cursor:'pointer' }}>{footerData.contact.phone}</Typography>
                   </Grid>
                 </Grid>
               </Stack>
