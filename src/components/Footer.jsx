@@ -197,7 +197,7 @@ const Footer = () => {
               {/* Address */}
               <Stack direction="row" alignItems="center" spacing={1} sx={{ minWidth: 220 }}>
                 <LocationOnIcon fontSize="small" sx={{ color: '#3A86FF' }} />
-                <Typography variant="body2" sx={{ wordBreak: 'break-word' }}>{footerData.contact.address}</Typography>
+                <Typography component="a" href="https://maps.app.goo.gl/4WKSFqFk5ytAyQgr9" target="_blank" sx={{ wordBreak: 'break-all', color:'white', cursor:'pointer'  }}>{footerData.contact.address}</Typography>
               </Stack>
               {/* Email */}
               <Stack direction="row" alignItems="center" spacing={1} sx={{ minWidth: 180 }}>
@@ -308,7 +308,7 @@ const Footer = () => {
                     <LocationOnIcon fontSize="small" sx={{ color: '#3A86FF' }} />
                   </Grid>
                   <Grid item xs={10} sx={{ textAlign: 'left' }}>
-                    <Typography variant="body2" sx={{ wordBreak: 'break-word'}}>{footerData.contact.address}</Typography>
+                    <Typography component="a" href="https://maps.app.goo.gl/4WKSFqFk5ytAyQgr9" target="_blank" variant="body2" sx={{ wordBreak: 'break-all', color:'white', cursor:'pointer'  }}>{footerData.contact.address}</Typography>
                   </Grid>
                 </Grid>
                 <Grid container alignItems="center" spacing={1} sx={{ width: '100%' }}>

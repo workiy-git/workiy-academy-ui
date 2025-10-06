@@ -4,4 +4,10 @@
     .email-input{
         width: 120px;
     }
+    .subscribe-input{
+      width: 40%;
+    }
+    .subscribe-button{
+      padding: 10px !important;
+    }
 }

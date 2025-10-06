@@ -23,6 +23,7 @@ const contactInfo = [
     label: "Location",
     content: "#6-183, Ottiyambakkam Road, Chennai - 126",
     desc: "Come say hello at our office HQ.",
+    link: "https://maps.app.goo.gl/4WKSFqFk5ytAyQgr9",
   },
   {
     icon: <PhoneIcon sx={{ fontSize: 40, color: "#7c3aed" }} />,
@@ -201,7 +202,7 @@ const Contact = () => {
         setSubscribeSuccess(false);
       }
     } catch (error) {
-      setSubscribeMsg("Network error. Please try again later.");
+      setSubscribeMsg("Network error. Please try again later.", error);
       setTimeout(() => {
         setSubscribeMsg("");
       }, 3000);
@@ -210,10 +211,10 @@ const Contact = () => {
     setOpenSnackbar(true);
   };
 
-  const handleSnackbarClose = (event, reason) => {
-    if (reason === 'clickaway') return;
-    setOpenSnackbar(false);
-  };
+  // const handleSnackbarClose = (event, reason) => {
+  //   if (reason === 'clickaway') return;
+  //   setOpenSnackbar(false);
+  // };
 
   return (
     <Box sx={{ p: { xs: 2, sm: 4 }, bgcolor: "#f9f9fb", color: "#18181a" }}>
@@ -233,7 +234,7 @@ const Contact = () => {
               <Typography variant="subtitle1" sx={{ fontWeight: 600, mt: 1 }}>{info.label}</Typography>
               {/* <Typography variant="body2" sx={{ color: "#666", mb: 1 }}>{info.desc}</Typography> */}
               {info.link ? (
-                <Typography component="a" href={info.link} sx={{ color: "#7c3aed", fontWeight: 500, textDecoration: "none" }}>{info.content}</Typography>
+                <Typography component="a" target="_blank" href={info.link} sx={{ color: "#7c3aed", fontWeight: 500, textDecoration: "none" }}>{info.content}</Typography>
               ) : (
                 <Typography sx={{ color: "#7c3aed", fontWeight: 500 }}>{info.content}</Typography>
               )}
@@ -345,7 +346,7 @@ const Contact = () => {
 			<Box sx={{ width: '70%', p: 4, margin:'auto' }}>
 				<Grid container alignItems="center" sx={{display:'flex', justifyContent:'space-between'}} spacing={2}>
 					<Grid item xs={12} md={6}>
-						<Typography variant="h6" sx={{ fontWeight: 600, fontSize: 22 }}>
+						<Typography variant="h6" sx={{ fontWeight: 600, fontSize: {sm:'24px', xs: '16px' } }}>
 							Join 3,000+ subscribers
 						</Typography>
 					</Grid>
@@ -354,12 +355,14 @@ const Contact = () => {
 							<Box sx={{ display: 'flex', width: '100%' }}>
 								<input
                   type="email"
+                  className="subscribe-input"
                   placeholder="Enter your email"
                   value={subscribeEmail}
                   onChange={e => setSubscribeEmail(e.target.value)}
                   style={{ flex: 1, padding: '12px', borderRadius: '6px 0 0 6px', border: '1px solid #E4E7EC', fontSize: '1rem', background: '#F9FAFB', borderRight: 'none' }}
                 />
                 <button
+                  className="subscribe-button"
                   type="button"
                   onClick={handleSubscribe}
                   style={{ padding: '12px 24px', background: '#7F56D9', color: '#fff', border: 'none', borderRadius: '0 6px 6px 0', fontSize: '1rem', fontWeight: 600, cursor: 'pointer' }}

@@ -218,7 +218,7 @@ const TopCoursesSlider = () => {
             alignItems: { xs: "flex-start", sm: "center" },
             justifyContent: "space-between",
             mb: 3,
-            px: { xs: 1, sm: 2 },
+            px: { xs: 3, sm: 2 },
           }}
         >
           <Typography
