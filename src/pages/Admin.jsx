@@ -168,6 +168,7 @@ const Admin = () => {
     setNewCourse(selectedCourse);
     setShowForm(true);
     setOpenEditDialog(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleCancelEdit = () => {

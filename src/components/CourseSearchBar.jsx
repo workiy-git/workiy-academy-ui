@@ -52,7 +52,9 @@ const CourseSearchBar = () => {
             label="Search anything"
             value={search}
             onChange={handleSearchChange}
-            sx={{ flex: 1, maxWidth: 900, bgcolor: "#FAFAFA", '& .MuiOutlinedInput-notchedOutline': { border: 'none' } }}
+            // sx={{ flex: 1, maxWidth: 900, bgcolor: "#FAFAFA", '& .MuiOutlinedInput-notchedOutline': { border: 'none' } }}
+            sx={{ flex: 1, maxWidth: 900 }}
+
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -77,9 +79,9 @@ const CourseSearchBar = () => {
             </Box>
           )}
         </Box>
-        <Button type="submit" variant="contained" sx={{ mr: { xs: 0, md: 10 }, fontWeight: 600, px: 4, height: 56, backgroundColor: "#262627", color: "#fff" }}>
+        {/* <Button type="submit" variant="contained" sx={{ mr: { xs: 0, md: 10 }, fontWeight: 600, px: 4, height: 56, backgroundColor: "#262627", color: "#fff" }}>
           Search
-        </Button>
+        </Button> */}
       
       </Box>
       
