@@ -93,7 +93,7 @@ const HomepageFeatures = () => (
                 {f.title}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {f.desc}
+             <span style={{ textAlign: 'justify', display: 'block' }}>{f.desc}</span>
               </Typography>
             </CardContent>
           </Card>
