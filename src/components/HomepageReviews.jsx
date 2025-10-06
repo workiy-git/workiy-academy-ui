@@ -60,7 +60,7 @@ const ReviewCard = ({ name, course, review, rating, avatar }) => (
       <Typography variant="h6" sx={{ fontWeight: 700, fontSize: { xs: 15, sm: 17, md: 19 } }}>{name}</Typography>
       <Typography variant="body2" color="text.secondary" sx={{ mb: 1, fontSize: { xs: 12, sm: 13, md: 14 } }}>{course}</Typography>
       <Rating value={rating} readOnly size="small" sx={{ mb: 1 }} />
-      <Typography variant="body1" sx={{ fontStyle: "italic", fontSize: { xs: 13, sm: 14, md: 15 } }}>
+        <Typography variant="body1" sx={{ fontStyle: "italic", fontSize: { xs: 13, sm: 14, md: 15 }, textAlign: 'justify' }}>
         "{review}"
       </Typography>
     </Box>
