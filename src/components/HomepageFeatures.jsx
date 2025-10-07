@@ -92,7 +92,7 @@ const HomepageFeatures = () => (
               <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
                 {f.title}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" color="text.secondary" sx={{ textAlign: 'justify' }}>
                 {f.desc}
               </Typography>
             </CardContent>

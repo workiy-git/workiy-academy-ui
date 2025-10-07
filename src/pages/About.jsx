@@ -73,6 +73,7 @@ const About = () => {
     image: {
       src: 'https://large-ivory-fala6psajj.edgeone.app/about-us-metaphor-company-inform.png',
       alt: 'AI Brain Visual',
+     
     },
   };
   // Partners carousel logic
@@ -281,7 +282,7 @@ const About = () => {
             ))}
           </Typography>
           <Typography variant="body1" sx={{ lineHeight: 1.8 }}>
-            {heroData.description}
+            <span style={{ textAlign: 'justify', display: 'block' }}>{heroData.description}</span>
           </Typography>
         </Box>
         <Box
@@ -468,7 +469,7 @@ const About = () => {
             const textOffset = isVisible ? 0 : (isImageLeft ? 200 : -200);
             return (
               <Box
-               id={service.id}
+                id={service.id}
                 key={idx}
                 data-index={idx}
                 ref={(el) => (itemRefs.current[idx] = el)}
@@ -478,7 +479,9 @@ const About = () => {
                   background: "rgba(255,255,255,0.7)",
                   backdropFilter: 'blur(12px)',
                   boxShadow: "0 8px 32px 0 rgba(16,14,133,0.10), 0 1.5px 8px 0 rgba(255,183,3,0.10)",
-                  width: "100%",
+                  width: '90%',
+                  margin: 'auto',
+                  marginTop: service.id === 'crm' ? '10px' : undefined,
                   minHeight: { xs: "220px", md: "260px" },
                   display: "grid",
                   gridTemplateColumns: isImageLeft 
@@ -487,6 +490,14 @@ const About = () => {
                   alignItems: "center",
                   gap: { xs: 3, md: 6 },
                   opacity: 1,
+                  transition: 'all 0.35s cubic-bezier(.4,0,.2,1)',
+                  cursor: 'pointer',
+                  '&:hover': {
+                    boxShadow: '0 12px 36px 0 rgba(90,105,242,0.18), 0 2px 12px 0 rgba(255,183,3,0.18)',
+                    borderColor: '#FFB703',
+                    background: 'rgba(58,134,255,0.07)',
+                    transform: 'translateY(-6px) scale(1.025)',
+                  },
                 }}
               >
                 {/* Image: starts from one end and moves to center */}
@@ -540,7 +551,8 @@ const About = () => {
                     sx={{ 
                       color: '#333',
                       lineHeight: 1.8,
-                      fontSize: { xs: 15, md: 16 }
+                      fontSize: { xs: 15, md: 16 },
+                      textAlign: 'justify'
                     }}
                   >
                     {service.description}
